@@ -1,0 +1,20 @@
+Config { font = "xft:Bitstream Vera Sans Mono:size=13:antialias=true"
+       , bgColor = "black"
+       , fgColor = "white"
+       , position = Top
+       , lowerOnStart = True
+       , borderColor = "#199EFC"
+       , allDesktops = True
+       , commands = [ Run StdinReader
+                    , Run Network "wlan0" ["-t","Wifi: <rx>➘ <tx>➚"
+                                           ,"-L","0","-H","300","--normal"
+                                           ,"green","--high","red"] 10
+                    , Run Network "eth0" ["-t","Eth: <rx>➘ <tx>➚" ,"-L","0","-H","300","--normal","green","--high","red"] 10
+                    , Run Network "tun0" ["-t","VPN: <rx>➘ <tx>➚" ,"-L","0","-H","300","--normal","green","--high","red"] 10
+                    , Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 10
+                    , Run Date " %b %_d. %H:%M:%S" "date" 10
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "<action=`gnome-system-monitor` button=1>%cpu%</action> <fc=#199EFC>|</fc> %eth0% %wlan0% %tun0% <fc=#199EFC>|</fc> } %StdinReader% { <fc=#199EFC>|</fc><fc=#ee9a00>%date%</fc> "
+       }

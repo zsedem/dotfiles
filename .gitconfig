@@ -1,0 +1,45 @@
+[push]
+	default = tracking
+[alias]
+    cp = cherry-pick
+    st = status
+    cl = clone
+    ci = commit
+    co = checkout
+    br = branch
+    rba = rebase --abort
+    rbc = rebase --continue
+    rb = rebase -i origin/master --autosquash --autostash
+    diff = diff --word-diff
+    dc = diff --cached
+    fetch = fetch --prune
+    edit-unmerged = \
+    "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; subl -w `f`"
+    step-forward = \
+    "!git checkout `git rev-list --topo-order HEAD..master | tail -1`"
+    step-backward = \
+    "!git checkout HEAD~1"
+    sl = log --oneline -10
+    last-ci = log --format="%H" -1
+    push-new-upstream = \
+    "!git push --set-upstream origin `git rev-parse --abbrev-ref HEAD`"
+[core]
+    editor = vim
+[guitool "JENKINS"]
+    cmd = make jenkins
+[guitool "Rebase onto master"]
+    cmd = git rebase -i origin/master
+[guitool "Rebase - Continue"]
+    cmd = git rebase --continue
+[guitool "Rebase - Skip"]
+    cmd = git rebase --skip
+[guitool "Rebase - Abort"]
+    cmd = git rebase --abort
+[guitool "Pull with Rebase"]
+    cmd = git pull --rebase
+[format]
+	signoff = true
+[core]
+	editor = vim
+[include]
+    path = ~/.gitconfig.local

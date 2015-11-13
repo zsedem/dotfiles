@@ -1,0 +1,2 @@
+exec stack exec -- xmonad
+
