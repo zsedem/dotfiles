@@ -29,6 +29,8 @@ noremap   <Left>   <NOP>
 noremap   <Right>  <NOP>
 
 " easy tab navigation
+map <C-k> <ESC> ddkkp
+map <C-j> <ESC> ddp
 map <C-e> <ESC>:tabnew 
 map <C-t> <ESC>:tabnew
 map <C-l> <ESC>:tabn<CR>
