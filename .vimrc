@@ -19,19 +19,9 @@ set nowritebackup
 set noswapfile
 set noundofile
 
-inoremap  <Up>     <NOP>
-inoremap  <Down>   <NOP>
-inoremap  <Left>   <NOP>
-inoremap  <Right>  <NOP>
-noremap   <Up>     <NOP>
-noremap   <Down>   <NOP>
-noremap   <Left>   <NOP>
-noremap   <Right>  <NOP>
-
 " easy tab navigation
-map <C-k> <ESC> ddkkp
-map <C-j> <ESC> ddp
-map <C-e> <ESC>:tabnew 
+map <C-k> <ESC>ddkkp
+map <C-j> <ESC>ddp
 map <C-t> <ESC>:tabnew
 map <C-l> <ESC>:tabn<CR>
 map <C-h> <ESC>:tabp<CR>

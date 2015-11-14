@@ -10,6 +10,7 @@
 !.xmobarrc
 !.Xresources
 !.dunstrc
+!.config/gnome-session/sessions/xmonad-gnome-nopanel.session
 
 !.tmux.conf
 

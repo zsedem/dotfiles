@@ -46,7 +46,7 @@ import           XMonad.Util.SpawnOnce           (spawnOnce)
 
 myWorkSpaces, windowsToFloat :: [String]
 myWorkSpaces = ["One", "Two", "Three"]
-windowsToFloat  = ["Adl","feh","File-roller","XTerm","Xmessage","Volti"]
+windowsToFloat  = ["Adl","feh","File-roller","Xmessage","Volti"]
 
 classNameIn :: [String] -> Query Bool
 classNameIn  = foldr ((<||>) . (className =?)) (return False)

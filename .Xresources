@@ -14,3 +14,6 @@ Xmessage*borderWidth:                  2
 Xmessage*Text.borderWidth:             0
 Xmessage*Command.shapeStyle:           rectangle
 Xmessage*Text.?.cursorColor:           white
+xterm*font:     *-fixed-*-*-*-20-*
+xterm*background: black
+xterm*foreground: white
