@@ -1,4 +1,5 @@
 import           XMonad
+import           XMonad.Config.Gnome             (gnomeConfig)
 import           XMonad.Util.Paste               (pasteSelection)
 import           XMonad.Actions.CycleWS          (Direction1D (Prev, Next),
                                                   WSType (..), moveTo)
@@ -55,7 +56,7 @@ windowsButton :: KeyMask
 windowsButton = mod4Mask -- windows button
 
 main :: IO ()
-main = xmonad =<< xmobar (ewmh $ defaultConfig
+main = xmonad =<< xmobar (gnomeConfig
        { modMask            = windowsButton
        , terminal           = "gnome-terminal --hide-menubar"
        , normalBorderColor  = "#333333"
@@ -65,13 +66,13 @@ main = xmonad =<< xmobar (ewmh $ defaultConfig
        , workspaces         = myWorkSpaces
        , borderWidth        = 2
        , layoutHook         = smartBorders myLayoutHook
-       , manageHook         = manageHook defaultConfig -- NOTE: <+> is executed from right to left
+       , manageHook         = manageHook gnomeConfig -- NOTE: <+> is executed from right to left
                            <+> myManageHook
                            <+> manageDocks
        , logHook            = dynamicLogString defaultPP >>= xmonadPropLog
        , keys               = customKeys delKeys insKeys
        , startupHook        = setWMName "LG3D" >> startup
-       , handleEventHook    = handleEventHook defaultConfig <+> docksEventHook
+       , handleEventHook    = handleEventHook gnomeConfig <+> docksEventHook
        } )
   where
     myLayoutHook = windowNavigation tiled ||| windowNavigation mirrored  ||| full

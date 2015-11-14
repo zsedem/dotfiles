@@ -1,2 +1,1 @@
-exec stack exec -- xmonad
-
+exec gnome-session --session xmonad-gnome-panel "$@"

@@ -6,6 +6,7 @@
 !scripts/
 
 !.xmonad/
+!.xsession
 !.xinitrc
 !.xmobarrc
 !.Xresources
