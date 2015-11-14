@@ -1,0 +1,4 @@
+bind generic S :source ~/.tigrc
+bind main f !git fetch --prune
+bind main R !git rebase -i %(commit) --autostash --autosquash
+bind main X !git commit -s --fixup %(commit)
