@@ -39,3 +39,14 @@ let g:airline_section_b = '%{strftime("%c")}'
 
 " git-gutter
 hi clear SignColumn
+
+" git rebase magic
+function RebaseActionToggle()
+   let line = getline(".")
+   let result = matchstr(line, "^\\a")
+   let transitions = {'p': 'fixup', 's': 'pick', 'e': 'squash', 'f': 'edit'}
+   execute "normal! ^cw" . transitions[result]
+endfunction
+
+autocmd FileType gitrebase noremap <Cr> :call RebaseActionToggle()<Cr>
+
