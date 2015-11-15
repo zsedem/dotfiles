@@ -8,6 +8,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'bling/vim-airline'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'terryma/vim-multiple-cursors'
+Plugin 'bronson/vim-trailing-whitespace'
 
 call vundle#end()
 
@@ -20,6 +21,8 @@ set nobackup
 set nowritebackup
 set noswapfile
 set noundofile
+set list
+set listchars=tab:▸·,trail:·
 
 " Line moving
 nmap <C-j> ddp
