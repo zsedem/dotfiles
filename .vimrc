@@ -21,9 +21,13 @@ set nowritebackup
 set noswapfile
 set noundofile
 
+" Line moving
+nmap <C-j> ddp
+nmap <C-k> ddkkp
+imap <C-j> <ESC>ddpi
+imap <C-k> <ESC>ddkkpi
+
 " easy tab navigation
-map <C-k> <ESC>ddkkp
-map <C-j> <ESC>ddp
 map <C-t> <ESC>:tabnew
 map <C-l> <ESC>:tabn<CR>
 map <C-h> <ESC>:tabp<CR>
