@@ -7,6 +7,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'bling/vim-airline'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'terryma/vim-multiple-cursors'
 
 call vundle#end()
 
@@ -14,6 +15,7 @@ filetype plugin indent on
 set colorcolumn=120
 syntax on
 
+set number
 set nobackup
 set nowritebackup
 set noswapfile
@@ -25,7 +27,6 @@ map <C-j> <ESC>ddp
 map <C-t> <ESC>:tabnew
 map <C-l> <ESC>:tabn<CR>
 map <C-h> <ESC>:tabp<CR>
-
 " split pane navigation
 nmap <silent> <a-k> :wincmd k<CR>
 nmap <silent> <a-j> :wincmd j<CR>
@@ -39,6 +40,16 @@ let g:airline_section_b = '%{strftime("%c")}'
 
 " git-gutter
 hi clear SignColumn
+
+" multiline-editing
+let g:multi_cursor_exit_from_visual_mode = 0
+let g:multi_cursor_exit_from_insert_mode = 0
+let g:multi_cursor_use_default_mapping = 0
+
+let g:multi_cursor_next_key='<C-d>'
+let g:multi_cursor_prev_key='<C-p>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<Esc>'
 
 " git rebase magic
 function RebaseActionToggle()
