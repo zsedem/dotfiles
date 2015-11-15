@@ -17,3 +17,5 @@ Xmessage*Text.?.cursorColor:           white
 xterm*font:     *-fixed-*-*-*-20-*
 xterm*background: black
 xterm*foreground: white
+xterm*locale: true
+xterm*faceName: Mono:style=Book
