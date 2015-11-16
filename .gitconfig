@@ -1,5 +1,5 @@
 [push]
-	default = tracking
+    default = tracking
 [alias]
     cp = cherry-pick
     st = status
@@ -38,8 +38,9 @@
 [guitool "Pull with Rebase"]
     cmd = git pull --rebase
 [format]
-	signoff = true
+    signoff = true
 [core]
-	editor = vim
+    editor = vim
+    excludesfile = ~/.gitignore.global
 [include]
     path = ~/.gitconfig.local
