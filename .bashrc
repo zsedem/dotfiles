@@ -108,4 +108,4 @@ function .poll-command() {
     while true; do inotifywait -r -emodify,move,create .; $1; done
 }
 
-source .bashrc.local
+source ~/.bashrc.local
