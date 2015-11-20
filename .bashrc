@@ -65,7 +65,7 @@ unset safe_term match_lhs
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
 
-EDITOR=nano
+EDITOR=vim
 HISTSIZE=99999999999999
 
 alias .cathistorygrep='cat ~/.bash_history | grep'
