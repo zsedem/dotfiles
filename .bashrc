@@ -105,7 +105,7 @@ function .dockerclean(){
 }
 
 function .poll-command() {
-    while true; do inotifywait -r -emodify,move,create .; $1; done
+    while true; do inotifywait -r -emodify,move,create . &> /dev/null; $@ ; done
 }
 
 source ~/.bashrc.local
