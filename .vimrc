@@ -14,6 +14,7 @@ Plugin 'kien/ctrlp.vim'
 
 call vundle#end()
 
+filetype plugin on
 filetype plugin indent on
 set colorcolumn=120
 syntax on
@@ -61,8 +62,8 @@ let g:multi_cursor_exit_from_insert_mode = 0
 let g:multi_cursor_use_default_mapping = 0
 
 let g:multi_cursor_next_key='<C-d>'
-let g:multi_cursor_prev_key='<C-p>'
-let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_prev_key='<C-S-d>'
+let g:multi_cursor_skip_key='<C-k>'
 let g:multi_cursor_quit_key='<Esc>'
 
 " git rebase magic
@@ -74,4 +75,15 @@ function RebaseActionToggle()
 endfunction
 
 autocmd FileType gitrebase noremap <Cr> :call RebaseActionToggle()<Cr>
+
+" Commenting blocks of code.
+autocmd FileType c,cpp,java,scala let b:comment_leader = '// '
+autocmd FileType sh,ruby,python   let b:comment_leader = '# '
+autocmd FileType conf,fstab       let b:comment_leader = '# '
+autocmd FileType tex              let b:comment_leader = '% '
+autocmd FileType mail             let b:comment_leader = '> '
+autocmd FileType vim              let b:comment_leader = '" '
+autocmd FileType haskell          let b:comment_leader = '-- '
+noremap <silent> ,cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
+noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
 
