@@ -61,9 +61,10 @@
 		"CVS",
 		"/home/zsedem/tmp/http-backend-proxy/bower_components"
 	],
-	"font_size": 15,
+	"font_size": 14,
 	"ignored_packages":
 	[
+		"Anaconda",
 		"PyRefactor",
 		"Vintage"
 	],

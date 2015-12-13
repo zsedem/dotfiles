@@ -19,3 +19,16 @@ xterm*background: black
 xterm*foreground: white
 xterm*locale: true
 xterm*faceName: Mono:style=Book
+URxvt*background:black
+URxvt*foreground:white
+URxvt*geometry:         83x23
+URxvt.internalBorder: 1
+URxvt*font: xft:PragmataPro for Powerline:size=15
+URxvt*boldFont: xft:PragmataPro for Powerline:size=15
+URxvt*scrollBar:        false
+URxvt.perl-ext-common: default,matcher,tabbedex,clipboard
+URxvt.tabbed.autohide: true
+URxvt.tabbed.new-button: false
+URxvt.url-launcher: /usr/bin/google-chrome
+URxvt.matcher.button: 1
+URxvt.iconFile: /usr/share/icons/Menda-Square/apps/scalable/terminal.svg

@@ -1,107 +1,78 @@
-import           XMonad
-import           XMonad.Config.Gnome             (gnomeConfig)
-import           XMonad.Util.Paste               (pasteSelection)
-import           XMonad.Actions.CycleWS          (Direction1D (Prev, Next),
-                                                  WSType (..), moveTo)
-import           XMonad.Actions.GroupNavigation
-import           XMonad.Actions.PerWorkspaceKeys
-import           XMonad.Actions.PhysicalScreens  (PhysicalScreen, sendToScreen,
-                                                  viewScreen)
-import           XMonad.Actions.Search           (google, hoogle, namedEngine,
-                                                  prefixAware,
-                                                  promptSearchBrowser, (!>))
-import           XMonad.Hooks.DynamicLog         (defaultPP, dynamicLogString,
-                                                  xmobar, xmonadPropLog)
-import           XMonad.Hooks.EwmhDesktops       (ewmh)
-import           XMonad.Hooks.ManageDocks        (ToggleStruts (..),
-                                                  docksEventHook, manageDocks)
-import           XMonad.Hooks.ManageHelpers      (composeOne, doCenterFloat,
-                                                  doFullFloat, isDialog,
-                                                  isFullscreen, (-?>))
-import           XMonad.Hooks.SetWMName          (setWMName)
-import           XMonad.Layout.NoBorders         (noBorders, smartBorders)
+import Data.Maybe
+import Data.List
+import XMonad
+import XMonad.Actions.CycleWindows
+import XMonad.Actions.GroupNavigation
+
+import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers
+import XMonad.Hooks.SetWMName
+import XMonad.Layout.Spacing
+import XMonad.Layout.Grid
+import XMonad.Layout.NoBorders
+import XMonad.Layout.Gaps
+import XMonad.Util.Run
+import XMonad.Util.SpawnOnce
+import XMonad.Util.EZConfig (additionalKeys)
 import           XMonad.Layout.WindowNavigation  (Direction2D (..),
                                                   Navigate (..),
                                                   windowNavigation)
-import           XMonad.Prompt                   (XPConfig (..),
-                                                  XPPosition (..),
-                                                  defaultXPConfig,
-                                                  greenXPConfig)
-import           XMonad.Prompt.Input
-import           XMonad.Prompt.Shell             (shellPrompt)
-import qualified XMonad.StackSet                 as W
-import           XMonad.Util.CustomKeys          (customKeys)
-import           XMonad.Util.SpawnOnce           (spawnOnce)
---Just to be sure that the compiler optimize these
-{-# INLINE myManageHook #-}
-{-# INLINE myWorkSpaces #-}
-{-# INLINE shift #-}
-{-# INLINE alt #-}
-{-# INLINE ctrl #-}
-{-# INLINE insKeys #-}
-{-# INLINE delKeys #-}
-{-# INLINE promptXPConfig #-}
-{-# INLINE startup #-}
-{-# INLINE workspaceKeys #-}
-{-# INLINE windowsToFloat #-}
+import System.IO
+import qualified XMonad.StackSet as W
+import qualified Data.Map as M
+import qualified GHC.IO.Handle.Types as H
 
-myWorkSpaces, windowsToFloat :: [String]
-myWorkSpaces = ["One", "Two", "Three"]
-windowsToFloat  = ["Adl","feh","File-roller","Xmessage","Volti"]
+hPath = "/home/zsedem/"
+clr1 = "#efefef"
+clr2 = "#000000"
+clr3 = "#0783c0"
+sWidth  = "1600"
+sHeight = "900"
+makeSpace = wrap "    " "    "
 
-classNameIn :: [String] -> Query Bool
-classNameIn  = foldr ((<||>) . (className =?)) (return False)
+myLogHook h = dynamicLogWithPP $ myPP h
 
-windowsButton :: KeyMask
-windowsButton = mod4Mask -- windows button
+myLogHook2 h = dynamicLogWithPP $ myPP2 h
 
-main :: IO ()
-main = xmonad =<< xmobar (gnomeConfig
-       { modMask            = windowsButton
-       , terminal           = "gnome-terminal --hide-menubar"
-       , normalBorderColor  = "#333333"
-       , focusedBorderColor = "#1793d1"
-       , focusFollowsMouse  = False
-       , clickJustFocuses   = True
-       , workspaces         = myWorkSpaces
-       , borderWidth        = 2
-       , layoutHook         = smartBorders myLayoutHook
-       , manageHook         = manageHook gnomeConfig -- NOTE: <+> is executed from right to left
-                           <+> myManageHook
-                           <+> manageDocks
-       , logHook            = dynamicLogString defaultPP >>= xmonadPropLog
-       , keys               = customKeys delKeys insKeys
-       , startupHook        = setWMName "LG3D" >> startup
-       , handleEventHook    = handleEventHook gnomeConfig <+> docksEventHook
-       } )
-  where
-    myLayoutHook = windowNavigation tiled ||| windowNavigation mirrored  ||| full
-           where mirrored = Mirror (Tall nmast delta ratio)
-                 tiled    = Tall nmast delta ratio
-                 nmast    = 1
-                 delta    = 0.07
-                 ratio    = 0.7
-                 full     = noBorders  Full
+myPP :: Handle -> PP
+myPP p = defaultPP
+    { ppOutput             = hPutStrLn p
+    , ppSep                = ""
+    , ppTitle              = titleWrapper . makeSpace . shorten 111 
+    , ppLayout             = buttonLayout . makeSpace .
+                            ( \t -> case t of
+                            "Spacing 10 Grid"           -> dir_icon ++ "grid.xbm)  Grid"
+                            "Spacing 10 Tall"           -> dir_icon ++ "sptall.xbm)  Tile"
+                            "Mirror Spacing 10 Tall"    -> dir_icon ++ "mptall.xbm)  mTile"
+                            "Mirror Spacing 20 Tall"    -> dir_icon ++ "mptall.xbm)  rTile"
+                            "Full"                      -> dir_icon ++ "full.xbm)  Full"
+                            )
+    , ppOrder  = \(ws:l:t:_) -> [l,t]
+    }
+    where
+        titleWrapper = wrap ("^fg("++clr3++")^i(.xmonad/assets/xbm/mr1.xbm)^fg()") ""
+        buttonLayout = wrap ("^ca(1,xdotool key super+space)^bg("++clr3++")") "^bg()^ca()"
+        dir_icon     = "^ca(1,xdotool key alt+space)^i(.xmonad/assets/xbm/"
 
--- | Rules for the new windows in tiling
-myManageHook :: ManageHook
-myManageHook = composeOne
-    [ isFullscreen                        -?> doFullFloat
-    , isDialog                            -?> doNothing
-    , classNameIn windowsToFloat          -?> doCenterFloat
-    ]
-    where 
-      doNothing           = return mempty
 
-delKeys :: XConfig Layout -> [(KeyMask, KeySym)]
-delKeys _ =
-    [ (shift windowsButton , xK_p)
-    , (windowsButton       , xK_r)
-    ] ++ workspaceKeys
+myPP2 :: Handle -> PP
+myPP2 h = defaultPP
+    { ppOutput             = hPutStrLn h
+    , ppCurrent            = wrapCurrent . makeSpace
+    , ppVisible            = wrapAnother . makeSpace
+    , ppHidden             = wrapAnother . makeSpace
+    , ppHiddenNoWindows    = wrapAnother . makeSpace
+    , ppWsSep              = "  "
+    , ppOrder  = \(ws:l:t:_) -> [ws]
+    }
+    where
+        wrapCurrent  = wrap ("^fg(#ffffff)^bg("++clr3++")") "^bg()^fg()"
+        wrapAnother  = wrap "^fg(#cacaca)^bg(#424242)" "^bg()^fg()"
 
-workspaceKeys :: [(KeyMask, KeySym)]
-workspaceKeys = zip (replicate 9 (shift windowsButton)) [xK_1 .. xK_9]
-
+myWorkspace :: [String]
+myWorkspace = makeOnclick [ " TERM ", " WEB ", " CODE "]
+        where makeOnclick l = [ "^ca(1,xdotool key super+" ++ show n ++ ")" ++ ws ++ "^ca()" | (i,ws) <- zip [1..] l, let n = i ]
 
 
 shift :: KeyMask -> KeyMask
@@ -114,111 +85,80 @@ alt = mod1Mask
 ctrl :: KeyMask -> KeyMask
 ctrl m = m .|. controlMask
 
-insKeys :: XConfig Layout -> [((KeyMask, KeySym), X ())]
-insKeys _ =
-    -- Prompts
-    [ ((windowsButton      , xK_p                          ), shellPrompt promptXPConfig )
-    , ((shift windowsButton, xK_p                          ), inputPrompt defaultXPConfig "$ " ?+ commandInNotify)
-    , ((ctrl windowsButton , xK_p                          ), promptSearchBrowser
-                                                              greenXPConfig
-                                                              "google-chrome-stable"
-                                                              ( namedEngine "hs" hoogle !> prefixAware google))
+windowsButton :: KeyMask
+windowsButton = mod4Mask
 
-    , ((windowsButton       , xK_Tab                        ), windows W.focusDown )
-    , ((shift windowsButton , xK_Tab                        ), windows W.focusUp )
-    , ((alt                 , xK_Tab                        ), bindOn [ ("Chrome", windows W.focusUp)
-                                                                 , (""      , nextMatch Forward (return True)
-                                                                   )
-                                                                 ]
-      )
-    , ((shift alt           , xK_Tab                        ), bindOn [ ("Chrome", windows W.focusDown)
-                                                                 , (""      , nextMatch Backward (return True)
-                                                                   )
-                                                                 ]
-      )
-    , ((shiftMask           , xK_Insert                     ), pasteSelection)
-    , ((windowsButton       , xK_Right                      ), sendMessage $ Swap R )
-    , ((windowsButton       , xK_Left                       ), sendMessage $ Swap L )
-    , ((windowsButton       , xK_Up                         ), sendMessage $ Swap U )
-    , ((windowsButton       , xK_Down                       ), sendMessage $ Swap D )
-    , ((alt                 , xK_F4                         ), kill )
-    , ((windowsButton       , xK_F4                         ), kill )
-    , ((windowsButton       , xK_F11                        ), sendMessage ToggleStruts )
-    -- Workspace
-    , ((ctrl alt            , xK_Down                       ), moveNext )
-    , ((ctrl alt            , xK_Up                         ), movePrev )
-    -- Screen
-    , ((shift windowsButton , xK_Left                       ), windowToScreen 0 )
-    , ((shift windowsButton , xK_Right                      ), windowToScreen 1 )
-    , ((ctrl alt            , xK_Left                       ), viewScreen 0 )
-    , ((ctrl alt            , xK_Right                      ), viewScreen 1 )
-    -- Power managment
-    , ((shift windowsButton , xK_l                          ), spawn "xscreensaver-command -lock" )
-    , ((shift windowsButton , xK_F4                         ), spawn "canberra-gtk-play -i service-logout"
-                                                                >> spawn "$HOME/.xmonad/closewindows.sh"
-                                                                >> notifyspawn "sleep 60; systemctl poweroff" )
-    , ((ctrl alt            , xK_F4                         ), spawn "canberra-gtk-play -i service-logout"
-                                                                >> notifyspawn "sleep 1; systemctl poweroff" )
-    , ((ctrl alt            , xK_Delete                     ), notifyspawn "sleep 3; systemctl reboot" )
-    , ((0                   , xK_Pause                      ), notifyspawn "systemctl suspend" )
-    , ((0                   , xMediaButton_Sleep            ), notifyspawn "systemctl suspend" )
-    -- Sound
-    , ((0                   , xMediaButton_AudioRewind      ), notifyspawn "amixer -q set Master toggle" )
-    , ((0                   , xMediaButton_AudioLowerVolume ), canberrabell $ spawn "amixer -q set Master 5%-" )
-    , ((0                   , xMediaButton_AudioRaiseVolume ), canberrabell $ spawn "amixer -q set Master 5%+" )
+myKeybinds = [ ((mod4Mask              , xK_p                          ), loggedSpawn dmenu_run)
+             , ((mod4Mask              , xK_q                          ), spawn xmonad_restart)
+             , ((mod4Mask .|. shiftMask, xK_q                          ), loggedSpawn powermenu)
+             , ((windowsButton         , xK_Tab                        ), windows W.focusDown )
+             , ((shift windowsButton   , xK_Tab                        ), windows W.focusUp )
+             , ((windowsButton         , xK_Tab                        ), windows W.focusDown )
+             , ((shift windowsButton   , xK_Tab                        ), windows W.focusUp )
+             -- , ((shiftMask             , xK_Insert                     ), pasteSelection)
+             , ((windowsButton         , xK_Right                      ), sendMessage $ Swap R )
+             , ((windowsButton         , xK_Left                       ), sendMessage $ Swap L )
+             , ((windowsButton         , xK_Up                         ), sendMessage $ Swap U )
+             , ((windowsButton         , xK_Down                       ), sendMessage $ Swap D )
+             , ((alt                   , xK_F4                         ), kill )
+             , ((windowsButton         , xK_F4                         ), kill )
+             , ((windowsButton         , xK_F11                        ), sendMessage ToggleStruts )
+             , ((alt                   , xK_Tab                        ), nextMatch Backward (return True) )
+             , ((shift alt             , xK_Tab                        ), nextMatch Forward (return True) )
+             , ((controlMask           , xK_space                      ), layoutSwitch)
+             ]
+             where
+                dmenu_run = hPath++".xmonad/assets/bin/dmenu-run.sh '"++sWidth ++"' '"++sHeight ++"' '"++clr2++"' '"++clr3++"'"
+                powermenu = hPath++".xmonad/assets/bin/powermenu.sh '"++sWidth ++"' '"++sHeight ++"' '"++clr2++"' '"++clr3++"'"
+                xmonad_restart = hPath++".xmonad/assets/bin/restart.sh"
+                loggedSpawn c = spawn $ "echo '"++c++ "'>> /tmp/xmonad.spawn.log; " ++ c
+                layoutSwitch = do keyboardlayout <- runProcessWithInput "/usr/bin/xkblayout-state" ["print", "%s"] ""
+                                  let newLayout = nextItem ["us", "hu"] keyboardlayout
+                                  spawn $ "setxkbmap " ++ newLayout
+                                  
 
-    -- Applications
-    , ((controlMask         , xK_KP_Up                      ), nextMatchOrDo
-                                                                Forward
-                                                                (className =? "Gnome-terminal")
-                                                                (spawn "gnome-terminal --hide-menubar"))
-    , ((0                   , xMediaButton_Email            ), notifyspawn "skype" )
-    , ((0                   , xMediaButton_Search           ), notifyspawn "google-chrome-stable" )
-    , ((0                   , xMediaButton_Home             ), notifyspawn "gnome-terminal" )
-    , ((0                   , xMediaButton_Play             ), notifyspawn "vlc" )
-    , ((0                   , xMediaButton_MyComputer       ), notifyspawn "nautilus" )
-    --Workspace grab with shift windowsButton + 0,1,...
-    ] ++ zip workspaceKeys (map changeWorkspace myWorkSpaces)
-    where
-      --Screen/Workspace manage
-      windowToScreen :: PhysicalScreen -> X ()
-      windowToScreen scr = do sendToScreen scr
-                              viewScreen scr
-      moveNext :: X ()
-      moveNext           = do viewScreen 0
-                              moveTo Next HiddenNonEmptyWS
-      movePrev :: X ()
-      movePrev           = do viewScreen 0
-                              moveTo Prev HiddenNonEmptyWS
-      changeWorkspace worksp  = windows (W.shift worksp) >> windows (W.greedyView worksp)
-      --Media buttons
-      xMediaButton_AudioRewind      = 0x1008ff3e
-      xMediaButton_AudioLowerVolume = 0x1008ff11
-      xMediaButton_AudioRaiseVolume = 0x1008ff13
-      xMediaButton_Sleep            = 0x1008ff2f
-      xMediaButton_Email            = 0x1008ff19
-      xMediaButton_Search           = 0x1008ff1b
-      xMediaButton_Home             = 0x1008ff18
-      xMediaButton_Play             = 0x1008ff14
-      xMediaButton_MyComputer       = 0x1008ff5d
-      --Notify
-      commandInNotify :: String -> X ()
-      commandInNotify str     = spawn ( "notify-send \""++str++"\" \"$("++str++")\"" )
-                                >> spawn "canberra-gtk-play -i message"
-      notifyspawn s           = spawn ("notify-send --expire-time=1 Spawn \""++s++"\"; "++s)
-                                >> spawn "canberra-gtk-play -i message"
-      canberrabell e          = spawn "canberra-gtk-play -i bell">> e
+nextItem :: (Eq a) => [a] -> a -> a
+nextItem l item = case elemIndex item (init l) of
+                    Just index -> l !! (index + 1)
+                    Nothing -> head l
 
-promptXPConfig :: XPConfig
-promptXPConfig = defaultXPConfig
-  { height            = 30
-  , fgHLight          = "#3493f3"
-  , bgHLight          = "#333333"
-  , promptBorderWidth = 0
-  , position          = Top
-  }
 
-startup :: X ()
-startup =
-    do spawn "canberra-gtk-play -i service-login"
-       spawnOnce "$HOME/.xmonad/startup.sh"
+myLayout = avoidStruts $ windowNavigation $ smartBorders ( sTall ||| Mirror mTall ||| Full )
+        where
+            sTall = spacing 10 $ Tall 1 (3/100) (2/3)
+            mTall = spacing 10 $ Tall 1 (3/100) (2/3)
+
+myDocks = composeAll
+        	[ className =? "feh" --> doFullFloat
+            , isDialog           --> doCenterFloat
+            ]
+
+
+main = do
+    bgPanel <- spawnPipe bgBar
+    layoutPanel <- spawnPipe lBar
+    infoPanel <- spawnPipe iBar
+    workspacePanel <- spawnPipe wBar
+    xmonad $ defaultConfig
+     { manageHook = myDocks <+> manageDocks <+> manageHook defaultConfig
+     , layoutHook = myLayout
+     , modMask = mod4Mask
+     , workspaces = myWorkspace
+     , terminal = "urxvt"
+     , focusedBorderColor = clr3
+     , normalBorderColor = "#424242"
+     , borderWidth = 3
+     , startupHook = spawnOnce autoload <+> 
+                     spawn trayer <+>
+                     setWMName "LG3D"
+     , logHook = myLogHook layoutPanel <+> myLogHook2 workspacePanel
+     , handleEventHook    = handleEventHook defaultConfig <+> docksEventHook
+     } `additionalKeys` myKeybinds
+     where
+        autoload = hPath++"/.xmonad/assets/bin/autoload.sh"
+        dzenArgs = "-p -e 'button3=' -fn 'Droid Sans Fallback-8:bold'"
+        bgBar    = "echo '^fg("++clr3++")^p(;+20)^r(1600x5)' | dzen2 " ++ dzenArgs++" -ta c -fg '" ++ clr1 ++ "' -bg '#000000' -h 35 -w "++sWidth
+        lBar     = "sleep 0.1;dzen2 "++dzenArgs++" -ta l -fg '"++clr1++"' -bg '" ++clr2++"' -h 25 -w `expr "++sWidth++" / 2` -y 0"
+        iBar     = "sleep 0.1; conky -c ~/.xmonad/assets/conky/info.conkyrc | dzen2 "++dzenArgs++" -ta r -fg '"++clr1++"' -bg '" ++clr2++"' -h 25 -w `expr "++sWidth++" / 2` -x `expr "++sWidth++" / 2 - 50` -y 0"
+        wBar     = "sleep 0.3;dzen2 "++dzenArgs++" -ta c -fg '"++clr1++"' -bg '" ++clr2++"' -h 20 -w 300 -x `expr "++sWidth++" / 2 - 150` -y 4"
+        trayer   = "pkill trayer; trayer --edge top --align right --width 50  --widthtype pixel --transparent true --height 25 --alpha 150 --tint 'rgba(0,0,0,0)'"
