@@ -164,6 +164,7 @@ main = do
      , borderWidth = 3
      , startupHook = spawnOnce autoload <+> 
                      spawn trayer <+>
+                     spawn autolock <+>
                      setWMName "LG3D"
      , logHook = myLogHook layoutPanel <+> myLogHook2 workspacePanel
      , handleEventHook    = handleEventHook defaultConfig <+> docksEventHook

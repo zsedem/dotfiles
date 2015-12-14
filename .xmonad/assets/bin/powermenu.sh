@@ -10,7 +10,7 @@ choice=$(echo -e "LOGOUT\nSHUTDOWN\nREBOOT" | $dmenu)
 
 case "$choice" in
   LOGOUT) pkill xmonad & ;;
-  SHUTDOWN) sudo shutdown -h now & ;;
-  REBOOT) sudo shutdown -r now & ;;
+  SHUTDOWN) systemctl poweroff & ;;
+  REBOOT) systemctl reboot & ;;
 esac
 

@@ -15,6 +15,7 @@ Xmessage*Text.borderWidth:             0
 Xmessage*Command.shapeStyle:           rectangle
 Xmessage*Text.?.cursorColor:           white
 xscreensaver.newLoginCommand: lxdm -c USER_SWITCH
+xscreensaver.timeout: 0:01:00
 xterm*font:     *-fixed-*-*-*-20-*
 xterm*background: black
 xterm*foreground: white
