@@ -14,10 +14,8 @@ import XMonad.Layout.NoBorders
 import XMonad.Layout.Gaps
 import XMonad.Util.Run
 import XMonad.Util.SpawnOnce
-import XMonad.Util.EZConfig (additionalKeys)
-import           XMonad.Layout.WindowNavigation  (Direction2D (..),
-                                                  Navigate (..),
-                                                  windowNavigation)
+import XMonad.Util.EZConfig
+import XMonad.Layout.WindowNavigation
 import System.IO
 import qualified XMonad.StackSet as W
 import qualified Data.Map as M
@@ -71,7 +69,7 @@ myPP2 h = defaultPP
         wrapAnother  = wrap "^fg(#cacaca)^bg(#424242)" "^bg()^fg()"
 
 myWorkspace :: [String]
-myWorkspace = makeOnclick [ " TERM ", " WEB ", " CODE "]
+myWorkspace = makeOnclick [ "TERM", "WEB", "CODE"]
         where makeOnclick l = [ "^ca(1,xdotool key super+" ++ show n ++ ")" ++ ws ++ "^ca()" | (i,ws) <- zip [1..] l, let n = i ]
 
 
@@ -96,6 +94,7 @@ myKeybinds = [ ((mod4Mask              , xK_p                          ), logged
              , ((windowsButton         , xK_Tab                        ), windows W.focusDown )
              , ((shift windowsButton   , xK_Tab                        ), windows W.focusUp )
              -- , ((shiftMask             , xK_Insert                     ), pasteSelection)
+
              , ((windowsButton         , xK_Right                      ), sendMessage $ Swap R )
              , ((windowsButton         , xK_Left                       ), sendMessage $ Swap L )
              , ((windowsButton         , xK_Up                         ), sendMessage $ Swap U )
@@ -106,6 +105,10 @@ myKeybinds = [ ((mod4Mask              , xK_p                          ), logged
              , ((alt                   , xK_Tab                        ), nextMatch Backward (return True) )
              , ((shift alt             , xK_Tab                        ), nextMatch Forward (return True) )
              , ((controlMask           , xK_space                      ), layoutSwitch)
+             , ((windowsButton         , xK_l                          ), spawn "xscreensaver-command -lock")
+             , ((0                     , xMediaButton_AudioRewind      ), spawn "amixer -q set Master toggle" )
+             , ((0                     , xMediaButton_AudioLowerVolume ), canberrabell $ spawn "amixer -q set Master 5%-" )
+             , ((0                     , xMediaButton_AudioRaiseVolume ), canberrabell $ spawn "amixer -q set Master 5%+" )
              ]
              where
                 dmenu_run = hPath++".xmonad/assets/bin/dmenu-run.sh '"++sWidth ++"' '"++sHeight ++"' '"++clr2++"' '"++clr3++"'"
@@ -115,6 +118,17 @@ myKeybinds = [ ((mod4Mask              , xK_p                          ), logged
                 layoutSwitch = do keyboardlayout <- runProcessWithInput "/usr/bin/xkblayout-state" ["print", "%s"] ""
                                   let newLayout = nextItem ["us", "hu"] keyboardlayout
                                   spawn $ "setxkbmap " ++ newLayout
+                canberrabell e          = spawn "canberra-gtk-play -i bell">> e
+
+                xMediaButton_AudioRewind      = 0x1008ff3e
+                xMediaButton_AudioLowerVolume = 0x1008ff11
+                xMediaButton_AudioRaiseVolume = 0x1008ff13
+                xMediaButton_Sleep            = 0x1008ff2f
+                xMediaButton_Email            = 0x1008ff19
+                xMediaButton_Search           = 0x1008ff1b
+                xMediaButton_Home             = 0x1008ff18
+                xMediaButton_Play             = 0x1008ff14
+                xMediaButton_MyComputer       = 0x1008ff5d
                                   
 
 nextItem :: (Eq a) => [a] -> a -> a
@@ -123,7 +137,7 @@ nextItem l item = case elemIndex item (init l) of
                     Nothing -> head l
 
 
-myLayout = avoidStruts $ windowNavigation $ smartBorders ( sTall ||| Mirror mTall ||| Full )
+myLayout = avoidStruts  $ smartBorders $ windowNavigation ( sTall ||| Mirror mTall ||| Full )
         where
             sTall = spacing 10 $ Tall 1 (3/100) (2/3)
             mTall = spacing 10 $ Tall 1 (3/100) (2/3)
@@ -158,7 +172,8 @@ main = do
         autoload = hPath++"/.xmonad/assets/bin/autoload.sh"
         dzenArgs = "-p -e 'button3=' -fn 'Droid Sans Fallback-8:bold'"
         bgBar    = "echo '^fg("++clr3++")^p(;+20)^r(1600x5)' | dzen2 " ++ dzenArgs++" -ta c -fg '" ++ clr1 ++ "' -bg '#000000' -h 35 -w "++sWidth
-        lBar     = "sleep 0.1;dzen2 "++dzenArgs++" -ta l -fg '"++clr1++"' -bg '" ++clr2++"' -h 25 -w `expr "++sWidth++" / 2` -y 0"
-        iBar     = "sleep 0.1; conky -c ~/.xmonad/assets/conky/info.conkyrc | dzen2 "++dzenArgs++" -ta r -fg '"++clr1++"' -bg '" ++clr2++"' -h 25 -w `expr "++sWidth++" / 2` -x `expr "++sWidth++" / 2 - 50` -y 0"
-        wBar     = "sleep 0.3;dzen2 "++dzenArgs++" -ta c -fg '"++clr1++"' -bg '" ++clr2++"' -h 20 -w 300 -x `expr "++sWidth++" / 2 - 150` -y 4"
+        lBar     = "sleep 0.3/;dzen2 "++dzenArgs++" -ta l -fg '"++clr1++"' -bg '" ++clr2++"' -h 25 -w `expr "++sWidth++" / 2` -y 0"
+        iBar     = "sleep 0.3; conky -c ~/.xmonad/assets/conky/info.conkyrc | dzen2 "++dzenArgs++" -ta r -fg '"++clr1++"' -bg '" ++clr2++"' -h 25 -w `expr "++sWidth++" / 2` -x `expr "++sWidth++" / 2 - 50` -y 0"
+        wBar     = "sleep 0.6;dzen2 "++dzenArgs++" -ta c -fg '"++clr1++"' -bg '" ++clr2++"' -h 20 -w 300 -x `expr "++sWidth++" / 2 - 150` -y 4"
         trayer   = "pkill trayer; trayer --edge top --align right --width 50  --widthtype pixel --transparent true --height 25 --alpha 150 --tint 'rgba(0,0,0,0)'"
+        autolock = "xss-lock -- lxdm -c USER_SWITCH"

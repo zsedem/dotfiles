@@ -1,9 +1,9 @@
 #!/bin/sh
-xmonad --restart;
-xrdb ~/.Xresources &
+xmonad --restart
+xrdb ~/.Xresources
 xsetroot -cursor_name left_ptr &
-nitrogen --restore
+nitrogen --restore &
 nm-applet &
-#volumeicon &
+xscreensaver -no-splash &
 compton --config ~/.config/compton.conf -b &
 urxvt &
