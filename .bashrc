@@ -1,6 +1,6 @@
 # If not running interactively, don't do anything!
 [[ $- != *i* ]] && return
-! [[ -z "$DISPLAY" ]] && [[ -z "$TMUX" ]] && exec bash -c "tmux -q has-session && exec tmux attach-session -d || exec tmux new-session -n$USER -s$USER@$HOSTNAME"
+! [[ -z "$DISPLAY" ]] && [[ -z "$TMUX" ]] && exec bash -c "tmux -q has-session && exec tmux attach-session || exec tmux"
 
 shopt -s checkwinsize
 shopt -s histappend

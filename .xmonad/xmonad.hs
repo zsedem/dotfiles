@@ -3,7 +3,7 @@ import Data.List
 import XMonad
 import XMonad.Actions.CycleWindows
 import XMonad.Actions.GroupNavigation
-
+import XMonad.Actions.WindowBringer
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
@@ -91,8 +91,6 @@ myKeybinds = [ ((mod4Mask              , xK_p                          ), logged
              , ((mod4Mask .|. shiftMask, xK_q                          ), loggedSpawn powermenu)
              , ((windowsButton         , xK_Tab                        ), windows W.focusDown )
              , ((shift windowsButton   , xK_Tab                        ), windows W.focusUp )
-             , ((windowsButton         , xK_Tab                        ), windows W.focusDown )
-             , ((shift windowsButton   , xK_Tab                        ), windows W.focusUp )
              -- , ((shiftMask             , xK_Insert                     ), pasteSelection)
 
              , ((windowsButton         , xK_Right                      ), sendMessage $ Swap R )
@@ -102,16 +100,18 @@ myKeybinds = [ ((mod4Mask              , xK_p                          ), logged
              , ((alt                   , xK_F4                         ), kill )
              , ((windowsButton         , xK_F4                         ), kill )
              , ((windowsButton         , xK_F11                        ), sendMessage ToggleStruts )
-             , ((alt                   , xK_Tab                        ), nextMatch Backward (return True) )
-             , ((shift alt             , xK_Tab                        ), nextMatch Forward (return True) )
+             , ((alt                   , xK_Tab                        ), gotoMenuArgs' dmenu_run_file [sWidth, sHeight, clr2, clr3] )
+             , ((shift alt             , xK_Tab                        ), bringMenuArgs' dmenu_run_file [sWidth, sHeight, clr2, clr3] )
              , ((controlMask           , xK_space                      ), layoutSwitch)
              , ((windowsButton         , xK_l                          ), spawn "xscreensaver-command -lock")
              , ((0                     , xMediaButton_AudioRewind      ), spawn "amixer -q set Master toggle" )
              , ((0                     , xMediaButton_AudioLowerVolume ), canberrabell $ spawn "amixer -q set Master 5%-" )
              , ((0                     , xMediaButton_AudioRaiseVolume ), canberrabell $ spawn "amixer -q set Master 5%+" )
+             , ((ctrl shiftMask        , xK_q                          ), return ())
              ]
              where
-                dmenu_run = hPath++".xmonad/assets/bin/dmenu-run.sh '"++sWidth ++"' '"++sHeight ++"' '"++clr2++"' '"++clr3++"'"
+                dmenu_run_file = hPath ++ ".xmonad/assets/bin/dmenu.sh"
+                dmenu_run = hPath ++ ".xmonad/assets/bin/dmenu-run.sh '"++sWidth ++"' '"++sHeight ++"' '"++clr2++"' '"++clr3++"'"
                 powermenu = hPath++".xmonad/assets/bin/powermenu.sh '"++sWidth ++"' '"++sHeight ++"' '"++clr2++"' '"++clr3++"'"
                 xmonad_restart = hPath++".xmonad/assets/bin/restart.sh"
                 loggedSpawn c = spawn $ "echo '"++c++ "'>> /tmp/xmonad.spawn.log; " ++ c
@@ -158,6 +158,8 @@ main = do
      , layoutHook = myLayout
      , modMask = mod4Mask
      , workspaces = myWorkspace
+     , focusFollowsMouse  = False
+     , clickJustFocuses   = False
      , terminal = "urxvt"
      , focusedBorderColor = clr3
      , normalBorderColor = "#424242"
@@ -173,8 +175,8 @@ main = do
         autoload = hPath++"/.xmonad/assets/bin/autoload.sh"
         dzenArgs = "-p -e 'button3=' -fn 'Droid Sans Fallback-8:bold'"
         bgBar    = "echo '^fg("++clr3++")^p(;+20)^r(1600x5)' | dzen2 " ++ dzenArgs++" -ta c -fg '" ++ clr1 ++ "' -bg '#000000' -h 35 -w "++sWidth
-        lBar     = "sleep 0.3/;dzen2 "++dzenArgs++" -ta l -fg '"++clr1++"' -bg '" ++clr2++"' -h 25 -w `expr "++sWidth++" / 2` -y 0"
+        lBar     = "sleep 0.3/;exec dzen2 "++dzenArgs++" -ta l -fg '"++clr1++"' -bg '" ++clr2++"' -h 25 -w `expr "++sWidth++" / 2` -y 0"
         iBar     = "sleep 0.3; conky -c ~/.xmonad/assets/conky/info.conkyrc | dzen2 "++dzenArgs++" -ta r -fg '"++clr1++"' -bg '" ++clr2++"' -h 25 -w `expr "++sWidth++" / 2` -x `expr "++sWidth++" / 2 - 50` -y 0"
-        wBar     = "sleep 0.6;dzen2 "++dzenArgs++" -ta c -fg '"++clr1++"' -bg '" ++clr2++"' -h 20 -w 300 -x `expr "++sWidth++" / 2 - 150` -y 4"
-        trayer   = "pkill trayer; trayer --edge top --align right --width 50  --widthtype pixel --transparent true --height 25 --alpha 150 --tint 'rgba(0,0,0,0)'"
-        autolock = "xss-lock -- lxdm -c USER_SWITCH"
+        wBar     = "sleep 0.6;exec dzen2 "++dzenArgs++" -ta c -fg '"++clr1++"' -bg '" ++clr2++"' -h 20 -w 300 -x `expr "++sWidth++" / 2 - 150` -y 4"
+        trayer   = "pkill trayer; exec trayer --edge top --align right --width 50  --widthtype pixel --transparent true --height 25 --alpha 150 --tint 'rgba(0,0,0,0)'"
+        autolock = "exec xss-lock -- lxdm -c USER_SWITCH"
