@@ -83,8 +83,8 @@
     #
     # If this option is set to mouse or keyboard, the monitor option will be
     # ignored.
-    follow = none
-
+    follow  = keyboard
+    
     # should a notification popped up from history be sticky or
     # timeout as if it would normally do.
     sticky_history = yes
@@ -134,10 +134,10 @@
     # xev might be helpful to find names for keys
 
     # close notification
-    close = ctrl+space
+    # close = ctrl+esc
 
     # close all notifications
-    close_all = ctrl+shift+space
+    # close_all = ctrl+shift+space
 
     # redisplay last message(s)
     # On the US keyboard layout 'grave' is normally above TAB and left of '1'.
