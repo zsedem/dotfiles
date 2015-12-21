@@ -87,18 +87,6 @@ function .fixupfile(){
     git commit -s --fixup=$(git log --format="%H" -1 $1)
 }
 
-function .updateconfigs(){
-    set -e
-    pushd ~/.my-linux-config/home > /dev/null
-    (~/.local/bin/update-configs . --dry-run | bash)|| stack install || (~/.local/bin/update-configs . --dry-run | bash)
-    popd > /dev/null
-    exec bash
-}
-
-function .configedit(){
-    nano ~/.my-linux-config/home/$@
-    .updateconfigs
-}
 
 function .dockerclean(){
     docker ps -aq | xargs --no-run-if-empty docker rm

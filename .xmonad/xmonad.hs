@@ -170,7 +170,7 @@ main = do
                      setWMName "LG3D"
      , logHook = myLogHook layoutPanel <+> myLogHook2 workspacePanel
      , handleEventHook    = handleEventHook defaultConfig <+> docksEventHook
-     } `additionalKeys` myKeybinds
+     } `additionalKeys` keyBindings
      where
         autoload = hPath++"/.xmonad/assets/bin/autoload.sh"
         dzenArgs = "-p -e 'button3=' -fn 'Droid Sans Fallback-8:bold'"
