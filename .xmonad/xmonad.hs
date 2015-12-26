@@ -1,25 +1,26 @@
-import Data.Maybe
-import Data.List
-import XMonad
-import XMonad.Actions.CycleWindows
-import XMonad.Actions.GroupNavigation
-import XMonad.Actions.WindowBringer
-import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.ManageDocks
-import XMonad.Hooks.ManageHelpers
-import XMonad.Hooks.SetWMName
-import XMonad.Layout.Spacing
-import XMonad.Layout.Grid
-import XMonad.Layout.NoBorders
-import XMonad.Layout.Gaps
-import XMonad.Util.Run
-import XMonad.Util.SpawnOnce
-import XMonad.Util.EZConfig
-import XMonad.Layout.WindowNavigation
-import System.IO
-import qualified XMonad.StackSet as W
-import qualified Data.Map as M
-import qualified GHC.IO.Handle.Types as H
+module Main(main) where
+import           Data.List
+import           Data.Maybe
+import           XMonad
+import           XMonad.Actions.CycleWindows
+import           XMonad.Actions.GroupNavigation
+import           XMonad.Actions.WindowBringer
+import qualified XMonad.Config.ZsEdem           as ZsEdem
+import           XMonad.Hooks.DynamicLog
+import           XMonad.Hooks.ManageDocks
+import           XMonad.Hooks.ManageHelpers
+import           XMonad.Layout.Gaps
+import           XMonad.Layout.Grid
+import           XMonad.Layout.NoBorders
+import           XMonad.Layout.Spacing
+import           XMonad.Util.Run
+
+import qualified Data.Map                       as M
+import qualified GHC.IO.Handle.Types            as H
+import           System.IO
+import           XMonad.Layout.WindowNavigation
+import qualified XMonad.StackSet                as W
+import           XMonad.Util.EZConfig
 
 hPath = "/home/zsedem/"
 clr1 = "#efefef"
@@ -27,126 +28,11 @@ clr2 = "#000000"
 clr3 = "#0783c0"
 sWidth  = "1600"
 sHeight = "900"
-makeSpace = wrap "    " "    "
 
-myLogHook h = dynamicLogWithPP $ myPP h
-
-myLogHook2 h = dynamicLogWithPP $ myPP2 h
-
-myPP :: Handle -> PP
-myPP p = defaultPP
-    { ppOutput             = hPutStrLn p
-    , ppSep                = ""
-    , ppTitle              = titleWrapper . makeSpace . shorten 111 
-    , ppLayout             = buttonLayout . makeSpace .
-                            ( \t -> case t of
-                            "Spacing 10 Grid"           -> dir_icon ++ "grid.xbm)  Grid"
-                            "Spacing 10 Tall"           -> dir_icon ++ "sptall.xbm)  Tile"
-                            "Mirror Spacing 10 Tall"    -> dir_icon ++ "mptall.xbm)  mTile"
-                            "Mirror Spacing 20 Tall"    -> dir_icon ++ "mptall.xbm)  rTile"
-                            "Full"                      -> dir_icon ++ "full.xbm)  Full"
-                            )
-    , ppOrder  = \(ws:l:t:_) -> [l,t]
-    }
-    where
-        titleWrapper = wrap ("^fg("++clr3++")^i(.xmonad/assets/xbm/mr1.xbm)^fg()") ""
-        buttonLayout = wrap ("^ca(1,xdotool key super+space)^bg("++clr3++")") "^bg()^ca()"
-        dir_icon     = "^ca(1,xdotool key alt+space)^i(.xmonad/assets/xbm/"
-
-
-myPP2 :: Handle -> PP
-myPP2 h = defaultPP
-    { ppOutput             = hPutStrLn h
-    , ppCurrent            = wrapCurrent . makeSpace
-    , ppVisible            = wrapAnother . makeSpace
-    , ppHidden             = wrapAnother . makeSpace
-    , ppHiddenNoWindows    = wrapAnother . makeSpace
-    , ppWsSep              = "  "
-    , ppOrder  = \(ws:l:t:_) -> [ws]
-    }
-    where
-        wrapCurrent  = wrap ("^fg(#ffffff)^bg("++clr3++")") "^bg()^fg()"
-        wrapAnother  = wrap "^fg(#cacaca)^bg(#424242)" "^bg()^fg()"
-
-myWorkspace :: [String]
-myWorkspace = makeOnclick [ "TERM", "WEB", "CODE"]
-        where makeOnclick l = [ "^ca(1,xdotool key super+" ++ show n ++ ")" ++ ws ++ "^ca()" | (i,ws) <- zip [1..] l, let n = i ]
-
-
-shift :: KeyMask -> KeyMask
-shift m = m .|. shiftMask
-
-
-alt :: KeyMask
-alt = mod1Mask
-
-ctrl :: KeyMask -> KeyMask
-ctrl m = m .|. controlMask
-
-windowsButton :: KeyMask
-windowsButton = mod4Mask
-
-myKeybinds = [ ((mod4Mask              , xK_p                          ), loggedSpawn dmenu_run)
-             , ((mod4Mask              , xK_q                          ), spawn xmonad_restart)
-             , ((mod4Mask .|. shiftMask, xK_q                          ), loggedSpawn powermenu)
-             , ((windowsButton         , xK_Tab                        ), windows W.focusDown )
-             , ((shift windowsButton   , xK_Tab                        ), windows W.focusUp )
-             -- , ((shiftMask             , xK_Insert                     ), pasteSelection)
-
-             , ((windowsButton         , xK_Right                      ), sendMessage $ Swap R )
-             , ((windowsButton         , xK_Left                       ), sendMessage $ Swap L )
-             , ((windowsButton         , xK_Up                         ), sendMessage $ Swap U )
-             , ((windowsButton         , xK_Down                       ), sendMessage $ Swap D )
-             , ((alt                   , xK_F4                         ), kill )
-             , ((windowsButton         , xK_F4                         ), kill )
-             , ((windowsButton         , xK_F11                        ), sendMessage ToggleStruts )
-             , ((alt                   , xK_Tab                        ), gotoMenuArgs' dmenu_run_file [sWidth, sHeight, clr2, clr3] )
-             , ((shift alt             , xK_Tab                        ), bringMenuArgs' dmenu_run_file [sWidth, sHeight, clr2, clr3] )
-             , ((controlMask           , xK_space                      ), layoutSwitch)
-             , ((windowsButton         , xK_l                          ), spawn "xscreensaver-command -lock")
-             , ((0                     , xMediaButton_AudioRewind      ), spawn "amixer -q set Master toggle" )
-             , ((0                     , xMediaButton_AudioLowerVolume ), canberrabell $ spawn "amixer -q set Master 5%-" )
-             , ((0                     , xMediaButton_AudioRaiseVolume ), canberrabell $ spawn "amixer -q set Master 5%+" )
-             , ((ctrl shiftMask        , xK_q                          ), return ())
-             ]
-             where
-                dmenu_run_file = hPath ++ ".xmonad/assets/bin/dmenu.sh"
-                dmenu_run = hPath ++ ".xmonad/assets/bin/dmenu-run.sh '"++sWidth ++"' '"++sHeight ++"' '"++clr2++"' '"++clr3++"'"
-                powermenu = hPath++".xmonad/assets/bin/powermenu.sh '"++sWidth ++"' '"++sHeight ++"' '"++clr2++"' '"++clr3++"'"
-                xmonad_restart = hPath++".xmonad/assets/bin/restart.sh"
-                loggedSpawn c = spawn $ "echo '"++c++ "'>> /tmp/xmonad.spawn.log; " ++ c
-                layoutSwitch = do keyboardlayout <- runProcessWithInput "/usr/bin/xkblayout-state" ["print", "%s"] ""
-                                  let newLayout = nextItem ["us", "hu"] keyboardlayout
-                                  spawn $ "setxkbmap " ++ newLayout
-                canberrabell e          = spawn "canberra-gtk-play -i bell">> e
-
-                xMediaButton_AudioRewind      = 0x1008ff3e
-                xMediaButton_AudioLowerVolume = 0x1008ff11
-                xMediaButton_AudioRaiseVolume = 0x1008ff13
-                xMediaButton_Sleep            = 0x1008ff2f
-                xMediaButton_Email            = 0x1008ff19
-                xMediaButton_Search           = 0x1008ff1b
-                xMediaButton_Home             = 0x1008ff18
-                xMediaButton_Play             = 0x1008ff14
-                xMediaButton_MyComputer       = 0x1008ff5d
-                                  
-
-nextItem :: (Eq a) => [a] -> a -> a
-nextItem l item = case elemIndex item (init l) of
-                    Just index -> l !! (index + 1)
-                    Nothing -> head l
-
-
-myLayout = avoidStruts  $ smartBorders $ windowNavigation ( sTall ||| Mirror mTall ||| Full )
+layoutHook' = avoidStruts  $ smartBorders $ windowNavigation ( sTall ||| Mirror mTall ||| Full )
         where
             sTall = spacing 10 $ Tall 1 (3/100) (2/3)
             mTall = spacing 10 $ Tall 1 (3/100) (2/3)
-
-myDocks = composeAll
-        	[ className =? "feh" --> doFullFloat
-            , isDialog           --> doCenterFloat
-            ]
-
 
 main = do
     bgPanel <- spawnPipe bgBar
@@ -154,29 +40,24 @@ main = do
     infoPanel <- spawnPipe iBar
     workspacePanel <- spawnPipe wBar
     xmonad $ defaultConfig
-     { manageHook = myDocks <+> manageDocks <+> manageHook defaultConfig
-     , layoutHook = myLayout
+     { manageHook = ZsEdem.manageHook <+> manageDocks <+> manageHook defaultConfig
+     , layoutHook = layoutHook'
      , modMask = mod4Mask
-     , workspaces = myWorkspace
+     , workspaces = ZsEdem.workspaces
      , focusFollowsMouse  = False
      , clickJustFocuses   = False
      , terminal = "urxvt"
      , focusedBorderColor = clr3
      , normalBorderColor = "#424242"
      , borderWidth = 3
-     , startupHook = spawnOnce autoload <+> 
-                     spawn trayer <+>
-                     spawn autolock <+>
-                     setWMName "LG3D"
-     , logHook = myLogHook layoutPanel <+> myLogHook2 workspacePanel
+     , startupHook = ZsEdem.startupHook
+     , logHook = ZsEdem.layoutDzenLogHook layoutPanel <+> ZsEdem.workspaceDzenLogHook workspacePanel
      , handleEventHook    = handleEventHook defaultConfig <+> docksEventHook
-     } `additionalKeys` keyBindings
+     } `additionalKeys` ZsEdem.keyBindings
      where
-        autoload = hPath++"/.xmonad/assets/bin/autoload.sh"
         dzenArgs = "-p -e 'button3=' -fn 'Droid Sans Fallback-8:bold'"
         bgBar    = "echo '^fg("++clr3++")^p(;+20)^r(1600x5)' | dzen2 " ++ dzenArgs++" -ta c -fg '" ++ clr1 ++ "' -bg '#000000' -h 35 -w "++sWidth
         lBar     = "sleep 0.3/;exec dzen2 "++dzenArgs++" -ta l -fg '"++clr1++"' -bg '" ++clr2++"' -h 25 -w `expr "++sWidth++" / 2` -y 0"
         iBar     = "sleep 0.3; conky -c ~/.xmonad/assets/conky/info.conkyrc | dzen2 "++dzenArgs++" -ta r -fg '"++clr1++"' -bg '" ++clr2++"' -h 25 -w `expr "++sWidth++" / 2` -x `expr "++sWidth++" / 2 - 50` -y 0"
         wBar     = "sleep 0.6;exec dzen2 "++dzenArgs++" -ta c -fg '"++clr1++"' -bg '" ++clr2++"' -h 20 -w 300 -x `expr "++sWidth++" / 2 - 150` -y 4"
-        trayer   = "pkill trayer; exec trayer --edge top --align right --width 50  --widthtype pixel --transparent true --height 25 --alpha 150 --tint 'rgba(0,0,0,0)'"
-        autolock = "exec xss-lock -- lxdm -c USER_SWITCH"
+
