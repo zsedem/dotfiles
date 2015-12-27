@@ -45,7 +45,7 @@ main = do
      where
         dzenArgs = "-p -e 'button3=' -fn 'Droid Sans Fallback-8:bold'"
         bgBar    = "echo '^fg("++clr3++")^p(;+20)^r(1600x5)' | dzen2 " ++ dzenArgs++" -ta c -fg '" ++ clr1 ++ "' -bg '#000000' -h 35 -w "++sWidth
-        lBar     = "sleep 0.3/;exec dzen2 "++dzenArgs++" -ta l -fg '"++clr1++"' -bg '" ++clr2++"' -h 25 -w `expr "++sWidth++" / 2` -y 0"
+        lBar     = "sleep 0.3;exec dzen2 "++dzenArgs++" -ta l -fg '"++clr1++"' -bg '" ++clr2++"' -h 25 -w `expr "++sWidth++" / 2` -y 0"
         iBar     = "sleep 0.3; conky -c ~/.xmonad/assets/conky/info.conkyrc | dzen2 "++dzenArgs++" -ta r -fg '"++clr1++"' -bg '" ++clr2++"' -h 25 -w `expr "++sWidth++" / 2` -x `expr "++sWidth++" / 2 - 50` -y 0"
         wBar     = "sleep 0.6;exec dzen2 "++dzenArgs++" -ta c -fg '"++clr1++"' -bg '" ++clr2++"' -h 20 -w 300 -x `expr "++sWidth++" / 2 - 150` -y 4"
 
