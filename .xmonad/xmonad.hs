@@ -1,26 +1,14 @@
 module Main(main) where
-import           Data.List
-import           Data.Maybe
-import           XMonad
-import           XMonad.Actions.CycleWindows
-import           XMonad.Actions.GroupNavigation
-import           XMonad.Actions.WindowBringer
-import qualified XMonad.Config.ZsEdem           as ZsEdem
-import           XMonad.Hooks.DynamicLog
-import           XMonad.Hooks.ManageDocks
-import           XMonad.Hooks.ManageHelpers
-import           XMonad.Layout.Gaps
-import           XMonad.Layout.Grid
-import           XMonad.Layout.NoBorders
-import           XMonad.Layout.Spacing
-import           XMonad.Util.Run
 
-import qualified Data.Map                       as M
-import qualified GHC.IO.Handle.Types            as H
-import           System.IO
-import           XMonad.Layout.WindowNavigation
-import qualified XMonad.StackSet                as W
-import           XMonad.Util.EZConfig
+import           XMonad
+import qualified XMonad.Config.ZsEdem           as ZsEdem
+import           XMonad.Hooks.ManageDocks       (avoidStruts, docksEventHook,
+                                                 manageDocks)
+import           XMonad.Layout.NoBorders        (smartBorders)
+import           XMonad.Layout.Spacing          (spacing)
+import           XMonad.Layout.WindowNavigation (windowNavigation)
+import           XMonad.Util.EZConfig           (additionalKeys)
+import           XMonad.Util.Run                (spawnPipe)
 
 hPath = "/home/zsedem/"
 clr1 = "#efefef"
