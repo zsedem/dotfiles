@@ -17,6 +17,10 @@ executable zsedem-prompt
                        directory,
                        filepath,
                        MissingH,
+                       time,
+                       lens,
+                       lens-datetime,
+                       hit,
                        containers
   default-language:    Haskell2010
 

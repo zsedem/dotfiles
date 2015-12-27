@@ -24,33 +24,28 @@ match_lhs=""
     && type -P dircolors >/dev/null \
     && match_lhs=$(dircolors --print-database)
 
-if [[ $'\n'${match_lhs} == *$'\n'"TERM "${safe_term}* ]] ; then
 
-    # we have colors :-)
+# we have colors :-)
 
-    # Enable colors for ls, etc. Prefer ~/.dir_colors
-    if type -P dircolors >/dev/null ; then
-        if [[ -f ~/.dir_colors ]] ; then
-            eval $(dircolors -b ~/.dir_colors)
-        elif [[ -f /etc/DIR_COLORS ]] ; then
-            eval $(dircolors -b /etc/DIR_COLORS)
-        fi
+# Enable colors for ls, etc. Prefer ~/.dir_colors
+if type -P dircolors >/dev/null ; then
+    if [[ -f ~/.dir_colors ]] ; then
+        eval $(dircolors -b ~/.dir_colors)
+    elif [[ -f /etc/DIR_COLORS ]] ; then
+        eval $(dircolors -b /etc/DIR_COLORS)
     fi
-
-    . /usr/share/git/completion/git-prompt.sh &> /dev/null # Not always needed
-    GIT_PS1_SHOWDIRTYSTATE=1
-    GIT_PS1_SHOWSTASHSTATE=1
-    GIT_PS1_SHOWUPSTREAM=1
-
-    PS1="$(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;31m\]\h'; else echo '\[\033[01;32m\]\u@\h'; fi)\[\033[01;34m\] \w\$(last_exit_status=\$?; [[ \$last_exit_status != 0 ]] && echo \"\[\033[01;31m\] (\$last_exit_status)\" || echo \"\[\033[01;32m\] :)\")\[\033[00m\]\[\033[1;33m\]\$(__git_ps1)\[\033[01;31m\] \t\n> $\[\033[00m\] "
-    alias ls="ls --color=auto"
-    alias dir="dir --color=auto"
-    alias grep="grep --color=auto"
-    alias dmesg='dmesg --color'
-else
-    # show root@ when we do not have colors
-    PS1="\u@\h \w \$([[ \$? != 0 ]] && echo \":( \")\n\[\033[01;31m\]>\[\033[00m\] "
 fi
+
+. /usr/share/git/completion/git-prompt.sh &> /dev/null # Not always needed
+GIT_PS1_SHOWDIRTYSTATE=1
+GIT_PS1_SHOWSTASHSTATE=1
+GIT_PS1_SHOWUPSTREAM=1
+
+PS1='$(git_status=$(__git_ps1) last_exit_code=$? zsedem-prompt)\n\[\033[31m\]> \[\033[00m\]'
+alias ls="ls --color=auto"
+alias dir="dir --color=auto"
+alias grep="grep --color=auto"
+alias dmesg='dmesg --color'
 
 PS2="> "
 PS3="> "

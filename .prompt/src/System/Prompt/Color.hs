@@ -18,7 +18,8 @@ data Style = Underline
            | Inverse
 
 bashFormatting :: BashColor -> Style -> String -> String
-bashFormatting color style = P.printf "\x1b[%s%sm%s\x1b[0m" color' style'
+bashFormatting _ _ "" = ""
+bashFormatting color style str = P.printf "\x1b[%s%sm%s\x1b[0m" color' style' str
   where color' = bashColor color
         style' = case bashStyle style of
                     "" -> ""
