@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+stack exec --no-ghc-package-path -- cabal exec -- cabal $@
