@@ -17,7 +17,7 @@ import Data.Time.Lens
 
 main = do
    environ <- Map.fromList <$> Env.getEnvironment
-   putStr =<< (bashFormatting Green Bold . appendSpace) <$> U.getLoginName 
+   putStr =<< (bashFormatting Green Bold . appendSpace) <$> U.getLoginName
    currentProject <- getCurrentProject
    (putStr . bashFormatting Blue Regular . appendSpace) currentProject
    when (null currentProject) $
@@ -30,7 +30,7 @@ appendSpace :: String -> String
 appendSpace "" = ""
 appendSpace l = l ++ " "
 
-exitCodePart environ = if exitcode == "0" 
+exitCodePart environ = if exitcode == "0"
                             then bashFormatting Green Regular ":)"
                             else bashFormatting Red Bold $ printf "(%s)" exitcode
   where exitcode = Map.findWithDefault "N/A" "last_exit_code" environ
@@ -39,7 +39,7 @@ getLocation environ = do
     currentDir <- getCurrentDirectory
     home <- getHomeDirectory
     let relativeCurrentDir = makeRelative home currentDir
-        currentDirWithTilde = if home /= currentDir 
+        currentDirWithTilde = if home /= currentDir
                                 then joinPath ["~", relativeCurrentDir]
                                 else "~"
         currentDir' = (joinPath.reverse) $ zipWith (\i folder -> if i < 4 then folder
@@ -51,7 +51,7 @@ getLocation environ = do
 
 getCurrentProject = do
     files <- filter (endswith cabal_extension) <$> getDirectoryContents "."
-    case files of 
+    case files of
         [] -> return ""
         (file:_) -> return $ join "" $ split ".cabal" file
   where cabal_extension = ".cabal"
