@@ -1,0 +1,60 @@
+"*":
+  "exception-reporting":
+    userId: "50e6bbb7-c8e3-972e-c108-4b075c1d971a"
+  welcome:
+    showOnStartup: false
+  core:
+    themes: [
+      "atom-dark-ui"
+      "atom-dark-syntax"
+    ]
+    autoHideMenuBar: true
+    ignoredNames: [
+      "*.stack-work"
+      "*.o"
+      "*.hi"
+      "*.ipynb"
+      "xmonad-x86_64-linux"
+      "*.pyc"
+    ]
+    projectHome: "/home/zsedem/projects"
+  editor:
+    invisibles: {}
+    fontSize: 17
+    showInvisibles: true
+    preferredLineLength: 120
+    scrollPastEnd: true
+    showIndentGuide: true
+    tabLength: 4
+  "linter-hdevtools":
+    hdevtoolsExecutablePath: "/home/zsedem/.local/bin/hdevtools"
+  linter:
+    gutterPosition: "Left"
+    errorPanelHeight: 100
+    showErrorTabLine: true
+    lintOnFlyInterval: 100
+    lintOnFly: false
+  "autocomplete-haskell":
+    completionBackendInfo: true
+  "haskell-ghc-mod":
+    onSaveCheck: false
+    onSaveLint: false
+  "autocomplete-plus": {}
+".haskell.latex.tex.text":
+  editor:
+    preferredLineLength: 120
+".c2hs.source":
+  editor:
+    preferredLineLength: 120
+".cabal.source":
+  editor:
+    preferredLineLength: 120
+".haskell.source":
+  editor:
+    preferredLineLength: 120
+".haskell.hint":
+  editor:
+    preferredLineLength: 120
+".hsc2hs.source":
+  editor:
+    preferredLineLength: 120
