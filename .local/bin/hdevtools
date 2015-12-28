@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+unset GHC_PACKAGE_PATH
+HDEVTOOLS=/home/zsedem/.stack/snapshots/x86_64-linux/lts-3.12/7.10.2/bin/hdevtools
+cabal exec -- $HDEVTOOLS $@

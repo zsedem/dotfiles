@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+unset GHC_PACKAGE_PATH
+CABAL=/home/zsedem/.stack/snapshots/x86_64-linux/lts-3.12/7.10.2/bin/cabal
+$CABAL exec -- $CABAL $@
