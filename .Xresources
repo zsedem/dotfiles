@@ -17,6 +17,8 @@ Xmessage*Text.?.cursorColor:           white
 
 xscreensaver.newLoginCommand: lxdm -c USER_SWITCH
 xscreensaver.timeout: 0:01:00
+xscreensaver.lockTimeout:0:00:05
+xscreensaver.fadeSeconds:0:00:05
 
 xterm*font:     *-fixed-*-*-*-20-*
 xterm*background: black

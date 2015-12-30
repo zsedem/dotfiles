@@ -18,10 +18,10 @@ clr3 = "#0783c0"
 sWidth :: Int
 sWidth  = 1600
 
-layoutHook' = avoidStruts $ smartBorders $ windowNavigation ( sTall ||| Mirror mTall ||| Full )
+layoutHook' = avoidStruts $ smartBorders $ windowNavigation ( Full ||| sTall ||| Mirror mTall )
         where
-            sTall = spacing 10 $ Tall 1 (3/100) (2/3)
-            mTall = spacing 10 $ Tall 1 (3/100) (2/3)
+            sTall = spacing 5 $ Tall 1 (3/100) (2/3)
+            mTall = spacing 5 $ Tall 1 (3/100) (2/3)
 
 main = do
     spawn iBar
@@ -37,7 +37,7 @@ main = do
      , terminal = "urxvt"
      , focusedBorderColor = clr3
      , normalBorderColor = "#424242"
-     , borderWidth = 3
+     , borderWidth = 2
      , startupHook = ZsEdem.startupHook
      , logHook = ZsEdem.layoutDzenLogHook layoutPanel <+> ZsEdem.workspaceDzenLogHook workspacePanel
      , handleEventHook    = handleEventHook defaultConfig <+> docksEventHook

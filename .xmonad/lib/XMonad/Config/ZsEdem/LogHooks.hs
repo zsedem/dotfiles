@@ -26,10 +26,10 @@ myPP p = defaultPP
     , ppTitle              = titleWrapper . makeSpace . shorten 111
     , ppLayout             = buttonLayout . makeSpace .
                             ( \t -> case t of
-                            "Spacing 10 Grid"           -> dir_icon ++ "grid.xbm)  Grid"
-                            "Spacing 10 Tall"           -> dir_icon ++ "sptall.xbm)  Tile"
-                            "Mirror Spacing 10 Tall"    -> dir_icon ++ "mptall.xbm)  mTile"
-                            "Mirror Spacing 20 Tall"    -> dir_icon ++ "mptall.xbm)  rTile"
+                            "Spacing 5 Grid"           -> dir_icon ++ "grid.xbm)  Grid"
+                            "Spacing 5 Tall"           -> dir_icon ++ "sptall.xbm)  Tile"
+                            "Mirror Spacing 5 Tall"    -> dir_icon ++ "mptall.xbm)  mTile"
+                            "Mirror Spacing 5 Tall"    -> dir_icon ++ "mptall.xbm)  rTile"
                             "Full"                      -> dir_icon ++ "full.xbm)  Full"
                             _ -> t
                             )
