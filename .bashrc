@@ -2,6 +2,8 @@
 [[ $- != *i* ]] && return
 ! [[ -z "$DISPLAY" ]] && [[ -z "$ATOM_HOME" ]] && [[ -z "$TMUX" ]] && exec bash -c "tmux -q has-session && exec tmux attach-session || exec tmux"
 
+export HISTSIZE="INFINITE"
+
 shopt -s checkwinsize
 shopt -s histappend
 
