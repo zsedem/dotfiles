@@ -13,6 +13,10 @@
     diff = diff --word-diff
     dc = diff --cached
     fetch = fetch --prune
+    casm = commit -asm
+    cfoobar = commit -am foobar --no-verify
+    caa = commit -a --amend --no-edit
+    caaf = commit -a --amend --no-edit --no-verify
     edit-unmerged = \
     "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; subl -w `f`"
     step-forward = \
