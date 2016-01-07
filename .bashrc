@@ -2,7 +2,6 @@
 [[ $- != *i* ]] && return
 ! [[ -z "$DISPLAY" ]] && [[ -z "$ATOM_HOME" ]] && [[ -z "$TMUX" ]] && exec bash -c "tmux -q has-session && exec tmux attach-session || exec tmux"
 
-export HISTSIZE="INFINITE"
 
 shopt -s checkwinsize
 shopt -s histappend
@@ -42,12 +41,27 @@ fi
 GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWSTASHSTATE=1
 GIT_PS1_SHOWUPSTREAM=1
-
+EDITOR=vim
+HISTSIZE=99999999999999
+HISTCONTROL=ignoredups:erasedups
 PS1='$(git_status=$(__git_ps1) last_exit_code=$? zsedem-prompt)\n\[\033[31m\]> \[\033[00m\]'
+
 alias ls="ls --color=auto"
 alias dir="dir --color=auto"
 alias grep="grep --color=auto"
 alias dmesg='dmesg --color'
+alias g="grep --perl-regexp"
+alias c="cat"
+alias e="$EDITOR"
+alias f="find . "
+alias fn="find . -name "
+alias gti="git"  # for typos
+export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
+
+alias .cathistorygrep='cat ~/.bash_history | grep'
+alias SystemUpgrade='sudo pacman -Syu && sudo bootctl update && sudo pkgfile --update && sudo aura -Au'
+alias PacmanClearCache='sudo pacman -Scc && sudo pacman-optimize'
+
 
 PS2="> "
 PS3="> "
@@ -62,13 +76,6 @@ unset safe_term match_lhs
 
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
-
-EDITOR=vim
-HISTSIZE=99999999999999
-
-alias .cathistorygrep='cat ~/.bash_history | grep'
-alias SystemUpgrade='sudo pacman -Syu && sudo bootctl update && sudo pkgfile --update && sudo aura -Au'
-alias PacmanClearCache='sudo pacman -Scc && sudo pacman-optimize'
 
 function .pushbranch(){
     currentbranch=$(git rev-parse --abbrev-ref HEAD)
