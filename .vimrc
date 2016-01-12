@@ -29,8 +29,6 @@ set listchars=tab:▸·,trail:·
 " File save/exit
 imap <C-x> <ESC>:q<CR>
 nmap <C-x> :q<CR>
-nmap <C-o> :w<CR>
-imap <C-o> <ESC>:w<CR>i
 
 " Line moving
 nmap <C-j> ddp
