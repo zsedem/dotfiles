@@ -56,6 +56,7 @@ alias e="$EDITOR"
 alias f="find . "
 alias fn="find . -name "
 alias gti="git"  # for typos
+alias inv="$(which invoke) --pty"
 export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
 
 alias .cathistorygrep='cat ~/.bash_history | grep'
