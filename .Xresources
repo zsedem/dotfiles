@@ -20,18 +20,18 @@ xscreensaver.timeout: 0:01:00
 xscreensaver.lockTimeout:0:00:05
 xscreensaver.fadeSeconds:0:00:05
 
-xterm*font:     *-fixed-*-*-*-20-*
+xterm*font:     *-fixed-*-*-*-23-*
 xterm*background: black
 xterm*foreground: white
 xterm*locale: true
-xterm*faceName: Mono:style=Book
+xterm*faceName: size=17:Monofur for Powerline
 
 URxvt*background:black
 URxvt*foreground:white
 URxvt*geometry:         83x23
 URxvt.internalBorder: 1
-URxvt*font: xft:PragmataPro for Powerline:size=15
-URxvt*boldFont: xft:PragmataPro for Powerline:size=15
+URxvt*font: xft:Monofur for Powerline:size=17
+URxvt*boldFont: xft:Monofur for Powerline:size=17
 URxvt*scrollBar:        false
 URxvt.perl-ext-common: default,matcher,tabbedex,clipboard
 URxvt.tabbed.autohide: true
