@@ -52,10 +52,20 @@
   "terminal-panel": {}
   "atom-terminal-panel": {}
   "linter-pylint":
-    executable: "%p/../../install/bin/pylint"
+    executable: "pylint"
     rcFile: "%p/.pylintrc"
-    pythonPath: "%p"
+    pythonPath: "%p/../../install/lib/python-2.7:%p"
     messageFormat: "%s - %m"
+  "vim-mode-plus":
+    setCursorToStartOfChangeOnUndoRedo: true
+    useSmartcaseForSearch: true
+    incrementalSearch: true
+  "cursor-history":
+    flashOnLand: true
+    flashDurationMilliSeconds: 300
+    flashColor: "success"
+    flashType: "word"
+  "tree-view": {}
 ".haskell.latex.tex.text":
   editor:
     preferredLineLength: 120
