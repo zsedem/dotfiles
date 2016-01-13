@@ -47,6 +47,8 @@ HISTCONTROL=ignoredups:erasedups
 PS1='$(git_status=$(__git_ps1) last_exit_code=$? zsedem-prompt)\n\[\033[31m\]> \[\033[00m\]'
 
 alias ls="ls --color=auto"
+alias tl="task list"
+alias ta="task add"
 alias dir="dir --color=auto"
 alias grep="grep --color=auto"
 alias dmesg='dmesg --color'
