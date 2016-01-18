@@ -8,6 +8,7 @@
 !.fonts/
 !.prompt/
 !.xmonad/
+!.screenlayout/
 !.xsession
 !.xinitrc
 !.xmobarrc
