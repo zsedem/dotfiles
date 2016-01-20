@@ -14,12 +14,8 @@
 !.xmobarrc
 !.Xresources
 !.dunstrc
-!.config/gnome-session/sessions/xmonad-gnome-nopanel.session
 
 !.tmux.conf
-
-!.stack/config.yaml
-!.stack/global-project/stack.yaml
 
 !.gitignore
 !.gitconfig
