@@ -3,6 +3,7 @@
 #
 
 export PATH=$HOME/.local/bin:$PATH
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 _JAVA_OPTIONS='-Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
 [[ -f ~/.bash_profile.local ]] && . $HOME/.bash_profile.local
