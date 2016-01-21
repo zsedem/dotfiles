@@ -14,11 +14,7 @@ startupHook = do
           , "compton --config ~/.config/compton.conf -b"
           , "urxvt"
           , "dunst -conf .dunstrc"]
-    delayedExecOnce "nm-applet"
-    spawnTrayer
     turnOnSuspendAutoLock
   where
         execOnce = spawnOnce . ("exec "++)
-        delayedExecOnce = spawnOnce . ("sleep 0.5; exec "++)
-        spawnTrayer   = spawn "pkill trayer; exec trayer --edge top --align right --width 50  --widthtype pixel --transparent true --height 25 --alpha 150 --tint 'rgba(0,0,0,0)'"
         turnOnSuspendAutoLock = execOnce "xss-lock -- xscreensaver -lock"
