@@ -16,7 +16,7 @@ Xmessage*Command.shapeStyle:           rectangle
 Xmessage*Text.?.cursorColor:           white
 
 xscreensaver.newLoginCommand: lxdm -c USER_SWITCH
-xscreensaver.timeout: 0:01:00
+xscreensaver.timeout: 0:02:00
 xscreensaver.lockTimeout:0:00:05
 xscreensaver.fadeSeconds:0:00:05
 
@@ -26,7 +26,7 @@ xterm*foreground: white
 xterm*locale: true
 xterm*faceName: size=17:Monofur for Powerline
 
-URxvt*background:black
+URxvt*background: #111111
 URxvt*foreground:white
 URxvt*geometry:         83x23
 URxvt.internalBorder: 1

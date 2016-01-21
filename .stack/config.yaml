@@ -1,1 +1,7 @@
-{}
+templates:
+ params:
+   author-name: Zsigmond Ádám Olivér
+   author-email: zsedem@gmail.com
+   category: Library
+   copyright: 'Copyright: (c) 2016 Zsigmond Ádám Olivér'
+   github-username: zsedem

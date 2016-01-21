@@ -69,18 +69,18 @@
 ".haskell.latex.tex.text":
   editor:
     preferredLineLength: 120
-".hsc2hs.source":
-  editor:
-    preferredLineLength: 120
-".haskell.hint":
-  editor:
-    preferredLineLength: 120
-".haskell.source":
+".c2hs.source":
   editor:
     preferredLineLength: 120
 ".cabal.source":
   editor:
     preferredLineLength: 120
-".c2hs.source":
+".haskell.source":
+  editor:
+    preferredLineLength: 120
+".haskell.hint":
+  editor:
+    preferredLineLength: 120
+".hsc2hs.source":
   editor:
     preferredLineLength: 120

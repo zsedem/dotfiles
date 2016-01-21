@@ -46,6 +46,8 @@ keyBindings homePath foregroundColor themeColor =
               , ((controlMask           , xK_space                      ), layoutSwitch)
               , ((windowsButton         , xK_l                          ), spawn "xscreensaver-command -lock")
               , ((0                     , xMediaButton_AudioRewind      ), spawn "amixer -q set Master toggle" )
+              , ((0                     , xF86MonBrightnessDown         ), spawn "xbacklight -5" )
+              , ((0                     , xF86MonBrightnessUp           ), spawn "xbacklight +5" )
               , ((0                     , xMediaButton_AudioLowerVolume ), canberrabell $ spawn "amixer -q set Master 5%-" )
               , ((0                     , xMediaButton_AudioRaiseVolume ), canberrabell $ spawn "amixer -q set Master 5%+" )
               , ((ctrl shiftMask        , xK_q                          ), return ())
@@ -70,6 +72,8 @@ keyBindings homePath foregroundColor themeColor =
                 -- xMediaButton_Home             = 0x1008ff18
                 -- xMediaButton_Play             = 0x1008ff14
                 -- xMediaButton_MyComputer       = 0x1008ff5d
+                xF86MonBrightnessUp = 0x1008ff02
+                xF86MonBrightnessDown = 0x1008ff03
                 sWidth  = "1600"
                 sHeight = "900"
 
