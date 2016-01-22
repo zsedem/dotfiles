@@ -1,0 +1,16 @@
+alias ls="ls --color=auto"
+alias tl="task list"
+alias ta="task add"
+alias dir="dir --color=auto"
+alias grep="grep --color=auto"
+alias dmesg='dmesg --color'
+alias g="grep --perl-regexp"
+alias c="cat"
+alias e="$EDITOR"
+alias f="find . "
+alias fn="find . -name "
+alias gti="git"  # for typos
+alias inv="$(which invoke) --pty"
+alias .cathistorygrep='cat ~/.bash_history | grep'
+alias SystemUpgrade='sudo pacman -Syu && sudo bootctl update && sudo pkgfile --update && sudo aura -Au'
+alias PacmanClearCache='sudo pacman -Scc && sudo pacman-optimize'
