@@ -1,6 +1,6 @@
 # Path to your oh-my-zsh installation.
 SHELL=`which zsh`
-source ~/.shrc
+
 export ZSH=/home/zsedem/.oh-my-zsh
 
 
@@ -30,6 +30,9 @@ HIST_STAMPS="yyyy-mm-dd"
 # PLUGINS
 plugins=(git)
 
+autoload -U compinit
+autoload -U bashcompinit
 source $ZSH/oh-my-zsh.sh
+source ~/.shrc
 
 
