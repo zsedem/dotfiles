@@ -39,4 +39,6 @@ extra-deps:
     - vinyl-0.5.1
     - regex-compat-tdfa-0.95.1.4
     - Xauth-0.1
+    - alsa-core-0.5.0.1
+    - alsa-mixer-0.2.0.3
 resolver: lts-3.12
