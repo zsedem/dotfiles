@@ -1,0 +1,43 @@
+# If not running interactively, don't do anything!
+[[ $- != *i* ]] && return
+eval $(ssh-agent)
+! [[ -z "$DISPLAY" ]] && [[ -z "$ATOM_HOME" ]] && [[ -z "$TMUX" ]] && exec "$SHELL" -c "tmux -q has-session && exec tmux attach-session || exec tmux"
+
+function try_source(){
+    [ -r $1 ] && source $1
+}
+
+try_source ~/.aliases
+PATH=~/.local/bin:$PATH
+
+
+
+EDITOR=vim
+HISTSIZE=99999999999999
+HISTCONTROL=ignoredups:erasedups
+
+PS2="> "
+PS3="> "
+PS4="+ "
+
+function .pushbranch(){
+    currentbranch=$(git rev-parse --abbrev-ref HEAD)
+    if [[ "$currentbranch" == "master" ]]; then
+        echo "This method not for pushing master"
+    else
+        git push -f || git push --set-upstream origin $currentbranch
+    fi
+}
+
+function .fixupfile(){
+    git add $1
+    git commit -s --fixup=$(git log --format="%H" -1 $1)
+}
+
+
+function .dockerclean(){
+    docker ps -aq | xargs --no-run-if-empty docker rm
+    docker rmi $(docker images -a | grep "^<none>" | awk '{print $3}')
+}
+
+try_source ~/.shrc.local
