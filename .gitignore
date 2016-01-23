@@ -9,6 +9,7 @@
 !scripts/
 
 !.fonts/
+.fonts/fonts.dir
 !.prompt/
 !.xmonad/
 !.screenlayout/
