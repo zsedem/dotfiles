@@ -13,7 +13,8 @@ startupHook = do
           , "nitrogen --restore"
           , "compton --config ~/.config/compton.conf -b"
           , "urxvt"
-          , "dunst -conf .dunstrc"]
+          , "dunst -conf .dunstrc"
+          , "nm-applet"]
     turnOnSuspendAutoLock
   where
         execOnce = spawnOnce . ("exec "++)
