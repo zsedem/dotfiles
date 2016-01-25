@@ -31,7 +31,9 @@ HIST_STAMPS="yyyy-mm-dd"
 plugins=(git)
 
 autoload -U compinit
+compinit
 autoload -U bashcompinit
+bashcompinit
 source $ZSH/oh-my-zsh.sh
 source ~/.shrc
 
