@@ -28,7 +28,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 HIST_STAMPS="yyyy-mm-dd"
 
 # PLUGINS
-plugins=(git)
+plugins=(git zsh-256-color)
 
 autoload -U compinit
 compinit
