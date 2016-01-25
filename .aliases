@@ -14,3 +14,4 @@ alias inv="$(which invoke) --pty"
 alias .cathistorygrep='cat ~/.bash_history | grep'
 alias SystemUpgrade='sudo pacman -Syu && sudo bootctl update && sudo pkgfile --update && sudo aura -Au'
 alias PacmanClearCache='sudo pacman -Scc && sudo pacman-optimize'
+alias screenlayout_dmenu='pushd ~/.screenlayout; bash `ls | ~/.xmonad/assets/bin/dmenu.sh 1600 900 "#000000" "#0783c0" `; popd'
