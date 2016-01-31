@@ -9,6 +9,7 @@ alias c="cat"
 alias e="$EDITOR"
 alias f="find . "
 alias fn="find . -name "
+alias vim='vim -w ~/.vimlog "$@"'
 alias gti="git"  # for typos
 alias inv="$(which invoke) --pty"
 alias .cathistorygrep='cat ~/.bash_history | grep'
