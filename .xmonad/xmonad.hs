@@ -11,6 +11,7 @@ import           XMonad.Layout.Spacing          (spacing)
 import           XMonad.Layout.WindowNavigation (windowNavigation)
 import           XMonad.Util.EZConfig           (additionalKeys)
 import           XMonad.Util.Run                (spawnPipe)
+import           XMonad.Layout.Tabbed
 
 backgroundColor,foregroundColor,themeColor :: String
 backgroundColor = "#efefef"
@@ -19,10 +20,22 @@ themeColor = "#0783c0"
 sWidth :: Int
 sWidth  = 1600
 
-layoutHook' = avoidStruts $ smartBorders $ windowNavigation ( Full ||| sTall ||| Mirror mTall )
+layoutHook' = avoidStruts $ smartBorders $ windowNavigation ( tabbed shrinkText theme ||| sTall ||| Mirror mTall )
         where
+            theme =  defaultTheme
+                         { inactiveColor = black
+                         , activeColor = themeColor
+                         , urgentColor = black
+                         , inactiveBorderColor = black
+                         , activeBorderColor = black
+                         , urgentBorderColor = red
+                         , urgentTextColor = red
+                         , fontName = "Monofur for Powerline"
+                         }
             sTall = spacing 5 $ Tall 1 (3/100) (2/3)
             mTall = spacing 5 $ Tall 1 (3/100) (2/3)
+            black = "#000000"
+            red = "#DD0000"
 
 main = do
     homePath <- (++"/")<$> getHomeDirectory
