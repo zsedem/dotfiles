@@ -12,7 +12,6 @@ startupHook = do
           , "xscreensaver -no-splash"
           , "nitrogen --restore"
           , "compton --config ~/.config/compton.conf -b"
-          , "urxvt"
           , "dunst -conf .dunstrc"
           , "nm-applet"]
     turnOnSuspendAutoLock
