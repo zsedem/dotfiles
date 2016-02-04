@@ -11,6 +11,7 @@ import           XMonad.Hooks.ManageDocks       (ToggleStruts (..))
 import qualified XMonad.Layout.WindowNavigation as W
 import qualified XMonad.StackSet                as S
 import qualified XMonad.Util.Run                as R
+import           XMonad.Config.ZsEdem.Core      (workspaces)
 
 
 shift :: KeyMask -> KeyMask
@@ -51,7 +52,10 @@ keyBindings homePath foregroundColor themeColor =
               , ((0                     , xMediaButton_AudioLowerVolume ), canberrabell $ spawn "amixer -q set Master 5%-" )
               , ((0                     , xMediaButton_AudioRaiseVolume ), canberrabell $ spawn "amixer -q set Master 5%+" )
               , ((ctrl shiftMask        , xK_q                          ), return ())
-              ]
+              ]  ++  [
+                ((m .|. windowsButton, k), windows $ f i)
+                   | (i, k) <- zip workspaces [xK_1 .. xK_9]
+                   , (f, m) <- [(S.view, 0), (S.shift, shiftMask)]]
              where
                 dmenu_run_file = homePath ++ ".xmonad/assets/bin/dmenu.sh"
                 dmenu_run = homePath ++ ".xmonad/assets/bin/dmenu-run.sh '"++sWidth ++"' '"++sHeight ++"' '"++foregroundColor++"' '"++themeColor++"'"
