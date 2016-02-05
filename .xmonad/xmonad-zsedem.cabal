@@ -19,6 +19,7 @@ executable xmonad-build
                      , containers
                      , X11
                      , directory
+                     , mtl
                      --, xmonad-extras
   hs-source-dirs:      ., lib
   default-language:    Haskell2010

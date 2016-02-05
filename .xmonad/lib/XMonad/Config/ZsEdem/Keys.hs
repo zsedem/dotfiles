@@ -12,6 +12,7 @@ import qualified XMonad.Layout.WindowNavigation as W
 import qualified XMonad.StackSet                as S
 import qualified XMonad.Util.Run                as R
 import           XMonad.Config.ZsEdem.Core      (workspaces)
+import           XMonad.Config.ZsEdem.Menu
 
 
 shift :: KeyMask -> KeyMask
@@ -30,7 +31,8 @@ windowsButton = mod4Mask
 
 keyBindings :: FilePath -> String -> String -> [((KeyMask, KeySym), X ())]
 keyBindings homePath foregroundColor themeColor =
-              [ ((mod4Mask              , xK_p                          ), loggedSpawn dmenu_run)
+              [ ((mod4Mask .|. shiftMask, xK_p                          ), loggedSpawn dmenu_run)
+              , ((mod4Mask              , xK_p                          ), menu [sWidth, sHeight, foregroundColor, themeColor])
               , ((mod4Mask              , xK_q                          ), spawn xmonad_restart)
               , ((mod4Mask .|. shiftMask, xK_q                          ), loggedSpawn powermenu)
               , ((windowsButton         , xK_Tab                        ), windows S.focusDown )
@@ -57,7 +59,7 @@ keyBindings homePath foregroundColor themeColor =
                    | (i, k) <- zip workspaces [xK_1 .. xK_9]
                    , (f, m) <- [(S.view, 0), (S.shift, shiftMask)]]
              where
-                dmenu_run_file = homePath ++ ".xmonad/assets/bin/dmenu.sh"
+                dmenu_run_file = homePath ++ dmenuBin
                 dmenu_run = homePath ++ ".xmonad/assets/bin/dmenu-run.sh '"++sWidth ++"' '"++sHeight ++"' '"++foregroundColor++"' '"++themeColor++"'"
                 powermenu = homePath++".xmonad/assets/bin/powermenu.sh '"++sWidth ++"' '"++sHeight ++"' '"++foregroundColor++"' '"++themeColor++"'"
                 xmonad_restart = homePath++".xmonad/assets/bin/restart.sh"

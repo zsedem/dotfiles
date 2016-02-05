@@ -4,6 +4,7 @@ import           Text.Printf                    (printf)
 import           System.Directory               (getHomeDirectory)
 import           XMonad
 import qualified XMonad.Config.ZsEdem           as ZsEdem
+import           XMonad.Config.ZsEdem           (backgroundColor, foregroundColor, themeColor)
 import           XMonad.Hooks.ManageDocks       (avoidStruts, docksEventHook,
                                                  manageDocks)
 import           XMonad.Layout.NoBorders        (smartBorders)
@@ -13,29 +14,14 @@ import           XMonad.Util.EZConfig           (additionalKeys)
 import           XMonad.Util.Run                (spawnPipe)
 import           XMonad.Layout.Tabbed
 
-backgroundColor,foregroundColor,themeColor :: String
-backgroundColor = "#efefef"
-foregroundColor = "#000000"
-themeColor = "#0783c0"
+
 sWidth :: Int
 sWidth  = 1600
 
-layoutHook' = avoidStruts $ smartBorders $ windowNavigation ( tabbed shrinkText theme ||| sTall ||| Mirror mTall )
+layoutHook' = avoidStruts $ smartBorders $ windowNavigation ( tabbed shrinkText ZsEdem.theme ||| sTall ||| Mirror mTall )
         where
-            theme =  defaultTheme
-                         { inactiveColor = black
-                         , activeColor = themeColor
-                         , urgentColor = black
-                         , inactiveBorderColor = black
-                         , activeBorderColor = black
-                         , urgentBorderColor = red
-                         , urgentTextColor = red
-                         , fontName = "Monofur for Powerline"
-                         }
             sTall = spacing 5 $ Tall 1 (3/100) (2/3)
             mTall = spacing 5 $ Tall 1 (3/100) (2/3)
-            black = "#000000"
-            red = "#DD0000"
 
 main = do
     homePath <- (++"/")<$> getHomeDirectory
