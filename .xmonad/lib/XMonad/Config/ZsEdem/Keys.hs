@@ -7,6 +7,7 @@ import           Graphics.X11.Types
 import           XMonad                         (X, kill, sendMessage,
                                                  spawn, windows, (.|.))
 import           XMonad.Actions.WindowBringer   (bringMenuArgs', gotoMenuArgs')
+import           XMonad.Actions.CycleWindows    (cycleRecentWindows)
 import           XMonad.Hooks.ManageDocks       (ToggleStruts (..))
 import qualified XMonad.Layout.WindowNavigation as W
 import qualified XMonad.StackSet                as S
@@ -35,8 +36,7 @@ keyBindings homePath foregroundColor themeColor =
               , ((mod4Mask              , xK_p                          ), menu [sWidth, sHeight, foregroundColor, themeColor])
               , ((mod4Mask              , xK_q                          ), spawn xmonad_restart)
               , ((mod4Mask .|. shiftMask, xK_q                          ), loggedSpawn powermenu)
-              , ((windowsButton         , xK_Tab                        ), windows S.focusDown )
-              , ((shift windowsButton   , xK_Tab                        ), windows S.focusUp )
+              , ((windowsButton         , xK_Tab                        ), cycleRecentWindows [xK_Super_L] xK_Tab xK_KP_Decimal)
               , ((windowsButton         , xK_Right                      ), sendMessage $ W.Swap W.R )
               , ((windowsButton         , xK_Left                       ), sendMessage $ W.Swap W.L )
               , ((windowsButton         , xK_Up                         ), sendMessage $ W.Swap W.U )
