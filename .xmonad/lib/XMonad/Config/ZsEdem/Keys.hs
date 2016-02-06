@@ -53,10 +53,7 @@ keyBindings homePath =
               , ((0                     , xMediaButton_AudioLowerVolume ), canberrabell $ spawn "amixer -q set Master 5%-" )
               , ((0                     , xMediaButton_AudioRaiseVolume ), canberrabell $ spawn "amixer -q set Master 5%+" )
               , ((ctrl shiftMask        , xK_q                          ), return ())
-              ]  ++  [
-                ((m .|. windowsButton, k), windows $ f i)
-                   | (i, k) <- zip workspaces [xK_1 .. xK_9]
-                   , (f, m) <- [(S.view, 0), (S.shift, shiftMask)]]
+              ]  ++  workspaceSwitcherKeyBindings
              where
                 xmonad_restart = homePath++".xmonad/assets/bin/restart.sh"
                 layoutSwitch = do keyboardlayout <- R.runProcessWithInput "/usr/bin/xkblayout-state" ["print", "%s"] ""
@@ -75,6 +72,10 @@ keyBindings homePath =
                 -- xMediaButton_MyComputer       = 0x1008ff5d
                 xF86MonBrightnessUp = 0x1008ff02
                 xF86MonBrightnessDown = 0x1008ff03
+                workspaceSwitcherKeyBindings = [
+                    ((modifier .|. windowsButton, workspaceKeyCode), windows $ windowCommand workspaceName)
+                        | (workspaceName, workspaceKeyCode) <- zip workspaces [xK_1 .. xK_9]
+                        , (windowCommand, modifier) <- [(S.view, 0), (S.shift, shiftMask)]]
 
 
 nextItem :: (Eq a) => [a] -> a -> a
