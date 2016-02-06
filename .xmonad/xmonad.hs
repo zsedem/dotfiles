@@ -42,7 +42,7 @@ main = do
      , startupHook = ZsEdem.startupHook
      , logHook = ZsEdem.layoutDzenLogHook layoutPanel <+> ZsEdem.workspaceDzenLogHook workspacePanel
      , handleEventHook = docksEventHook <+> handleEventHook defaultConfig
-     } `additionalKeys` ZsEdem.keyBindings homePath foregroundColor themeColor
+     } `additionalKeys` ZsEdem.keyBindings homePath
      where
         dzenArgs = "-p -e 'button3=' -fn 'Droid Sans Fallback-8:bold'"
         lBar     = printf

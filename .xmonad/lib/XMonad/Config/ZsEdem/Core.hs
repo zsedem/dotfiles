@@ -1,11 +1,4 @@
-module XMonad.Config.ZsEdem.Core
-    ( manageHook
-    , workspaces
-    , backgroundColor
-    , foregroundColor
-    , themeColor
-    , theme
-    ) where
+module XMonad.Config.ZsEdem.Core where
 import           Data.Monoid                (Endo)
 import           XMonad                     (Query, WindowSet, className,
                                              composeAll, (-->), (=?))
@@ -42,3 +35,6 @@ workspaces :: [String]
 workspaces = makeOnclick [ "TERM", "WEB", "CODE"]
         where makeOnclick l = [ "^ca(1,xdotool key super+" ++ show n ++ ")" ++ ws ++ "^ca()" |
                                 (i,ws) <- zip [(1::Int)..] l, let n = i ]
+sWidth, sHeight :: String
+sWidth  = "1600"
+sHeight = "900"

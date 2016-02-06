@@ -1,14 +1,21 @@
 module XMonad.Config.ZsEdem.Menu
-    ( dmenuBin
-    , queryIsInTitle
-    , openWebPage
-    , menu
+    ( customCommandMenu
+    , dmenuRun
+    , windowBringMenu
+    , windowSwitchMenu
+    , powerMenu
+    , dmenuRunMenu
     ) where
-import XMonad(Query(..), title, X, spawn)
-import XMonad.Util.Dmenu(menuArgs)
-import XMonad.Actions.GroupNavigation(nextMatchOrDo, Direction(..))
 import Data.List(isSubsequenceOf)
+import XMonad(Query(..), title, X, spawn, MonadIO)
+import XMonad.Util.Dmenu(menuArgs)
+import XMonad.Actions.WindowBringer  (bringMenuArgs', gotoMenuArgs')
+import XMonad.Actions.GroupNavigation(nextMatchOrDo, Direction(..))
+import XMonad.Config.ZsEdem.Core
 
+windowSwitchMenu, windowBringMenu :: X ()
+windowSwitchMenu = gotoMenuArgs' dmenuRunFile [sWidth, sHeight, foregroundColor, themeColor]
+windowBringMenu = bringMenuArgs' dmenuRunFile [sWidth, sHeight, foregroundColor, themeColor]
 
 dmenuBin :: String
 dmenuBin = ".xmonad/assets/bin/dmenu.sh"
@@ -27,10 +34,11 @@ nextTitleMatchOrSpawn windowSubTitle command = nextMatchOrDo
                                                     (queryIsInTitle windowSubTitle)
                                                     (spawn command)
 
-menu :: [String] -> X ()
-menu args = do
+customCommandMenu :: X ()
+customCommandMenu = do
     let commands = ["jira", "hangups", "mail", "pycharm", "term", "calendar", "newtmux",
                     "chrome", "xmonad config", "review", "network", "wifi"]
+        args = [sWidth, sHeight, foregroundColor, themeColor]
     choosed <- menuArgs dmenuBin args commands
     let hangups = nextTitleMatchOrSpawn "hangups" "exec urxvt -e hangups"
     case choosed of
@@ -43,7 +51,7 @@ menu args = do
         "term" -> nextTitleMatchOrSpawn "urxvt" "exec urxvt"
         "newtmux" -> spawn "exec urxvt -e tmux"
         "chrome" -> nextTitleMatchOrSpawn "chrome" "exec google-chrome"
-        "xmonad" -> nextTitleMatchOrSpawn ".xmonad" "exec atom .xmonad"
+        "xmonad config" -> nextTitleMatchOrSpawn ".xmonad" "exec atom .xmonad"
         "review" -> openWebPage "review.balabit" "review.balabit"
         "network" -> spawn "nmcli_dmenu"
         "wifi" -> do switch <- menuArgs dmenuBin args ["off", "on"]
@@ -51,3 +59,16 @@ menu args = do
         "" -> return ()
         ('!':command) -> spawn command
         custom -> spawn $ "xdg-open http://google.com/search?num=100&q=" ++ custom
+
+loggedSpawn :: MonadIO io => String -> io ()
+loggedSpawn c = spawn $ "echo '"++c++ "'>> /tmp/xmonad.spawn.log; " ++ c
+
+dmenuRunFile, dmenuRun :: String
+dmenuRunFile = dmenuBin
+dmenuRun = ".xmonad/assets/bin/dmenu-run.sh '"++sWidth ++"' '"++sHeight ++"' '"++foregroundColor++"' '"++themeColor++"'"
+
+dmenuRunMenu :: X ()
+dmenuRunMenu = loggedSpawn $ dmenuRun
+
+powerMenu :: MonadIO io => io ()
+powerMenu = loggedSpawn $ ".xmonad/assets/bin/powermenu.sh '"++sWidth ++"' '"++sHeight ++"' '"++foregroundColor++"' '"++themeColor++"'"

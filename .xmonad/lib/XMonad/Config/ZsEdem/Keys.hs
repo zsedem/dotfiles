@@ -6,13 +6,12 @@ import           Data.List(elemIndex)
 import           Graphics.X11.Types
 import           XMonad                         (X, kill, sendMessage,
                                                  spawn, windows, (.|.))
-import           XMonad.Actions.WindowBringer   (bringMenuArgs', gotoMenuArgs')
 import           XMonad.Actions.CycleWindows    (cycleRecentWindows)
 import           XMonad.Hooks.ManageDocks       (ToggleStruts (..))
 import qualified XMonad.Layout.WindowNavigation as W
 import qualified XMonad.StackSet                as S
 import qualified XMonad.Util.Run                as R
-import           XMonad.Config.ZsEdem.Core      (workspaces)
+import           XMonad.Config.ZsEdem.Core
 import           XMonad.Config.ZsEdem.Menu
 
 
@@ -30,12 +29,12 @@ windowsButton :: KeyMask
 windowsButton = mod4Mask
 
 
-keyBindings :: FilePath -> String -> String -> [((KeyMask, KeySym), X ())]
-keyBindings homePath foregroundColor themeColor =
-              [ ((mod4Mask .|. shiftMask, xK_p                          ), loggedSpawn dmenu_run)
-              , ((mod4Mask              , xK_p                          ), menu [sWidth, sHeight, foregroundColor, themeColor])
+keyBindings :: FilePath -> [((KeyMask, KeySym), X ())]
+keyBindings homePath =
+              [ ((mod4Mask .|. shiftMask, xK_p                          ), dmenuRunMenu)
+              , ((mod4Mask              , xK_p                          ), customCommandMenu)
               , ((mod4Mask              , xK_q                          ), spawn xmonad_restart)
-              , ((mod4Mask .|. shiftMask, xK_q                          ), loggedSpawn powermenu)
+              , ((mod4Mask .|. shiftMask, xK_q                          ), powerMenu)
               , ((windowsButton         , xK_Tab                        ), cycleRecentWindows [xK_Super_L] xK_Tab xK_KP_Decimal)
               , ((windowsButton         , xK_Right                      ), sendMessage $ W.Swap W.R )
               , ((windowsButton         , xK_Left                       ), sendMessage $ W.Swap W.L )
@@ -44,8 +43,8 @@ keyBindings homePath foregroundColor themeColor =
               , ((alt                   , xK_F4                         ), kill )
               , ((windowsButton         , xK_F4                         ), kill )
               , ((windowsButton         , xK_F11                        ), sendMessage ToggleStruts )
-              , ((alt                   , xK_Tab                        ), gotoMenuArgs' dmenu_run_file [sWidth, sHeight, foregroundColor, themeColor] )
-              , ((shift alt             , xK_Tab                        ), bringMenuArgs' dmenu_run_file [sWidth, sHeight, foregroundColor, themeColor] )
+              , ((alt                   , xK_Tab                        ), windowSwitchMenu)
+              , ((shift alt             , xK_Tab                        ), windowBringMenu)
               , ((controlMask           , xK_space                      ), layoutSwitch)
               , ((windowsButton         , xK_l                          ), spawn "xscreensaver-command -lock")
               , ((0                     , xMediaButton_AudioRewind      ), spawn "amixer -q set Master toggle" )
@@ -59,11 +58,7 @@ keyBindings homePath foregroundColor themeColor =
                    | (i, k) <- zip workspaces [xK_1 .. xK_9]
                    , (f, m) <- [(S.view, 0), (S.shift, shiftMask)]]
              where
-                dmenu_run_file = homePath ++ dmenuBin
-                dmenu_run = homePath ++ ".xmonad/assets/bin/dmenu-run.sh '"++sWidth ++"' '"++sHeight ++"' '"++foregroundColor++"' '"++themeColor++"'"
-                powermenu = homePath++".xmonad/assets/bin/powermenu.sh '"++sWidth ++"' '"++sHeight ++"' '"++foregroundColor++"' '"++themeColor++"'"
                 xmonad_restart = homePath++".xmonad/assets/bin/restart.sh"
-                loggedSpawn c = spawn $ "echo '"++c++ "'>> /tmp/xmonad.spawn.log; " ++ c
                 layoutSwitch = do keyboardlayout <- R.runProcessWithInput "/usr/bin/xkblayout-state" ["print", "%s"] ""
                                   let newLayout = nextItem ["us", "hu"] keyboardlayout
                                   spawn $ "setxkbmap " ++ newLayout
@@ -80,8 +75,7 @@ keyBindings homePath foregroundColor themeColor =
                 -- xMediaButton_MyComputer       = 0x1008ff5d
                 xF86MonBrightnessUp = 0x1008ff02
                 xF86MonBrightnessDown = 0x1008ff03
-                sWidth  = "1600"
-                sHeight = "900"
+
 
 nextItem :: (Eq a) => [a] -> a -> a
 nextItem l item = case elemIndex item (init l) of
