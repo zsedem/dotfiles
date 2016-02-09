@@ -40,13 +40,16 @@ keyBindings homePath =
               , ((windowsButton         , xK_Left                       ), sendMessage $ W.Swap W.L )
               , ((windowsButton         , xK_Up                         ), sendMessage $ W.Swap W.U )
               , ((windowsButton         , xK_Down                       ), sendMessage $ W.Swap W.D )
+              , ((windowsButton         , xK_h                          ), windows S.focusUp)
+              , ((windowsButton         , xK_l                          ), windows S.focusDown)
+              , ((windowsButton         , xK_w                          ), kill )
               , ((alt                   , xK_F4                         ), kill )
               , ((windowsButton         , xK_F4                         ), kill )
               , ((windowsButton         , xK_F11                        ), sendMessage ToggleStruts )
               , ((alt                   , xK_Tab                        ), windowSwitchMenu)
               , ((shift alt             , xK_Tab                        ), windowBringMenu)
               , ((controlMask           , xK_space                      ), layoutSwitch)
-              , ((windowsButton         , xK_l                          ), spawn "xscreensaver-command -lock")
+              , ((mod4Mask .|. shiftMask, xK_l                          ), spawn "xscreensaver-command -lock")
               , ((0                     , xMediaButton_AudioRewind      ), spawn "amixer -q set Master toggle" )
               , ((0                     , xF86MonBrightnessDown         ), spawn "xbacklight -5" )
               , ((0                     , xF86MonBrightnessUp           ), spawn "xbacklight +5" )
@@ -59,7 +62,7 @@ keyBindings homePath =
                 layoutSwitch = do keyboardlayout <- R.runProcessWithInput "/usr/bin/xkblayout-state" ["print", "%s"] ""
                                   let newLayout = nextItem ["us", "hu"] keyboardlayout
                                   spawn $ "setxkbmap " ++ newLayout
-                canberrabell e          = spawn "canberra-gtk-play -i bell">> e
+                canberrabell e = spawn "canberra-gtk-play -i bell">> e
 
                 xMediaButton_AudioRewind      = 0x1008ff3e
                 xMediaButton_AudioLowerVolume = 0x1008ff11
@@ -75,7 +78,7 @@ keyBindings homePath =
                 workspaceSwitcherKeyBindings = [
                     ((modifier .|. windowsButton, workspaceKeyCode), windows $ windowCommand workspaceName)
                         | (workspaceName, workspaceKeyCode) <- zip workspaces [xK_1 .. xK_9]
-                        , (windowCommand, modifier) <- [(S.view, 0), (S.shift, shiftMask)]]
+                        , (windowCommand, modifier) <- [(S.view, 0), (S.shift, shiftMask), (S.greedyView, mod1Mask)]]
 
 
 nextItem :: (Eq a) => [a] -> a -> a

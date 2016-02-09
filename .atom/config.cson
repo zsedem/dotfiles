@@ -26,7 +26,7 @@
     flashOnLand: true
     flashType: "word"
   editor:
-    fontSize: 17
+    fontSize: 15
     invisibles: {}
     preferredLineLength: 120
     scrollPastEnd: true

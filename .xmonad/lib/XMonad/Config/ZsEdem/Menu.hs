@@ -7,11 +7,13 @@ module XMonad.Config.ZsEdem.Menu
     , dmenuRunMenu
     ) where
 import Data.List(isSubsequenceOf)
-import XMonad(Query(..), title, X, spawn, MonadIO)
+import System.Directory(getDirectoryContents)
+import XMonad(Query(..), title, X, spawn, liftIO)
 import XMonad.Util.Dmenu(menuArgs)
 import XMonad.Actions.WindowBringer  (bringMenuArgs', gotoMenuArgs')
 import XMonad.Actions.GroupNavigation(nextMatchOrDo, Direction(..))
 import XMonad.Config.ZsEdem.Core
+
 
 windowSwitchMenu, windowBringMenu :: X ()
 windowSwitchMenu = gotoMenuArgs' dmenuRunFile [sWidth, sHeight, foregroundColor, themeColor]
@@ -56,11 +58,16 @@ customCommandMenu = do
         "network" -> spawn "nmcli_dmenu"
         "wifi" -> do switch <- menuArgs dmenuBin args ["off", "on"]
                      spawn $ "notify-send 'Wifi' `nmcli radio wifi " ++ switch ++ "`"
+        "screenlayout" -> do layoutFiles <- liftIO $ getDirectoryContents ".screenlayout"
+                             let layouts = map (takeWhile (/='.')) layoutFiles
+                             layout <- menuArgs dmenuBin args layouts
+                             let layoutFile = ".screenlayout/" ++ layout ++ ".sh"
+                             spawn layoutFile
         "" -> return ()
         ('!':command) -> spawn command
         custom -> spawn $ "xdg-open http://google.com/search?num=100&q=" ++ custom
 
-loggedSpawn :: MonadIO io => String -> io ()
+loggedSpawn :: String -> X ()
 loggedSpawn c = spawn $ "echo '"++c++ "'>> /tmp/xmonad.spawn.log; " ++ c
 
 dmenuRunFile, dmenuRun :: String
@@ -70,5 +77,5 @@ dmenuRun = ".xmonad/assets/bin/dmenu-run.sh '"++sWidth ++"' '"++sHeight ++"' '"+
 dmenuRunMenu :: X ()
 dmenuRunMenu = loggedSpawn $ dmenuRun
 
-powerMenu :: MonadIO io => io ()
+powerMenu :: X ()
 powerMenu = loggedSpawn $ ".xmonad/assets/bin/powermenu.sh '"++sWidth ++"' '"++sHeight ++"' '"++foregroundColor++"' '"++themeColor++"'"

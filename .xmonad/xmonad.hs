@@ -5,8 +5,7 @@ import           System.Directory               (getHomeDirectory)
 import           XMonad
 import qualified XMonad.Config.ZsEdem           as ZsEdem
 import           XMonad.Config.ZsEdem           (backgroundColor, foregroundColor, themeColor)
-import           XMonad.Hooks.ManageDocks       (avoidStruts, docksEventHook,
-                                                 manageDocks)
+import           XMonad.Hooks.ManageDocks       (avoidStruts, docksEventHook)
 import           XMonad.Layout.NoBorders        (smartBorders)
 import           XMonad.Layout.Spacing          (spacing)
 import           XMonad.Layout.WindowNavigation (windowNavigation)
@@ -29,7 +28,7 @@ main = do
     layoutPanel <- spawnPipe lBar
     workspacePanel <- spawnPipe wBar
     xmonad $ defaultConfig
-     { manageHook = ZsEdem.manageHook <+> manageDocks <+> manageHook defaultConfig
+     { manageHook = ZsEdem.manageHook <+> manageHook defaultConfig
      , layoutHook = layoutHook'
      , modMask = mod4Mask
      , workspaces = ZsEdem.workspaces

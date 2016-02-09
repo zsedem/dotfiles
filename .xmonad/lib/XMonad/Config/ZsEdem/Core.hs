@@ -1,9 +1,11 @@
 module XMonad.Config.ZsEdem.Core where
 import           Data.Monoid                (Endo)
 import           XMonad                     (Query, WindowSet, className,
-                                             composeAll, (-->), (=?))
-import           XMonad.Hooks.ManageHelpers(doFullFloat, doCenterFloat, isDialog)
-import           XMonad.Layout.Decoration(defaultTheme, Theme(..))
+                                             composeAll, (-->), (=?), (<+>))
+import           XMonad.Actions.SpawnOn     (manageSpawn)
+import           XMonad.Hooks.ManageHelpers (doFullFloat, doCenterFloat, isDialog)
+import           XMonad.Layout.Decoration   (defaultTheme, Theme(..))
+import           XMonad.Hooks.ManageDocks   (manageDocks)
 
 theme :: Theme
 theme =  defaultTheme
@@ -14,7 +16,7 @@ theme =  defaultTheme
              , activeBorderColor = black
              , urgentBorderColor = red
              , urgentTextColor = red
-             , fontName = "Monofur for Powerline"
+             , fontName = "-Monofur for Powerline-*-*-*-*-12-*-*-*-*-*-*-*"
              }
     where
         black = "#000000"
@@ -29,7 +31,7 @@ manageHook :: Query (Endo WindowSet)
 manageHook = composeAll
             [ className =? "feh" --> doFullFloat
             , isDialog           --> doCenterFloat
-            ]
+            ] <+> manageSpawn <+> manageDocks
 
 workspaces :: [String]
 workspaces = makeOnclick [ "TERM", "WEB", "CODE"]
