@@ -1,2 +1,3 @@
 xrdb ~/.Xresources
-stack exec xmonad
+numlockx
+stack exec xmonad > xmonad.log
