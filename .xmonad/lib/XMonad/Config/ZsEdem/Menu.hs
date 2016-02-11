@@ -23,9 +23,7 @@ dmenuBin :: String
 dmenuBin = ".xmonad/assets/bin/dmenu.sh"
 
 queryIsInTitle :: String -> Query Bool
-queryIsInTitle windowNameMatcher = do
-    windowName <- title
-    return $ isSubsequenceOf windowNameMatcher windowName
+queryIsInTitle windowNameMatcher = isSubsequenceOf windowNameMatcher <$> title
 
 openWebPage :: String -> String -> X ()
 openWebPage subString webpage = nextTitleMatchOrSpawn subString $ "xdg-open http://" ++ webpage
@@ -39,7 +37,8 @@ nextTitleMatchOrSpawn windowSubTitle command = nextMatchOrDo
 customCommandMenu :: X ()
 customCommandMenu = do
     let commands = ["jira", "hangups", "mail", "pycharm", "term", "calendar", "newtmux",
-                    "chrome", "xmonad config", "review", "network", "wifi"]
+                    "chrome", "xmonad config", "review", "network", "wifi", "jenkins",
+                    "screenlayout"]
         args = [sWidth, sHeight, foregroundColor, themeColor]
     choosed <- menuArgs dmenuBin args commands
     let hangups = nextTitleMatchOrSpawn "hangups" "exec urxvt -e hangups"
@@ -49,6 +48,7 @@ customCommandMenu = do
         "calendar" -> openWebPage "Calendar" "calendar.google.com"
         "hangups" -> hangups
         "hangout" -> hangups
+        "jenkins" -> openWebPage "Jenkins" "jenkins.bsp.balabit"
         "pycharm" -> nextTitleMatchOrSpawn "PyCharm" "exec pycharm"
         "term" -> nextTitleMatchOrSpawn "urxvt" "exec urxvt"
         "newtmux" -> spawn "exec urxvt -e tmux"
@@ -58,17 +58,21 @@ customCommandMenu = do
         "network" -> spawn "nmcli_dmenu"
         "wifi" -> do switch <- menuArgs dmenuBin args ["off", "on"]
                      spawn $ "notify-send 'Wifi' `nmcli radio wifi " ++ switch ++ "`"
-        "screenlayout" -> do layoutFiles <- liftIO $ getDirectoryContents ".screenlayout"
-                             let layouts = map (takeWhile (/='.')) layoutFiles
-                             layout <- menuArgs dmenuBin args layouts
-                             let layoutFile = ".screenlayout/" ++ layout ++ ".sh"
-                             spawn layoutFile
+        "screenlayout" -> screenLayoutMenu args
         "" -> return ()
         ('!':command) -> spawn command
         custom -> spawn $ "xdg-open http://google.com/search?num=100&q=" ++ custom
 
 loggedSpawn :: String -> X ()
 loggedSpawn c = spawn $ "echo '"++c++ "'>> /tmp/xmonad.spawn.log; " ++ c
+
+screenLayoutMenu :: [String] -> X ()
+screenLayoutMenu args = do
+    layoutFiles <- filter (`notElem` [".", ".."] ) <$> liftIO (getDirectoryContents ".screenlayout")
+    let layouts = map (takeWhile (/='.')) layoutFiles
+    layout <- menuArgs dmenuBin args layouts
+    let layoutFile = ".screenlayout/" ++ layout ++ ".sh"
+    spawn layoutFile
 
 dmenuRunFile, dmenuRun :: String
 dmenuRunFile = dmenuBin
