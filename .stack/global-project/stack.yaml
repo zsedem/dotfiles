@@ -4,7 +4,7 @@
 flags: {}
 extra-package-dbs: []
 packages: []
-extra-deps: 
+extra-deps:
     - binary-shared-0.8.3
     - ghcjs-codemirror-0.0.0.1
     - ghcjs-dom-0.2.3.0
@@ -40,5 +40,6 @@ extra-deps:
     - regex-compat-tdfa-0.95.1.4
     - Xauth-0.1
     - alsa-core-0.5.0.1
+    - gtk-traymanager-0.1.6
     - alsa-mixer-0.2.0.3
 resolver: lts-3.12

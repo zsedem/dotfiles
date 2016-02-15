@@ -1,5 +1,5 @@
-set nocompatible
 filetype off
+set nocompatible
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -11,6 +11,7 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'tpope/vim-fugitive'
 Plugin 'kien/ctrlp.vim'
+Plugin 'bitc/vim-hdevtools'
 
 call vundle#end()
 
