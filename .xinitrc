@@ -1,3 +1,4 @@
 xrdb ~/.Xresources
 numlockx
-stack exec xmonad > xmonad.log
+stack exec taffybar 2>&1 > .taffybar.log &
+stack exec xmonad 2>&1 > .xmonad.log

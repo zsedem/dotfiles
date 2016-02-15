@@ -34,9 +34,8 @@ manageHook = composeAll
             ] <+> manageSpawn <+> manageDocks
 
 workspaces :: [String]
-workspaces = makeOnclick [ "TERM", "WEB", "CODE"]
-        where makeOnclick l = [ "^ca(1,xdotool key super+" ++ show n ++ ")" ++ ws ++ "^ca()" |
-                                (i,ws) <- zip [(1::Int)..] l, let n = i ]
+workspaces = [ "TERM", "WEB", "CODE"]
+
 sWidth, sHeight :: String
 sWidth  = "1600"
 sHeight = "900"
