@@ -27,8 +27,9 @@ layoutHook' = avoidStruts $ smartBorders $ windowNavigation ( tabbed shrinkText 
 
 main = do
     homePath <- (++"/")<$> getHomeDirectory
-    xmonad . ewmh . pagerHints $ defaultConfig
-     { manageHook = ZsEdem.manageHook <+> manageHook defaultConfig
+    let desktopConfig = ewmh $ pagerHints defaultConfig
+    xmonad $ desktopConfig
+     { manageHook = ZsEdem.manageHook <+> manageHook desktopConfig
      , layoutHook = layoutHook'
      , modMask = mod4Mask
      , workspaces = ZsEdem.workspaces
@@ -38,8 +39,8 @@ main = do
      , focusedBorderColor = themeColor
      , normalBorderColor = "#424242"
      , borderWidth = 2
-     , startupHook = ZsEdem.startupHook
-     , handleEventHook = docksEventHook <+> handleEventHook defaultConfig
+     , startupHook = startupHook desktopConfig >> ZsEdem.startupHook
+     , handleEventHook = docksEventHook <+> handleEventHook desktopConfig
      } `additionalKeys` ZsEdem.keyBindings homePath
      where
 
