@@ -69,7 +69,7 @@ let g:multi_cursor_quit_key='<Esc>'
 function RebaseActionToggle()
    let line = getline(".")
    let result = matchstr(line, "^\\a")
-   let transitions = {'p': 'fixup', 's': 'pick', 'e': 'squash', 'f': 'edit'}
+   let transitions = {'p': 'fixup', 's': 'pick', 'e': 'reword', 'f': 'edit', 'r': 'squash'}
    execute "normal! ^cw" . transitions[result]
 endfunction
 

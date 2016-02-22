@@ -8,7 +8,6 @@ startupHook = do
     setWMName "LG3D"
     mapM_ execOnce
           [ "xsetroot -cursor_name left_ptr"
-          , "xscreensaver -no-splash"
           , "nitrogen --restore"
           , "compton --config ~/.config/compton.conf -b"
           , "dunst -conf .dunstrc"
