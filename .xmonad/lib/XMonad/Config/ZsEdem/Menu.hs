@@ -40,8 +40,9 @@ customCommandMenu = do
                     "chrome", "xmonad config", "review", "network", "wifi", "jenkins",
                     "screenlayout"]
         args = [sWidth, sHeight, foregroundColor, themeColor]
+        terminalRun = nextMatchOrDo Forward (("st"==) <$> title) $ spawn "exec st -f 'Monofur for Powerline:size=19'"
+        hangups = nextTitleMatchOrSpawn "hangups" "exec st -f 'Monofur for Powerline:size=19' -e hangups"
     choosed <- menuArgs dmenuBin args commands
-    let hangups = nextTitleMatchOrSpawn "hangups" "exec urxvt -e hangups"
     case choosed of
         "jira" -> openWebPage "JIRA" "jira.balabit"
         "mail" -> openWebPage "Inbox" "inbox.google.com"
@@ -50,8 +51,9 @@ customCommandMenu = do
         "hangout" -> hangups
         "jenkins" -> openWebPage "Jenkins" "jenkins.bsp.balabit"
         "pycharm" -> nextTitleMatchOrSpawn "PyCharm" "exec pycharm"
-        "term" -> nextTitleMatchOrSpawn "urxvt" "exec urxvt"
-        "newtmux" -> spawn "exec urxvt -e tmux"
+        "term" -> terminalRun
+        "st" -> terminalRun
+        "newtmux" -> spawn "exec st -f 'Monofur for Powerline:size=19' -e tmux"
         "chrome" -> nextTitleMatchOrSpawn "chrome" "exec google-chrome"
         "xmonad config" -> nextTitleMatchOrSpawn ".xmonad" "exec atom .xmonad"
         "review" -> openWebPage "review.balabit" "review.balabit"
