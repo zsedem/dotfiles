@@ -35,7 +35,7 @@ main = do
      , workspaces = ZsEdem.workspaces
      , focusFollowsMouse  = False
      , clickJustFocuses   = False
-     , terminal = "urxvt"
+     , terminal = "st -f 'Monofur for Powerline:size=19'"
      , focusedBorderColor = themeColor
      , normalBorderColor = "#424242"
      , borderWidth = 2
@@ -43,5 +43,4 @@ main = do
      , handleEventHook = docksEventHook <+> handleEventHook desktopConfig
      } `additionalKeys` ZsEdem.keyBindings homePath
      where
-
         (//)      = div
