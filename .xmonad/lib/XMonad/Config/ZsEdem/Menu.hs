@@ -6,10 +6,11 @@ module XMonad.Config.ZsEdem.Menu
     , powerMenu
     , dmenuRunMenu
     ) where
-import Data.List(isSubsequenceOf)
+import Data.List(isSubsequenceOf, unwords, lines)
 import System.Directory(getDirectoryContents)
 import XMonad(Query(..), title, X, spawn, liftIO)
 import XMonad.Util.Dmenu(menuArgs)
+import XMonad.Util.Run(runProcessWithInput)
 import XMonad.Actions.WindowBringer  (bringMenuArgs', gotoMenuArgs')
 import XMonad.Actions.GroupNavigation(nextMatchOrDo, Direction(..))
 import XMonad.Config.ZsEdem.Core
@@ -38,7 +39,7 @@ customCommandMenu :: X ()
 customCommandMenu = do
     let commands = ["jira", "hangups", "mail", "pycharm", "term", "calendar", "newtmux",
                     "chrome", "xmonad config", "review", "network", "wifi", "jenkins",
-                    "screenlayout"]
+                    "screenlayout", "google", "openUrl"]
         args = [sWidth, sHeight, foregroundColor, themeColor]
         terminalRun = nextMatchOrDo Forward (("st"==) <$> title) $ spawn "exec st -f 'Monofur for Powerline:size=19'"
         hangups = nextTitleMatchOrSpawn "hangups" "exec st -f 'Monofur for Powerline:size=19' -e hangups"
@@ -53,6 +54,13 @@ customCommandMenu = do
         "pycharm" -> nextTitleMatchOrSpawn "PyCharm" "exec pycharm"
         "term" -> terminalRun
         "st" -> terminalRun
+        "google" -> do
+            selection <- getXselection
+            let onelined = unwords $ lines selection
+            spawn $ "xdg-open https://www.google.com/search?q=['" ++ onelined ++ "']"
+        "openUrl" -> do
+            selection <- getXselection
+            spawn $ "xdg-open " ++ selection
         "newtmux" -> spawn "exec st -f 'Monofur for Powerline:size=19' -e tmux"
         "chrome" -> nextTitleMatchOrSpawn "chrome" "exec google-chrome"
         "xmonad config" -> nextTitleMatchOrSpawn ".xmonad" "exec atom .xmonad"
@@ -64,7 +72,8 @@ customCommandMenu = do
         "" -> return ()
         ('!':command) -> spawn command
         custom -> spawn $ "xdg-open http://google.com/search?num=100&q=" ++ custom
-
+  where
+      getXselection = runProcessWithInput "xclip" ["-o", "-selection"] ""
 loggedSpawn :: String -> X ()
 loggedSpawn c = spawn $ "echo '"++c++ "'>> /tmp/xmonad.spawn.log; " ++ c
 
