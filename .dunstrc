@@ -29,7 +29,7 @@
 
     # alignment of message text.
     # Possible values are "left", "center" and "right"
-    alignment = left
+    alignment = right
 
     # The frequency with wich text that is longer than the notification
     # window allows bounces back and forth.
@@ -42,7 +42,7 @@
     show_age_threshold = 60
 
     # split notifications into multiple lines if they don't fit into geometry
-    word_wrap = no
+    word_wrap = yes
 
     # ignore newlines '\n' in notifications
     ignore_newline = no
@@ -84,7 +84,7 @@
     # If this option is set to mouse or keyboard, the monitor option will be
     # ignored.
     follow  = keyboard
-    
+
     # should a notification popped up from history be sticky or
     # timeout as if it would normally do.
     sticky_history = yes
@@ -134,7 +134,7 @@
     # xev might be helpful to find names for keys
 
     # close notification
-    # close = ctrl+esc
+    close = ctrl+esc
 
     # close all notifications
     # close_all = ctrl+shift+space
