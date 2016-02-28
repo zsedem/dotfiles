@@ -21,6 +21,7 @@ executable xmonad-build
                      , directory
                      , mtl
                      , taffybar
+                     , data-default
                      --, xmonad-extras
   hs-source-dirs:      ., lib
   default-language:    Haskell2010

@@ -1,12 +1,10 @@
-resolver: lts-3.12
+resolver: lts-5.4
 packages:
 - '.'
-extra-deps:
-- xmonad-0.11.1
-- xmonad-contrib-0.11.4
-- xmonad-extras-0.12.1
-- X11-xft-0.3.1
-- libmpd-0.9.0.4
-
 flags: {}
 extra-package-dbs: []
+extra-deps:
+- taffybar-0.4.6
+- xmonad-contrib-0.12
+- X11-xft-0.3.1
+- gtk-traymanager-0.1.6

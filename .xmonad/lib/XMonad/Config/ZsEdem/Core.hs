@@ -1,14 +1,15 @@
 module XMonad.Config.ZsEdem.Core where
 import           Data.Monoid                (Endo)
 import           XMonad                     (Query, WindowSet, className,
-                                             composeAll, (-->), (=?), (<+>))
+                                             composeAll, (-->), (=?), (<+>),
+                                             def)
 import           XMonad.Actions.SpawnOn     (manageSpawn)
 import           XMonad.Hooks.ManageHelpers (doFullFloat, doCenterFloat, isDialog)
-import           XMonad.Layout.Decoration   (defaultTheme, Theme(..))
+import           XMonad.Layout.Decoration   (Theme(..))
 import           XMonad.Hooks.ManageDocks   (manageDocks)
 
 theme :: Theme
-theme =  defaultTheme
+theme =  def
              { inactiveColor = black
              , activeColor = themeColor
              , urgentColor = black

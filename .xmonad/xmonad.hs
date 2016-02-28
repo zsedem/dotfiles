@@ -1,24 +1,18 @@
 {-# OPTIONS_GHC -fno-warn-missing-signatures #-}
 module Main(main) where
-import           Text.Printf                    (printf)
 import           System.Directory               (getHomeDirectory)
 import           System.Taffybar.Hooks.PagerHints (pagerHints)
 import           XMonad
 import qualified XMonad.Config.ZsEdem           as ZsEdem
-import           XMonad.Config.ZsEdem           (backgroundColor, foregroundColor, themeColor)
-import           XMonad.Hooks.ManageDocks       (avoidStruts, docksEventHook,
-                                                 manageDocks)
+import           XMonad.Config.ZsEdem           (themeColor)
+import           XMonad.Hooks.ManageDocks       (avoidStruts, docksEventHook)
 import           XMonad.Layout.NoBorders        (smartBorders)
 import           XMonad.Layout.Spacing          (spacing)
 import           XMonad.Layout.WindowNavigation (windowNavigation)
 import           XMonad.Util.EZConfig           (additionalKeys)
 import           XMonad.Hooks.EwmhDesktops      (ewmh)
-import           XMonad.Util.Run                (spawnPipe)
 import           XMonad.Layout.Tabbed
 
-
-sWidth :: Int
-sWidth  = 1600
 
 layoutHook' = avoidStruts $ smartBorders $ windowNavigation ( tabbed shrinkText ZsEdem.theme ||| sTall ||| Mirror mTall )
         where
@@ -27,7 +21,7 @@ layoutHook' = avoidStruts $ smartBorders $ windowNavigation ( tabbed shrinkText 
 
 main = do
     homePath <- (++"/")<$> getHomeDirectory
-    let desktopConfig = ewmh $ pagerHints defaultConfig
+    let desktopConfig = ewmh $ pagerHints def
     xmonad $ desktopConfig
      { manageHook = ZsEdem.manageHook <+> manageHook desktopConfig
      , layoutHook = layoutHook'
@@ -42,5 +36,4 @@ main = do
      , startupHook = startupHook desktopConfig >> ZsEdem.startupHook
      , handleEventHook = docksEventHook <+> handleEventHook desktopConfig
      } `additionalKeys` ZsEdem.keyBindings homePath
-     where
-        (//)      = div
+
