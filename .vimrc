@@ -5,6 +5,8 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'airblade/vim-gitgutter'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'eagletmt/ghcmod-vim.git'
 Plugin 'eagletmt/neco-ghc'
@@ -57,6 +59,10 @@ set nowritebackup
 set noswapfile
 set list
 set listchars=tab:▸▸,trail:·
+
+" airline
+let g:airline_powerline_fonts = 1
+
 " folding method
 set foldmethod=indent
 set foldlevel=99
@@ -89,17 +95,6 @@ let g:multi_cursor_next_key='<C-d>'
 let g:multi_cursor_prev_key='<C-S-d>'
 let g:multi_cursor_skip_key='<C-k>'
 let g:multi_cursor_quit_key='<Esc>'
-
-" statusline
-
-set statusline=%.20F:%l:%c\ -   "Filename, cursor column,  "cursor line
-set statusline+=%m\       "modified flag
-set statusline+=%#warningmsg#%r%#todo#      "read only flag
-set statusline+=%=<      "left/right separator
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%#todo#%L      "total lines
-set statusline+=%*
 
 " first, enable status line always
 set laststatus=2
