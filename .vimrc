@@ -4,52 +4,77 @@ set nocompatible
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'bling/vim-airline'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'terryma/vim-multiple-cursors'
 Plugin 'bronson/vim-trailing-whitespace'
-Plugin 'tpope/vim-fugitive'
-Plugin 'kien/ctrlp.vim'
-Plugin 'bitc/vim-hdevtools'
+Plugin 'eagletmt/ghcmod-vim.git'
+Plugin 'eagletmt/neco-ghc'
+Plugin 'ervandew/supertab.git'
+Plugin 'garbas/vim-snipmate.git'
+Plugin 'godlygeek/tabular.git'
+Plugin 'MarcWeber/vim-addon-mw-utils.git'
+Plugin 'scrooloose/syntastic.git'
+Plugin 'scrooloose/nerdtree.git'
+Plugin 'scrooloose/nerdcommenter.git'
+Plugin 'Shougo/neocomplete.vim.git'
+Plugin 'Shougo/vimproc.vim.git'
+Plugin 'tomtom/tlib_vim.git'
+Plugin 'terryma/vim-multiple-cursors.git'
+Plugin 'bitc/vim-hdevtools.git'
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'Xuyuanp/nerdtree-git-plugin.git'
 
 call vundle#end()
-
 filetype plugin on
 filetype plugin indent on
-set colorcolumn=120
 syntax on
 
 set number
+set nowrap
+set ruler
+set showmode
+set tw=80
+set smartcase
+set smarttab
+set smartindent
+set autoindent
+set softtabstop=2
+set shiftwidth=2
+set expandtab
+set incsearch
+set mouse=a
+set history=1000
+set completeopt=menuone,menu,longest
+set wildignore+=*\\tmp\\*,*.swp,*.swo,*.zip,.git,.cabal-sandbox
+set wildmode=longest,list,full
+set wildmenu
+set completeopt+=longest
+set t_Co=256
+set cmdheight=1
+set cursorline
+set colorcolumn=120
 set nobackup
 set nowritebackup
 set noswapfile
-set noundofile
 set list
-set listchars=tab:▸·,trail:·
-" File save/exit
-imap <C-x> <ESC>:q<CR>
-nmap <C-x> :q<CR>
-
+set listchars=tab:▸▸,trail:·
+" folding method
+set foldmethod=indent
+set foldlevel=99
 " Line moving
 nmap <C-j> ddp
-nmap <C-k> ddkkp
+nmap <C-k> ddkP
 imap <C-j> <ESC>ddpi
-imap <C-k> <ESC>ddkkpi
+imap <C-k> <ESC>ddkPi
 
-" easy tab navigation
-map <C-t> <ESC>:tabnew
-map <C-l> <ESC>:tabn<CR>
-map <C-h> <ESC>:tabp<CR>
+" easy buffer navigation
+map <C-t> <ESC>:enew<CR>
+map <C-l> <ESC>:bnext<CR>
+map <C-h> <ESC>:bprev<CR>
+map <C-w> <ESC>:bp <BAR> bd #<CR>
+
 " split pane navigation
-nmap <silent> <a-k> :wincmd k<CR>
-nmap <silent> <a-j> :wincmd j<CR>
-nmap <silent> <a-h> :wincmd h<CR>
-nmap <silent> <a-l> :wincmd l<CR>
-
-" airline
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_section_b = '%{strftime("%c")}'
+nmap <silent> <C-h> :wincmd h<CR>
+nmap <silent> <C-l> :wincmd l<CR>
 
 
 " git-gutter
@@ -65,8 +90,47 @@ let g:multi_cursor_prev_key='<C-S-d>'
 let g:multi_cursor_skip_key='<C-k>'
 let g:multi_cursor_quit_key='<Esc>'
 
+" statusline
+
+set statusline=%.20F:%l:%c\ -   "Filename, cursor column,  "cursor line
+set statusline+=%m\       "modified flag
+set statusline+=%#warningmsg#%r%#todo#      "read only flag
+set statusline+=%=<      "left/right separator
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%#todo#%L      "total lines
+set statusline+=%*
+
+" first, enable status line always
+set laststatus=2
+
+" now set it up to change the status line based on mode
+function! InsertStatuslineColor(mode)
+  if a:mode == 'i'
+    hi statusline guibg=magenta
+  elseif a:mode == 'r'
+    hi statusline guibg=blue
+  else
+    hi statusline guibg=red
+  endif
+endfunction
+
+au InsertEnter * call InsertStatuslineColor(v:insertmode)
+au InsertChange * call InsertStatuslineColor(v:insertmode)
+au InsertLeave * hi statusline guibg=green
+
+" default the statusline to green when entering Vim
+hi statusline guibg=green
+
+" Syntastic
+map <Leader>s :SyntasticToggleMode<CR>
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+
 " git rebase magic
-function RebaseActionToggle()
+function! RebaseActionToggle()
    let line = getline(".")
    let result = matchstr(line, "^\\a")
    let transitions = {'p': 'fixup', 's': 'pick', 'e': 'reword', 'f': 'edit', 'r': 'squash'}
