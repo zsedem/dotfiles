@@ -1,0 +1,30 @@
+#!/usr/bin/env runhaskell
+{-# LANGUAGE DeriveDataTypeable #-}
+import XMonad hiding (def)
+import qualified XMonad as X
+import XMonad.Layout.Fullscreen
+import XMonad.Layout.NoBorders
+import qualified Data.Map as Map
+import System.Console.CmdArgs
+import System.Environment
+import System.Exit
+
+data Arguments = Arguments {programToRun :: String} deriving (Show, Data, Typeable)
+
+argumentsDef = Arguments{programToRun = def &= argPos 0 &= typ "SHELLCMD"}
+         &= versionArg [ignore]
+         &= summary ("This is simple window manager, which starts every"++
+                     "program in fullscreen and the applications to be "++
+                     "run are added from the command line")
+main = do
+    Arguments programToRun' <- cmdArgs argumentsDef
+    withArgs [] $
+      xmonad X.def
+            { borderWidth = 0
+            , workspaces = ["default"]
+            , layoutHook = noBorders (fullscreenFull Full)
+            , keys = const $ Map.fromList [((mod4Mask, xK_F4), return ())]
+            , mouseBindings = const Map.empty
+            , focusFollowsMouse = True
+            , startupHook = spawn programToRun'
+            }
