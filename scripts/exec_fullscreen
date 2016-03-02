@@ -1,4 +1,5 @@
 #!/usr/bin/env runhaskell
+-- vi: syntax=haskell
 {-# LANGUAGE DeriveDataTypeable #-}
 import XMonad hiding (def)
 import qualified XMonad as X
