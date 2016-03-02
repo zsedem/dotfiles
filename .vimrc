@@ -61,6 +61,7 @@ set list
 set listchars=tab:▸▸,trail:·
 
 " airline
+let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 
 " folding method
