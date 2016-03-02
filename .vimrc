@@ -80,8 +80,10 @@ map <C-h> <ESC>:bprev<CR>
 map <C-w> <ESC>:bp <BAR> bd #<CR>
 
 " split pane navigation
-nmap <silent> <C-h> :wincmd h<CR>
-nmap <silent> <C-l> :wincmd l<CR>
+nmap <silent> <C-S-J> :wincmd j<CR>
+nmap <silent> <C-S-K> :wincmd k<CR>
+nmap <silent> <C-S-H> :wincmd h<CR>
+nmap <silent> <C-S-L> :wincmd l<CR>
 
 
 " git-gutter
@@ -124,6 +126,13 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
+
+" completion
+let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
+inoremap <Nul> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
+" haskell-completion
+let g:haskellmode_completion_ghc = 1
+autocmd FileType haskell setlocal omnifunc=necoghc
 
 " git rebase magic
 function! RebaseActionToggle()
