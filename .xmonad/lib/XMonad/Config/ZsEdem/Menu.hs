@@ -65,7 +65,7 @@ customCommandMenu = do
         "newtmux" -> spawn "exec st -f 'Monofur for Powerline:size=19' -e tmux"
         "chrome" -> nextTitleMatchOrSpawn "chrome" "exec google-chrome"
         "xmonad config" -> nextTitleMatchOrSpawn ".xmonad" "exec atom .xmonad"
-        "review" -> openWebPage "review.balabit" "review.balabit"
+        "review" -> nextTitleMatchOrSpawn "review.balabit" "google-chrome  --incognito --app=https://review.balabit/#/q/project:bsp/bsp+status:open"
         "network" -> spawn "nmcli_dmenu"
         "wifi" -> do switch <- menuArgs dmenuBin args ["off", "on"]
                      spawn $ "notify-send 'Wifi' `nmcli radio wifi " ++ switch ++ "`"
