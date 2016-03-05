@@ -4,7 +4,7 @@
     cp = cherry-pick
     st = status
     cl = clone
-    ci = commit
+    ci = commit --signoff
     co = checkout
     br = branch
     rba = rebase --abort
