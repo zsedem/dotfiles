@@ -92,7 +92,7 @@ dmenuRunFile = dmenuBin
 dmenuRun = ".xmonad/assets/bin/dmenu-run.sh '"++sWidth ++"' '"++sHeight ++"' '"++foregroundColor++"' '"++themeColor++"'"
 
 dmenuRunMenu :: X ()
-dmenuRunMenu = loggedSpawn $ dmenuRun
+dmenuRunMenu = loggedSpawn dmenuRun
 
 powerMenu :: X ()
 powerMenu = loggedSpawn $ ".xmonad/assets/bin/powermenu.sh '"++sWidth ++"' '"++sHeight ++"' '"++foregroundColor++"' '"++themeColor++"'"
