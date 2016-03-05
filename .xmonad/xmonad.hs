@@ -14,7 +14,7 @@ import           XMonad.Hooks.EwmhDesktops      (ewmh)
 import           XMonad.Layout.Tabbed
 
 
-layoutHook' = avoidStruts $ smartBorders $ windowNavigation ( tabbed shrinkText ZsEdem.theme ||| sTall ||| Mirror mTall )
+layoutHook' = avoidStruts $ smartBorders $ windowNavigation ( Full ||| sTall ||| Mirror mTall )
         where
             sTall = spacing 5 $ Tall 1 (3/100) (2/3)
             mTall = spacing 5 $ Tall 1 (3/100) (2/3)
