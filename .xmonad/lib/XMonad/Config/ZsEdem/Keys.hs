@@ -58,7 +58,7 @@ keyBindings homePath =
               , ((ctrl shiftMask        , xK_q                          ), return ())
               ]  ++  workspaceSwitcherKeyBindings
              where
-                xmonad_restart = homePath++".xmonad/assets/bin/restart.sh"
+                xmonad_restart = "xmonad --restart"
                 layoutSwitch = do keyboardlayout <- R.runProcessWithInput "/usr/bin/xkblayout-state" ["print", "%s"] ""
                                   let newLayout = nextItem ["us", "hu"] keyboardlayout
                                   spawn $ "setxkbmap " ++ newLayout
