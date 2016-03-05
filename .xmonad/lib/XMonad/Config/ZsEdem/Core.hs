@@ -17,6 +17,8 @@ theme =  def
              , activeBorderColor = black
              , urgentBorderColor = red
              , urgentTextColor = red
+             , decoHeight = 30
+             , decoWidth = 30
              , fontName = "-Monofur for Powerline-*-*-*-*-12-*-*-*-*-*-*-*"
              }
     where
