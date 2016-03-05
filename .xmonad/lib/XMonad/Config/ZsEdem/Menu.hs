@@ -37,7 +37,7 @@ nextTitleMatchOrSpawn windowSubTitle command = nextMatchOrDo
 
 customCommandMenu :: X ()
 customCommandMenu = do
-    let commands = ["jira", "hangups", "mail", "pycharm", "term", "calendar", "newtmux",
+    let commands = ["jira", "hangups", "mail", "inbox", "pycharm", "term", "calendar", "newtmux",
                     "chrome", "xmonad config", "review", "network", "wifi", "jenkins",
                     "screenlayout", "google", "openUrl"]
         args = [sWidth, sHeight, foregroundColor, themeColor]
@@ -47,6 +47,7 @@ customCommandMenu = do
     case choosed of
         "jira" -> openWebPage "JIRA" "jira.balabit"
         "mail" -> openWebPage "Inbox" "inbox.google.com"
+        "inbox" -> openWebPage "Inbox" "inbox.google.com"
         "calendar" -> openWebPage "Calendar" "calendar.google.com"
         "hangups" -> hangups
         "hangout" -> hangups
