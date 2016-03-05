@@ -27,7 +27,7 @@ queryIsInTitle :: String -> Query Bool
 queryIsInTitle windowNameMatcher = isSubsequenceOf windowNameMatcher <$> title
 
 openWebPage :: String -> String -> X ()
-openWebPage subString webpage = nextTitleMatchOrSpawn subString $ "xdg-open http://" ++ webpage
+openWebPage subString webpage = nextTitleMatchOrSpawn subString $ "google-chrome --app=http://" ++ webpage
 
 nextTitleMatchOrSpawn :: String -> String -> X ()
 nextTitleMatchOrSpawn windowSubTitle command = nextMatchOrDo
@@ -75,6 +75,7 @@ customCommandMenu = do
         custom -> spawn $ "xdg-open http://google.com/search?num=100&q=" ++ custom
   where
       getXselection = runProcessWithInput "xclip" ["-o", "-selection"] ""
+
 loggedSpawn :: String -> X ()
 loggedSpawn c = spawn $ "echo '"++c++ "'>> /tmp/xmonad.spawn.log; " ++ c
 
