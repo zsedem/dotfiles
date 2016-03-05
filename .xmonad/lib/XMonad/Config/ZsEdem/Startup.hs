@@ -10,9 +10,9 @@ startupHook = do
     _ <- runProcessWithInput "xset" ["n", "180", "190"] ""
     mapM_ execOnce
           [ "xsetroot -cursor_name left_ptr"
-          , "xss-lock -n 'notify-send \"Idle Timout reached\"' -- slock"
           , "nitrogen --restore"
           , "compton --config ~/.config/compton.conf -b"
+          , "xss slock"
           , "dunst -conf .dunstrc"
           , "nm-applet"]
   where
