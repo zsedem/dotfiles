@@ -14,6 +14,7 @@ Plugin 'ervandew/supertab.git'
 Plugin 'garbas/vim-snipmate.git'
 Plugin 'godlygeek/tabular.git'
 Plugin 'MarcWeber/vim-addon-mw-utils.git'
+Plugin 'tpope/vim-obsession.git'
 Plugin 'scrooloose/syntastic.git'
 Plugin 'scrooloose/nerdtree.git'
 Plugin 'scrooloose/nerdcommenter.git'
@@ -77,14 +78,7 @@ imap <C-k> <ESC>ddkPi
 map <C-t> <ESC>:enew<CR>
 map <C-l> <ESC>:bnext<CR>
 map <C-h> <ESC>:bprev<CR>
-map <C-w> <ESC>:bp <BAR> bd #<CR>
-
-" split pane navigation
-nmap <silent> <C-S-J> :wincmd j<CR>
-nmap <silent> <C-S-K> :wincmd k<CR>
-nmap <silent> <C-S-H> :wincmd h<CR>
-nmap <silent> <C-S-L> :wincmd l<CR>
-
+" map <C-w> <ESC>:bp <BAR> bd #<CR>
 
 " git-gutter
 hi clear SignColumn
@@ -133,6 +127,9 @@ inoremap <Nul> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
 " haskell-completion
 let g:haskellmode_completion_ghc = 1
 autocmd FileType haskell setlocal omnifunc=necoghc
+" ctags
+
+set tags=tags;/,codex.tags;/
 
 " git rebase magic
 function! RebaseActionToggle()
