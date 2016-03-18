@@ -124,9 +124,10 @@ let g:syntastic_mode_map = {'mode': 'active', 'passive_filetypes': ['python'] }
 " completion
 let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
 inoremap <Nul> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
-" haskell-completion
-let g:haskellmode_completion_ghc = 1
-autocmd FileType haskell setlocal omnifunc=necoghc
+let g:neocomplete#enable_at_startup = 1
+" Disable haskell-vim omnifunc
+let g:haskellmode_completion_ghc = 0
+autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 " ctags
 
 set tags=tags;/,codex.tags;/
