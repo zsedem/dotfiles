@@ -129,6 +129,8 @@ noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<
 
 " Powerline
 set rtp+=/usr/lib/python3.5/site-packages/powerline/bindings/vim
+" FZF
+set rtp+=~/.fzf
 
 function! DeleteHiddenBuffers()
   let tpbl=[]

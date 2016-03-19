@@ -28,7 +28,11 @@
                         {
                                 "function": "powerline.segments.common.net.internal_ip",
                                 "args": {"interface": "wlan0"}
+                        },
+                        {
+                                "function": "powerline.segments.common.net.internal_ip",
+                                "args": {"interface": "enp3s0"}
                         }
-               ]
+                ]
         }
 }
