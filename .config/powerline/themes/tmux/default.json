@@ -9,11 +9,25 @@
                                 "function": "powerline.segments.common.time.date"
                         },
                         {
+                                "function": "powerline.segments.common.bat.battery",
+                                "args":{
+
+                                }
+                        },
+                        {
                                 "function": "powerline.segments.common.time.date",
                                 "args": {
                                         "format": "%H:%M",
                                         "istime": true
                                 }
+                        },
+                        {
+                                "function": "powerline.segments.common.net.internal_ip",
+                                "args": {"interface": "eth0"}
+                        },
+                        {
+                                "function": "powerline.segments.common.net.internal_ip",
+                                "args": {"interface": "wlan0"}
                         }
                ]
         }
