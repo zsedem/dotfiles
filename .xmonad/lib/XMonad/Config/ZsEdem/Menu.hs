@@ -1,3 +1,4 @@
+{-# LANGUAGE MultiWayIf #-}
 module XMonad.Config.ZsEdem.Menu
     ( customCommandMenu
     , dmenuRun
@@ -6,10 +7,14 @@ module XMonad.Config.ZsEdem.Menu
     , powerMenu
     , dmenuRunMenu
     ) where
-import Data.List(isSubsequenceOf, unwords, lines)
+import Control.Arrow((>>>))
+import Data.List(isSubsequenceOf, isPrefixOf)
+import Data.Char(toLower)
 import System.Directory(getDirectoryContents)
-import XMonad(Query(..), title, X, spawn, liftIO)
+import XMonad hiding(windows)
 import XMonad.Util.Dmenu(menuArgs)
+import XMonad.Util.NamedWindows(getName)
+import qualified XMonad.StackSet as W
 import XMonad.Util.Run(runProcessWithInput)
 import XMonad.Actions.WindowBringer  (bringMenuArgs', gotoMenuArgs')
 import XMonad.Actions.GroupNavigation(nextMatchOrDo, Direction(..))
@@ -33,59 +38,73 @@ nextTitleMatchOrSpawn :: String -> String -> X ()
 nextTitleMatchOrSpawn windowSubTitle command = nextMatchOrDo
                                                     Forward
                                                     (queryIsInTitle windowSubTitle)
-                                                    (spawn command)
+                                                    (loggedSpawn command)
 
 customCommandMenu :: X ()
 customCommandMenu = do
+    windows <- windowMap
+    layoutFiles <- filter (`notElem` [".", ".."] ) <$> liftIO (getDirectoryContents ".screenlayout")
     let commands = ["jira", "hangups", "mail", "inbox", "pycharm", "term", "calendar", "newtmux",
                     "chrome", "xmonad config", "review", "network", "wifi", "jenkins",
-                    "screenlayout", "google", "openUrl"]
-        args = [sWidth, sHeight, foregroundColor, themeColor]
-        terminalRun = nextMatchOrDo Forward (("st"==) <$> title) $ spawn "exec st -f 'Monofur for Powerline:size=19'"
-        hangups = nextTitleMatchOrSpawn "hangups" "exec st -f 'Monofur for Powerline:size=19' -e hangups"
-    choosed <- menuArgs dmenuBin args commands
-    case choosed of
-        "jira" -> openWebPage "JIRA" "jira.balabit"
-        "mail" -> openWebPage "Inbox" "inbox.google.com"
-        "inbox" -> openWebPage "Inbox" "inbox.google.com"
-        "calendar" -> openWebPage "Calendar" "calendar.google.com"
-        "hangups" -> hangups
-        "hangout" -> hangups
-        "jenkins" -> openWebPage "Jenkins" "jenkins.bsp.balabit"
-        "pycharm" -> nextTitleMatchOrSpawn "PyCharm" "exec pycharm"
-        "term" -> terminalRun
-        "st" -> terminalRun
-        "google" -> do
-            selection <- getXselection
-            let onelined = unwords $ lines selection
-            spawn $ "xdg-open https://www.google.com/search?q=['" ++ onelined ++ "']"
-        "openUrl" -> do
-            selection <- getXselection
-            spawn $ "xdg-open " ++ selection
-        "newtmux" -> spawn "exec st -f 'Monofur for Powerline:size=19' -e tmux"
-        "chrome" -> nextTitleMatchOrSpawn "chrome" "exec google-chrome"
-        "xmonad config" -> nextTitleMatchOrSpawn ".xmonad" "exec atom .xmonad"
-        "review" -> nextTitleMatchOrSpawn "review.balabit" "google-chrome  --incognito --app=https://review.balabit/#/q/project:bsp/bsp+status:open"
-        "network" -> spawn "nmcli_dmenu"
-        "wifi" -> do switch <- menuArgs dmenuBin args ["off", "on"]
-                     spawn $ "notify-send 'Wifi' `nmcli radio wifi " ++ switch ++ "`"
-        "screenlayout" -> screenLayoutMenu args
-        "" -> return ()
-        ('!':command) -> spawn command
-        custom -> spawn $ "xdg-open http://google.com/search?num=100&q=" ++ custom
+                    "google", "openUrl"]
+        windowPrefix = "window: "
+        commandPrefix = "command: "
+        screenLayoutPrefix = "screenlayout: "
+        (|-) = isPrefixOf
+
+        selections = concat
+            [ map (commandPrefix++) commands
+            , map (fst>>>(windowPrefix++)) windows
+            , map (screenLayoutPrefix++) layoutFiles
+            ]
+    choosed <- menuArgs dmenuBin args selections
+    if  | "!" |- choosed -> loggedSpawn $ drop 1 choosed
+        | windowPrefix |- choosed -> do
+            let windowName = drop (length windowPrefix) choosed
+            case lookup windowName windows of
+                Just window -> focus window
+                Nothing -> return ()
+        | commandPrefix |- choosed -> do
+            let command = drop (length commandPrefix) choosed
+            commandRun command
+        | screenLayoutPrefix |- choosed -> do
+            let screenLayout = drop (length screenLayoutPrefix) choosed
+                layoutFile = ".screenlayout/" ++ screenLayout
+            loggedSpawn layoutFile
   where
-      getXselection = runProcessWithInput "xclip" ["-o", "-selection"] ""
+    args = [sWidth, sHeight, foregroundColor, themeColor]
+    terminalRun = nextMatchOrDo Forward (("st"==) <$> title) $ loggedSpawn "exec st -f 'Monofur for Powerline:size=19'"
+    hangups = nextTitleMatchOrSpawn "hangups" "exec st -f 'Monofur for Powerline:size=19' -e hangups"
+    getXselection = runProcessWithInput "xclip" ["-o", "-selection"] ""
+    commandRun "jira" = openWebPage "JIRA" "jira.balabit"
+    commandRun "mail" = openWebPage "Inbox" "inbox.google.com"
+    commandRun "inbox" = openWebPage "Inbox" "inbox.google.com"
+    commandRun "calendar" = openWebPage "Calendar" "calendar.google.com"
+    commandRun "hangups" = hangups
+    commandRun "hangout" = hangups
+    commandRun "jenkins" = openWebPage "Jenkins" "jenkins.bsp.balabit"
+    commandRun "pycharm" = nextTitleMatchOrSpawn "PyCharm" "exec pycharm"
+    commandRun "term" = terminalRun
+    commandRun "st" = terminalRun
+    commandRun "google" = do
+        selection <- getXselection
+        let onelined = unwords $ lines selection
+        loggedSpawn $ "xdg-open https://www.google.com/search?q=['" ++ onelined ++ "']"
+    commandRun "openUrl" = do
+        selection <- getXselection
+        loggedSpawn $ "xdg-open " ++ selection
+    commandRun "newtmux" = loggedSpawn "exec st -f 'Monofur for Powerline:size=19' -e tmux"
+    commandRun "chrome" = nextTitleMatchOrSpawn "chrome" "exec google-chrome"
+    commandRun "xmonad config" = nextTitleMatchOrSpawn ".xmonad" "exec atom .xmonad"
+    commandRun "review" = nextTitleMatchOrSpawn "review.balabit" "google-chrome  --incognito --app=https://review.balabit/#/q/project:bsp/bsp+status:open"
+    commandRun "network" = loggedSpawn "nmcli_dmenu"
+    commandRun "wifi" = do
+        switch <- menuArgs dmenuBin args ["off", "on"]
+        loggedSpawn $ "notify-send 'Wifi' `nmcli radio wifi " ++ switch ++ "`"
+    commandRun _ = return ()
 
 loggedSpawn :: String -> X ()
-loggedSpawn c = spawn $ "echo '"++c++ "'>> /tmp/xmonad.spawn.log; " ++ c
-
-screenLayoutMenu :: [String] -> X ()
-screenLayoutMenu args = do
-    layoutFiles <- filter (`notElem` [".", ".."] ) <$> liftIO (getDirectoryContents ".screenlayout")
-    let layouts = map (takeWhile (/='.')) layoutFiles
-    layout <- menuArgs dmenuBin args layouts
-    let layoutFile = ".screenlayout/" ++ layout ++ ".sh"
-    spawn layoutFile
+loggedSpawn c = spawn $ "echo 'Spawn: "++c++ "'>> .logs/xmonad.log; " ++ c
 
 dmenuRunFile, dmenuRun :: String
 dmenuRunFile = dmenuBin
@@ -96,3 +115,12 @@ dmenuRunMenu = loggedSpawn dmenuRun
 
 powerMenu :: X ()
 powerMenu = loggedSpawn $ ".xmonad/assets/bin/powermenu.sh '"++sWidth ++"' '"++sHeight ++"' '"++foregroundColor++"' '"++themeColor++"'"
+
+
+windowMap :: X [(String,Window)]
+windowMap = do
+    ws <- gets windowset
+    mapM keyValuePair (W.allWindows ws)
+  where
+    keyValuePair w = flip (,) w . map toLower .show <$> getName w
+
