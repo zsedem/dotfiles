@@ -1,6 +1,7 @@
 {
         "segments": {
             "above":[{
+                "spaces":10,
                 "left": [
                         {
                                 "function": "powerline.segments.common.net.hostname",
@@ -32,13 +33,6 @@
                         {
                                 "function": "powerline.segments.shell.last_status",
                                 "priority": 10
-                        },
-                        {
-                                "function": "powerline.segments.common.time.date",
-                                "args": {
-                                        "format": "%H:%M:%S",
-                                        "istime": true
-                                }
                         }
                 ]
             }],
@@ -54,6 +48,13 @@
             "right":[
                  {
                     "function": "powerline.segments.shell.mode"
+                 },
+                 {
+                         "function": "powerline.segments.common.time.date",
+                         "args": {
+                                 "format": "%H:%M:%S",
+                                 "istime": true
+                         }
                  }
             ]
         }
