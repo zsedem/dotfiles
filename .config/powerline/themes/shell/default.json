@@ -15,8 +15,11 @@
                                 "priority": 50
                         },
                         {
-                                "function": "powerline.segments.common.vcs.branch",
-                                "priority": 40
+                                "function": "powerline_gitstatus.gitstatus",
+                                "priority": 40,
+                                "args":{
+                                    "use_dash_c": false
+                                }
                         },
                         {
                                 "function": "powerline.segments.shell.cwd",
@@ -47,6 +50,11 @@
                           "istime": true
                     }
                 }
+            ],
+            "right":[
+                 {
+                    "function": "powerline.segments.shell.mode"
+                 }
             ]
         }
 }
