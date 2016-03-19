@@ -57,6 +57,8 @@ set nowritebackup
 set noswapfile
 set list
 set listchars=tab:▸▸,trail:·
+set showtabline=2
+set laststatus=2
 
 " folding method
 set foldmethod=indent
@@ -85,27 +87,6 @@ let g:multi_cursor_next_key='<C-d>'
 let g:multi_cursor_prev_key='<C-S-d>'
 let g:multi_cursor_skip_key='<C-k>'
 let g:multi_cursor_quit_key='<Esc>'
-
-" first, enable status line always
-set laststatus=2
-
-" now set it up to change the status line based on mode
-function! InsertStatuslineColor(mode)
-  if a:mode == 'i'
-    hi statusline guibg=magenta
-  elseif a:mode == 'r'
-    hi statusline guibg=blue
-  else
-    hi statusline guibg=red
-  endif
-endfunction
-
-au InsertEnter * call InsertStatuslineColor(v:insertmode)
-au InsertChange * call InsertStatuslineColor(v:insertmode)
-au InsertLeave * hi statusline guibg=green
-
-" default the statusline to green when entering Vim
-hi statusline guibg=green
 
 " Syntastic
 map <Leader>s :SyntasticToggleMode<CR>
