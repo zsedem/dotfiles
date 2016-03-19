@@ -25,7 +25,7 @@ EDITOR=vim
 HISTSIZE=99999999999999
 HISTCONTROL=ignoredups:erasedups
 
-export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
+#export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
 
 try_source /usr/share/bash-completion/bash_completion
 try_source /usr/share/doc/pkgfile/command-not-found.bash
@@ -33,3 +33,5 @@ try_source /usr/share/doc/pkgfile/command-not-found.bash
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
 try_source ~/.bashrc.local
+
+try_source ~/.fzf.bash

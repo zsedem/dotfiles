@@ -22,3 +22,5 @@ source $ZSH/oh-my-zsh.sh
 source ~/.shrc
 try_source /usr/lib/python3.5/site-packages/powerline/bindings/zsh/powerline.zsh
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

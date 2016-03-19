@@ -1,3 +1,4 @@
+# vi: syntax=sh
 # If not running interactively, don't do anything!
 [[ $- != *i* ]] && return
 ! [[ -z "$DISPLAY" ]] && [[ -z "$ATOM_HOME" ]] && [[ -z "$TMUX" ]] && exec "$SHELL" -c "tmux -q has-session && exec tmux attach-session || exec tmux"
@@ -42,4 +43,7 @@ function .dockerclean(){
     docker rmi $(docker images -a | grep "^<none>" | awk '{print $3}')
 }
 
+FZF_DEFAULT_OPTS=""
+
 try_source ~/.shrc.local
+
