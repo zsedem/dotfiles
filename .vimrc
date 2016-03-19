@@ -5,8 +5,6 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'airblade/vim-gitgutter'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
 Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'eagletmt/ghcmod-vim.git'
 Plugin 'eagletmt/neco-ghc'
@@ -17,7 +15,6 @@ Plugin 'MarcWeber/vim-addon-mw-utils.git'
 Plugin 'tpope/vim-obsession.git'
 Plugin 'scrooloose/syntastic.git'
 Plugin 'scrooloose/nerdtree.git'
-Plugin 'scrooloose/nerdcommenter.git'
 Plugin 'Shougo/neocomplete.vim.git'
 Plugin 'Shougo/vimproc.vim.git'
 Plugin 'tomtom/tlib_vim.git'
@@ -35,7 +32,7 @@ set number
 set nowrap
 set ruler
 set showmode
-set tw=80
+set tw=120
 set smartcase
 set smarttab
 set smartindent
@@ -60,10 +57,6 @@ set nowritebackup
 set noswapfile
 set list
 set listchars=tab:▸▸,trail:·
-
-" airline
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
 
 " folding method
 set foldmethod=indent
@@ -153,3 +146,5 @@ autocmd FileType haskell          let b:comment_leader = '-- '
 noremap <silent> ,cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
 noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
 
+" Powerline
+set rtp+=/usr/lib/python3.5/site-packages/powerline/bindings/vim

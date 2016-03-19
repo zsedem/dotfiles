@@ -16,6 +16,7 @@ if type -P dircolors >/dev/null ; then
 fi
 
 try_source /usr/share/git/completion/git-prompt.sh
+try_source /usr/lib/python3.5/site-packages/powerline/bindings/bash/powerline.sh
 
 GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWSTASHSTATE=1
@@ -23,9 +24,6 @@ GIT_PS1_SHOWUPSTREAM=1
 EDITOR=vim
 HISTSIZE=99999999999999
 HISTCONTROL=ignoredups:erasedups
-if [ -r `which zsedem-prompt` ]; then
-    PS1='$(git_status=$(__git_ps1) last_exit_code=$? zsedem-prompt)\n\[\033[31m\]> \[\033[00m\]'
-fi
 
 export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
 
@@ -34,5 +32,4 @@ try_source /usr/share/doc/pkgfile/command-not-found.bash
 
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
-
 try_source ~/.bashrc.local

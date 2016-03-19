@@ -13,6 +13,7 @@
 !.prompt/
 !.xmonad/
 !.screenlayout/
+!.config/powerline/
 !.xsession
 !.xinitrc
 !.xmobarrc
