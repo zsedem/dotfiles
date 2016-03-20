@@ -1,16 +1,16 @@
 {-# OPTIONS_GHC -fno-warn-missing-signatures #-}
 module Main(main) where
-import           System.Directory               (getHomeDirectory)
+import           System.Directory                 (getHomeDirectory)
 import           System.Taffybar.Hooks.PagerHints (pagerHints)
 import           XMonad
-import qualified XMonad.Config.ZsEdem           as ZsEdem
-import           XMonad.Config.ZsEdem           (themeColor)
-import           XMonad.Hooks.ManageDocks       (avoidStruts, docksEventHook)
-import           XMonad.Layout.NoBorders        (smartBorders)
-import           XMonad.Layout.Spacing          (spacing)
-import           XMonad.Layout.WindowNavigation (windowNavigation)
-import           XMonad.Util.EZConfig           (additionalKeys)
-import           XMonad.Hooks.EwmhDesktops      (ewmh)
+import           XMonad.Config.ZsEdem             (themeColor)
+import qualified XMonad.Config.ZsEdem             as ZsEdem
+import           XMonad.Hooks.EwmhDesktops        (ewmh)
+import           XMonad.Hooks.ManageDocks         (avoidStruts, docksEventHook)
+import           XMonad.Layout.NoBorders          (smartBorders)
+import           XMonad.Layout.Spacing            (spacing)
+import           XMonad.Layout.WindowNavigation   (windowNavigation)
+import           XMonad.Util.EZConfig             (additionalKeys)
 
 
 layoutHook' = avoidStruts $ smartBorders $ windowNavigation ( Full ||| sTall ||| Mirror mTall )

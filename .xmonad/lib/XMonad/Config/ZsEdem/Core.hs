@@ -1,12 +1,13 @@
 module XMonad.Config.ZsEdem.Core where
 import           Data.Monoid                (Endo)
 import           XMonad                     (Query, WindowSet, className,
-                                             composeAll, (-->), (=?), (<+>),
-                                             def)
+                                             composeAll, def, (-->), (<+>),
+                                             (=?))
 import           XMonad.Actions.SpawnOn     (manageSpawn)
-import           XMonad.Hooks.ManageHelpers (doFullFloat, doCenterFloat, isDialog)
-import           XMonad.Layout.Decoration   (Theme(..))
 import           XMonad.Hooks.ManageDocks   (manageDocks)
+import           XMonad.Hooks.ManageHelpers (doCenterFloat, doFullFloat,
+                                             isDialog)
+import           XMonad.Layout.Decoration   (Theme (..))
 
 theme :: Theme
 theme =  def

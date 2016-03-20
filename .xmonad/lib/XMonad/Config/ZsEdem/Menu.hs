@@ -7,17 +7,17 @@ module XMonad.Config.ZsEdem.Menu
     , powerMenu
     , dmenuRunMenu
     ) where
-import Control.Arrow((>>>))
-import Data.List(isSubsequenceOf, isPrefixOf)
-import Data.Char(toLower)
-import System.Directory(getDirectoryContents)
-import XMonad hiding(windows)
-import XMonad.Util.NamedWindows(getName)
-import qualified XMonad.StackSet as W
-import XMonad.Util.Run(runProcessWithInput)
-import XMonad.Actions.WindowBringer  (bringMenuArgs', gotoMenuArgs')
-import XMonad.Actions.GroupNavigation(nextMatchOrDo, Direction(..))
-import XMonad.Config.ZsEdem.Core
+import           Control.Arrow                  ((>>>))
+import           Data.Char                      (toLower)
+import           Data.List                      (isPrefixOf, isSubsequenceOf)
+import           System.Directory               (getDirectoryContents)
+import           XMonad                         hiding (windows)
+import           XMonad.Actions.GroupNavigation (Direction (..), nextMatchOrDo)
+import           XMonad.Actions.WindowBringer   (bringMenuArgs', gotoMenuArgs')
+import           XMonad.Config.ZsEdem.Core
+import qualified XMonad.StackSet                as W
+import           XMonad.Util.NamedWindows       (getName)
+import           XMonad.Util.Run                (runProcessWithInput)
 
 
 windowSwitchMenu, windowBringMenu :: X ()

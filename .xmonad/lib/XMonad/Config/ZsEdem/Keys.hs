@@ -2,17 +2,17 @@ module XMonad.Config.ZsEdem.Keys
     ( keyBindings
     )
   where
-import           Data.List(elemIndex)
+import           Data.List                      (elemIndex)
 import           Graphics.X11.Types
-import           XMonad                         (X, kill, sendMessage,
-                                                 spawn, windows, (.|.))
+import           XMonad                         (X, kill, sendMessage, spawn,
+                                                 windows, (.|.))
 import           XMonad.Actions.CycleWindows    (cycleRecentWindows)
+import           XMonad.Config.ZsEdem.Core
+import           XMonad.Config.ZsEdem.Menu
 import           XMonad.Hooks.ManageDocks       (ToggleStruts (..))
 import qualified XMonad.Layout.WindowNavigation as W
 import qualified XMonad.StackSet                as S
 import qualified XMonad.Util.Run                as R
-import           XMonad.Config.ZsEdem.Core
-import           XMonad.Config.ZsEdem.Menu
 
 
 shift :: KeyMask -> KeyMask

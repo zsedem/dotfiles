@@ -1,8 +1,8 @@
 module XMonad.Config.ZsEdem.Startup(startupHook) where
-import XMonad(X)
-import XMonad.Hooks.SetWMName(setWMName)
-import XMonad.Util.Run(runProcessWithInput)
-import XMonad.Util.SpawnOnce(spawnOnce)
+import           XMonad                 (X)
+import           XMonad.Hooks.SetWMName (setWMName)
+import           XMonad.Util.Run        (runProcessWithInput)
+import           XMonad.Util.SpawnOnce  (spawnOnce)
 
 startupHook :: X ()
 startupHook = do
