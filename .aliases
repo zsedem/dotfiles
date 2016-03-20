@@ -22,3 +22,4 @@ alias SystemUpgrade='sudo pacman -Syu && sudo bootctl update && sudo pkgfile --u
 alias PacmanClearCache='sudo pacman -Scc && sudo pacman-optimize'
 alias screenlayout_dmenu='pushd ~/.screenlayout; bash `ls | ~/.xmonad/assets/bin/dmenu.sh 1600 900 "#000000" "#0783c0" `; popd'
 alias htoptmux='htop -p `pstree -p $(echo $TMUX | cut -d, -f2) | perl -ne '"'"'push @t, /\((\d+)\)/g; END { print join ",", @t }'"'"'`'
+alias evcs='vim `git ls-files | fzf`'
