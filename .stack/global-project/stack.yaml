@@ -1,14 +1,14 @@
 packages: []
-resolver: lts-5.4
+resolver: lts-5.8
 flags: {}
 extra-package-dbs: []
 extra-deps:
-- taffybar-0.4.6
-- xmonad-contrib-0.12
 - X11-xft-0.3.1
 - binary-shared-0.8.3
+- xmonad-contrib-0.12
 - ghcjs-codemirror-0.0.0.1
 - ghcjs-dom-0.2.3.1
+- gtk-traymanager-0.1.6
 - gtksourceview3-0.13.2.1
 - jsaddle-0.3.0.1
 - leksah-server-0.15.2.0
@@ -18,4 +18,3 @@ extra-deps:
 - vcswrapper-0.1.2
 - webkitgtk3-0.14.1.1
 - webkitgtk3-javascriptcore-0.13.1.1
-- gtk-traymanager-0.1.6

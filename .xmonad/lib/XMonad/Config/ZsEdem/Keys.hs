@@ -29,8 +29,8 @@ windowsButton :: KeyMask
 windowsButton = mod4Mask
 
 
-keyBindings :: FilePath -> [((KeyMask, KeySym), X ())]
-keyBindings homePath =
+keyBindings :: [((KeyMask, KeySym), X ())]
+keyBindings =
               [ ((mod4Mask .|. shiftMask, xK_p                          ), dmenuRunMenu)
               , ((mod4Mask              , xK_p                          ), customCommandMenu)
               , ((mod4Mask              , xK_q                          ), spawn xmonad_restart)

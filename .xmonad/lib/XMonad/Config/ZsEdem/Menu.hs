@@ -59,7 +59,7 @@ customCommandMenu = do
             , map (fst>>>(webPrefix++)) webAppMap
             ]
     choosed <- menuArgs dmenuBin dmenuArgs selections
-    spawn $ unwords ["echo '", choosed, "' >> .logs/yeganesh.log "]
+    spawn $ unwords ["echo '", choosed, "' >> .logs/dmenu.log "]
     if  | "!" |- choosed -> loggedSpawn $ drop 1 choosed
         | windowPrefix |- choosed -> do
             let windowName = drop (length windowPrefix) choosed
@@ -131,5 +131,8 @@ windowMap = do
   where
     keyValuePair w = flip (,) w . map toLower .show <$> getName w
 
-dmenuBin = "yeganesh"
-dmenuArgs = words "-p xmonadmenu -f -- -b -h 24 -l 9 -x 575 -y 342 -w 450 -nb #000000 -sb #0783c0 -dim 0.65"
+dmenuBin::String
+dmenuBin = "dmenu"
+
+dmenuArgs :: [String]
+dmenuArgs = words "-b -h 24 -l 9 -x 575 -y 342 -w 450 -nb #000000 -sb #0783c0 -dim 0.65"

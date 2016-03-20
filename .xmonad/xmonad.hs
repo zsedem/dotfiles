@@ -11,7 +11,6 @@ import           XMonad.Layout.Spacing          (spacing)
 import           XMonad.Layout.WindowNavigation (windowNavigation)
 import           XMonad.Util.EZConfig           (additionalKeys)
 import           XMonad.Hooks.EwmhDesktops      (ewmh)
-import           XMonad.Layout.Tabbed
 
 
 layoutHook' = avoidStruts $ smartBorders $ windowNavigation ( Full ||| sTall ||| Mirror mTall )
@@ -35,5 +34,4 @@ main = do
      , borderWidth = 2
      , startupHook = startupHook desktopConfig >> ZsEdem.startupHook
      , handleEventHook = docksEventHook <+> handleEventHook desktopConfig
-     } `additionalKeys` ZsEdem.keyBindings homePath
-
+     } `additionalKeys` ZsEdem.keyBindings
