@@ -1,0 +1,32 @@
+pkgname=hlock
+pkgver=0.1.0.0
+pkgrel=1
+pkgdesc='Simple X display locker written in Haskell'
+url='https://github.com/zsedem/hlock'
+arch=('i686' 'x86_64' 'armv7h')
+license=('MIT')
+depends=('libx11')
+conflicts=('hlock')
+makedepends=('libxext' 'git')
+source=('git://github.com/zsedem/hlock')
+sha1sums=('SKIP')
+
+provides=("${pkgname}")
+conflicts=("${pkgname}")
+
+pkgver() {
+  cd "${srcdir}/${pkgname}"
+  grep ^version hlock.cabal | grep --perl-regexp --only-matching '\d+\.\d+.\d+.\d+'
+}
+
+build() {
+  cd "${srcdir}/${pkgname}"
+  stack build
+}
+
+package() {
+  cd "${srcdir}/${pkgname}"
+  install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+  install -D `stack exec which hlock` "${pkgdir}/usr/bin/hlock"
+  chmod +sx "${pkgdir}/usr/bin/hlock"
+}
