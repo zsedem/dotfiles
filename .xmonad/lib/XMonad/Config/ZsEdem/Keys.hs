@@ -49,7 +49,7 @@ keyBindings =
               , ((alt                   , xK_Tab                        ), windowSwitchMenu)
               , ((shift alt             , xK_Tab                        ), windowBringMenu)
               , ((controlMask           , xK_space                      ), layoutSwitch)
-              , ((mod4Mask .|. shiftMask, xK_l                          ), spawn "slock")
+              , ((mod4Mask .|. shiftMask, xK_l                          ), spawn "hlock")
               , ((0                     , xMediaButton_AudioRewind      ), spawn "amixer -q set Master toggle" )
               , ((0                     , xF86MonBrightnessDown         ), spawn "xbacklight -5" )
               , ((0                     , xF86MonBrightnessUp           ), spawn "xbacklight +5" )

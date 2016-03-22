@@ -12,7 +12,7 @@ startupHook = do
           [ "xsetroot -cursor_name left_ptr"
           , "nitrogen --restore"
           , "compton --config ~/.config/compton.conf -b"
-          , "xss slock"
+          , "xss hlock"
           , "dunst -conf .dunstrc"
           , "nm-applet"]
   where
