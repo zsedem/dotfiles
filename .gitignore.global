@@ -9,3 +9,5 @@ bspgit.conf
 *.hi
 *.o
 *.pyc
+*.lkshw
+*.lkshs
