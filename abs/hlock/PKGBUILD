@@ -1,3 +1,4 @@
+# Maintainer: Ádám Olivér Zsigmond <zsedem at gmail dott com>
 pkgname=hlock
 pkgver=0.1.0.2
 pkgrel=1
@@ -6,7 +7,6 @@ url='https://github.com/zsedem/hlock'
 arch=('i686' 'x86_64' 'armv7h')
 license=('MIT')
 depends=('libx11')
-conflicts=('hlock')
 makedepends=('libxext' 'git')
 source=('git://github.com/zsedem/hlock')
 sha1sums=('SKIP')
