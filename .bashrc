@@ -1,5 +1,6 @@
 # If not running interactively, don't do anything!
 [[ $- != *i* ]] && return
+alias rehash='echo' # for compatibility with zsh
 SHELL=`which bash`
 source ~/.shrc
 

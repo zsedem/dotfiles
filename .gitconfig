@@ -10,6 +10,7 @@
     rba = rebase --abort
     rbc = rebase --continue
     rb = rebase -i origin/master --autosquash --autostash
+    rbf = -c core.editor=true rebase -i origin/master --autosquash --autostash
     diff = diff --word-diff
     dc = diff --cached
     fetch = fetch --prune
