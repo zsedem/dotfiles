@@ -1,0 +1,17 @@
+# vi: syntax=sh
+function project {
+    cd $HOME/projects/$1
+    try_source .projectrc
+}
+
+_projects()
+{
+    local cur prev opts
+    _project_folders=$(for i in $(ls -d $HOME/projects/*/); do a=${i%%/}; echo ${a##*/}; done)
+    local cur prev
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    COMPREPLY=( $(compgen -W "${_project_folders}" -- ${cur}) )
+}
+
+complete -F _projects project

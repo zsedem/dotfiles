@@ -4,6 +4,6 @@
 !hangups/
 !powerline/
 !systemd/
-!systemd/
 !taffybar/
 !yi/
+!shrc.d/
