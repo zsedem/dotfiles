@@ -44,7 +44,7 @@ customCommandMenu = do
     windows <- windowMap
     layoutFiles <- filter (`notElem` [".", ".."] ) <$> liftIO (getDirectoryContents ".screenlayout")
     let commands = ["hangups", "pycharm", "term", "newtmux", "wifi off",
-                    "chrome", "xmonad config", "review", "network", "wifi on",
+                    "chrome", "xmonad config", "network", "wifi on",
                     "google", "openUrl"]
         windowPrefix = "window: "
         commandPrefix = "command: "
@@ -96,7 +96,6 @@ customCommandMenu = do
     commandRun "newtmux" = loggedSpawn "exec st -f 'Monofur for Powerline:size=19' -e tmux"
     commandRun "chrome" = nextTitleMatchOrSpawn "chrome" "exec google-chrome"
     commandRun "xmonad config" = nextTitleMatchOrSpawn ".xmonad" "exec atom .xmonad"
-    commandRun "review" = nextTitleMatchOrSpawn "review.balabit" "google-chrome  --incognito --app=https://review.balabit/#/q/project:bsp/bsp+status:open"
     commandRun "network" = loggedSpawn "nmcli_dmenu"
     commandRun ('w':'i':'f':'i':' ':switch)= wifi switch
     commandRun _ = return ()
@@ -109,6 +108,7 @@ webAppMap =
     , ("inbox", ("Inbox", "inbox.google.com"))
     , ("calendar", ("Calendar", "calendar.google.com"))
     , ("jira", ("Jira", "jira.balabit"))
+    , ("review", ("review.balabit", "review.balabit/#/q/project:bsp/bsp+status:open"))
     ]
 
 loggedSpawn :: String -> X ()
