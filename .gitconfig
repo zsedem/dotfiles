@@ -13,7 +13,7 @@
     rbf = -c core.editor=true rebase -i origin/master --autosquash --autostash
     diff = diff --word-diff
     dc = diff --cached
-    fetch = fetch --prune
+    fp = fetch --prune
     casm = commit -asm
     cfoobar = commit -am foobar --no-verify
     caa = commit -a --amend --no-edit
