@@ -12,3 +12,5 @@ bspgit.conf
 *.pyc
 *.lkshw
 *.lkshs
+*.sublime-workspace
+*.sublime-project

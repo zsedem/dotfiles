@@ -1,0 +1,23 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"Alignment",
+		"BracketHighlighter",
+		"Colorsublime",
+		"GitGutter",
+		"GitSavvy",
+		"Multi Select Alphabetizer",
+		"Package Control",
+		"SublimeGerrit",
+		"SublimeLinter",
+		"SublimeLinter-contrib-hdevtools",
+		"SublimeLinter-pep8",
+		"SublimeLinter-pylint",
+		"Theme - Flatland",
+		"Vintageous"
+	]
+}
