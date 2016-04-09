@@ -6,20 +6,9 @@ call vundle#begin()
 
 Plugin 'airblade/vim-gitgutter'
 Plugin 'bronson/vim-trailing-whitespace'
-Plugin 'eagletmt/ghcmod-vim.git'
-Plugin 'eagletmt/neco-ghc'
 Plugin 'ervandew/supertab.git'
-Plugin 'garbas/vim-snipmate.git'
-Plugin 'godlygeek/tabular.git'
-Plugin 'MarcWeber/vim-addon-mw-utils.git'
-Plugin 'tpope/vim-obsession.git'
 Plugin 'scrooloose/syntastic.git'
 Plugin 'scrooloose/nerdtree.git'
-Plugin 'Shougo/neocomplete.vim.git'
-Plugin 'Shougo/vimproc.vim.git'
-Plugin 'tomtom/tlib_vim.git'
-Plugin 'terryma/vim-multiple-cursors.git'
-Plugin 'bitc/vim-hdevtools.git'
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'Xuyuanp/nerdtree-git-plugin.git'
 
@@ -37,8 +26,8 @@ set smartcase
 set smarttab
 set smartindent
 set autoindent
-set softtabstop=2
-set shiftwidth=2
+set softtabstop=4
+set shiftwidth=4
 set expandtab
 set incsearch
 set mouse=a
@@ -78,33 +67,12 @@ map <C-h> <ESC>:bprev<CR>
 " git-gutter
 hi clear SignColumn
 
-" multiline-editing
-let g:multi_cursor_exit_from_visual_mode = 0
-let g:multi_cursor_exit_from_insert_mode = 0
-let g:multi_cursor_use_default_mapping = 0
-
-let g:multi_cursor_next_key='<C-d>'
-let g:multi_cursor_prev_key='<C-S-d>'
-let g:multi_cursor_skip_key='<C-k>'
-let g:multi_cursor_quit_key='<Esc>'
-
 " Syntastic
 map <Leader>s :SyntasticToggleMode<CR>
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_mode_map = {'mode': 'active', 'passive_filetypes': ['python'] }
-
-" completion
-let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
-inoremap <Nul> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
-let g:neocomplete#enable_at_startup = 1
-" Disable haskell-vim omnifunc
-let g:haskellmode_completion_ghc = 0
-autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-" ctags
-
-set tags=tags;/,codex.tags;/
 
 " git rebase magic
 function! RebaseActionToggle()
