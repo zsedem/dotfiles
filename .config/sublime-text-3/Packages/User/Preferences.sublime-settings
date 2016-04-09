@@ -1,4 +1,14 @@
 {
+	"added_words":
+	[
+		"bsp",
+		"addons",
+		"algo",
+		"url",
+		"activitycountscorer",
+		"linux",
+		"zsedem"
+	],
 	"always_prompt_for_file_reload": false,
 	"always_show_minimap_viewport": true,
 	"animation_enabled": false,
