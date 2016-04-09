@@ -7,6 +7,12 @@
         "gutter_theme_excludes": [],
         "lint_mode": "background",
         "linters": {
+            "eslint": {
+                "@disable": false,
+                "chdir": "${project}",
+                "args": ["--ignore-path", ".gitignore", "--cache"],
+                "excludes": []
+            },
             "hdevtools": {
                 "@disable": false,
                 "args": [],
@@ -35,11 +41,16 @@
                 "paths": [],
                 "rcfile": "pylintrc",
                 "show-codes": false
+            },
+            "writegood": {
+                "@disable": false,
+                "args": [],
+                "excludes": []
             }
         },
         "mark_style": "solid underline",
         "no_column_highlights_line": false,
-        "passive_warnings": false,
+        "passive_warnings": true,
         "paths": {
             "linux": [
                 "/home/zsedem/.local/bin"
