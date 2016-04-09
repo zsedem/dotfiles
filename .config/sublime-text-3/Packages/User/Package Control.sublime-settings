@@ -15,6 +15,7 @@
 		"SublimeGerrit",
 		"SublimeLinter",
 		"SublimeLinter-contrib-hdevtools",
+		"SublimeLinter-contrib-write-good",
 		"SublimeLinter-pep8",
 		"SublimeLinter-pylint",
 		"Theme - Flatland",

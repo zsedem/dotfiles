@@ -15,6 +15,7 @@
 !.local/
 !.logs/
 !.nanorc
+!.npmrc
 !.screenlayout/
 !.shrc
 !.stack/
