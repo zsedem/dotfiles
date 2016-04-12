@@ -107,7 +107,7 @@
 		".stack-work",
 		".idea"
 	],
-	"font_size": 12,
+	"font_size": 14,
 	"gpu_window_buffer": "auto",
 	"gutter": true,
 	"highlight_line": false,
