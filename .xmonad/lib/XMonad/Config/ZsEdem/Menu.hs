@@ -45,7 +45,7 @@ customCommandMenu = do
     layoutFiles <- filter (`notElem` [".", ".."] ) <$> liftIO (getDirectoryContents ".screenlayout")
     let commands = ["hangups", "pycharm", "term", "newtmux", "wifi off",
                     "chrome", "xmonad config", "network", "wifi on",
-                    "google", "openUrl"]
+                    "google", "openUrl", "subl3"]
         windowPrefix = "window: "
         commandPrefix = "command: "
         screenLayoutPrefix = "screenlayout: "
@@ -97,6 +97,7 @@ customCommandMenu = do
     commandRun "chrome" = nextTitleMatchOrSpawn "chrome" "exec google-chrome"
     commandRun "xmonad config" = nextTitleMatchOrSpawn ".xmonad" "exec atom .xmonad"
     commandRun "network" = loggedSpawn "nmcli_dmenu"
+    commandRun "subl3" = loggedSpawn "subl3"
     commandRun ('w':'i':'f':'i':' ':switch)= wifi switch
     commandRun _ = return ()
     wifi switch = loggedSpawn $ "notify-send 'Wifi' `nmcli radio wifi " ++ switch ++ "`"

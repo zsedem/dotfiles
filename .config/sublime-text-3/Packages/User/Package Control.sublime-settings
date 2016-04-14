@@ -6,8 +6,10 @@
 	"installed_packages":
 	[
 		"Alignment",
+		"Behave Toolkit",
 		"BracketHighlighter",
 		"Colorsublime",
+		"Gherkin (Cucumber) Formatter",
 		"GitGutter",
 		"GitSavvy",
 		"Multi Select Alphabetizer",
