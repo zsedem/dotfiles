@@ -15,13 +15,16 @@
 		"GitSavvy",
 		"Multi Select Alphabetizer",
 		"Package Control",
+		"Sass",
 		"SublimeLinter",
 		"SublimeLinter-contrib-eslint",
 		"SublimeLinter-contrib-hdevtools",
+		"SublimeLinter-contrib-tslint",
 		"SublimeLinter-contrib-write-good",
 		"SublimeLinter-pep8",
 		"SublimeLinter-pylint",
 		"Theme - Flatland",
+		"TypeScript",
 		"Vintageous",
 		"Yesod"
 	]
