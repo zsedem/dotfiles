@@ -1,5 +1,8 @@
 [push]
     default = tracking
+[pull]
+    rebase = true
+
 [alias]
     cp = cherry-pick
     st = status
@@ -28,10 +31,6 @@
     last-ci = log --format="%H" -1
     push-new-upstream = \
     "!git push --set-upstream origin `git rev-parse --abbrev-ref HEAD`"
-[core]
-    editor = vim
-[guitool "JENKINS"]
-    cmd = make jenkins
 [guitool "Rebase onto master"]
     cmd = git rebase -i origin/master
 [guitool "Rebase - Continue"]
@@ -47,5 +46,8 @@
 [core]
     editor = vim
     excludesfile = ~/.gitignore.global
+[remote "origin"]
+    tagOpt = --no-tags
+    prune = true
 [include]
     path = ~/.gitconfig.local
