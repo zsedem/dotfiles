@@ -73,6 +73,7 @@ customCommandMenu = do
             let screenLayout = drop (length screenLayoutPrefix) choosed
                 layoutFile = ".screenlayout/" ++ screenLayout
             loggedSpawn layoutFile
+            spawn "sleep 1; nitrogen --restore"
         | webPrefix |- choosed -> do
             let web = drop (length webPrefix) choosed
             case lookup web webAppMap of
@@ -121,9 +122,18 @@ dmenuRun = ".xmonad/assets/bin/dmenu-run.sh '"++sWidth ++"' '"++sHeight ++"' '"+
 dmenuRunMenu :: X ()
 dmenuRunMenu = loggedSpawn dmenuRun
 
-powerMenu :: X ()
-powerMenu = loggedSpawn $ ".xmonad/assets/bin/powermenu.sh '"++sWidth ++"' '"++sHeight ++"' '"++foregroundColor++"' '"++themeColor++"'"
+data SystemCommand =
+    LOGOUT| SUSPEND| SHUTDOWN| REBOOT
+  deriving (Show, Read, Enum, Eq, Bounded)
 
+powerMenu :: X ()
+powerMenu = do
+    systemCommand <- menuArgs dmenuBin dmenuArgs $ map show [minBound::SystemCommand .. maxBound]
+    case read systemCommand of
+        LOGOUT -> spawn "pkill xmonad"
+        SUSPEND -> spawn "systemctl suspend"
+        SHUTDOWN -> spawn "systemctl poweroff"
+        REBOOT -> spawn "systemctl reboot"
 
 windowMap :: X [(String,Window)]
 windowMap = do
