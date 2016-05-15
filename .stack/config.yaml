@@ -1,5 +1,3 @@
-ghc-options:
- "*": -fPIC
 templates:
  params:
    author-name: Zsigmond Ádám Olivér
