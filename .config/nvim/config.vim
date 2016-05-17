@@ -21,7 +21,7 @@ set smartcase
 set smartcase
 set softtabstop=4
 set timeout
-set timeoutlen=200
+set timeoutlen=400
 set title
 set tw=120
 set wildignore+=*\\tmp\\*,*.hi,*.swp,*.swo,*.o,*.zip,.git,.cabal-sandbox,node_modules,.stack-work

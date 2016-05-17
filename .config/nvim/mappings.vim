@@ -11,6 +11,13 @@ imap <expr><Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 imap <expr><S-Tab>   pumvisible() ? "\<C-p>" : "\<S-Tab>"
 imap <silent><expr><CR> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>"
 
+nmap <C-p> :GitFiles<CR>
+
+nmap jww :w<CR>
+nmap jwq :wq<CR>
+nmap jqq :q<CR>
+
+nmap : q:i
 " Disables:
 " Disable the right side of the keyboard
 inoremap  <Up>     <NOP>
