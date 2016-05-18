@@ -13,6 +13,7 @@ call dein#add('airblade/vim-gitgutter')
 call dein#add('/home/zsedem/.fzf/')
 call dein#add('junegunn/fzf.vim')
 call dein#add('neomake/neomake')
+call dein#add('digitaltoad/vim-pug')
 
 call dein#end()
 
