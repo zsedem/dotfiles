@@ -13,9 +13,9 @@ imap <silent><expr><CR> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>"
 
 nmap <C-p> :GitFiles<CR>
 
-nmap jww :w<CR>
-nmap jwq :wq<CR>
-nmap jqq :q<CR>
+nmap <Leader>ww :w<CR>
+nmap <Leader>wq :wq<CR>
+nmap <Leader>qq :q<CR>
 
 nmap : q:i
 " Disables:
