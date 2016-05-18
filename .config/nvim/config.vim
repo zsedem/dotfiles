@@ -26,3 +26,8 @@ set title
 set tw=120
 set wildignore+=*\\tmp\\*,*.hi,*.swp,*.swo,*.o,*.zip,.git,.cabal-sandbox,node_modules,.stack-work
 
+" NeoMake
+autocmd BufWritePost * Neomake
+
+" Workaround a problem with gitgutter async
+let g:gitgutter_async = 0
