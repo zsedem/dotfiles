@@ -28,9 +28,10 @@ set wildignore+=*\\tmp\\*,*.hi,*.swp,*.swo,*.o,*.zip,.git,.cabal-sandbox,node_mo
 
 " NeoMake
 autocmd BufWritePost * Neomake
+let g:neomake_typescript_enabled_makers = ['tslint']
 
 " NeoMake makes the notes
-let g:tsuquyomi_disable_quickfix = 1
+" let g:tsuquyomi_disable_quickfix = 1
 
 " Workaround a problem with gitgutter async
 let g:gitgutter_async = 0
