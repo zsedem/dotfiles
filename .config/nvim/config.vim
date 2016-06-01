@@ -29,6 +29,7 @@ set wildignore+=*\\tmp\\*,*.hi,*.swp,*.swo,*.o,*.zip,.git,.cabal-sandbox,node_mo
 " NeoMake
 autocmd BufWritePost * Neomake
 let g:neomake_typescript_enabled_makers = ['tslint']
+let g:neomake_haskell_enabled_makers = ['hdevtools', 'hlint']
 
 " NeoMake makes the notes
 " let g:tsuquyomi_disable_quickfix = 1
