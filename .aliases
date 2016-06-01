@@ -1,3 +1,4 @@
+# vi : syntax=sh
 alias ls="ls --color=auto"
 alias tl="task list"
 alias ta="task add"
@@ -25,3 +26,10 @@ alias htoptmux='htop -p `pstree -p $(echo $TMUX | cut -d, -f2) | perl -ne '"'"'p
 alias evcs='vim `git ls-files | fzf`'
 alias cdir='cd `dirs -lp | fzf`'
 alias vimconfig='nvim ~/.config/nvim'
+function stopper() {
+    date1=`date +%s`
+    while true; do 
+       echo -ne "$(date -u --date @$((`date +%s` - $date1)) +%H:%M:%S)\r"
+       sleep 0.1
+    done
+}
