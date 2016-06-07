@@ -19,6 +19,7 @@
     fp = fetch --prune --no-tags
     casm = commit -asm
     cfoobar = commit -am foobar --no-verify
+    ca = commit --amend --no-edit
     caa = commit -a --amend --no-edit
     caaf = commit -a --amend --no-edit --no-verify
     edit-unmerged = \
