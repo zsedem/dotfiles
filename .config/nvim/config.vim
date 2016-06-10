@@ -11,6 +11,7 @@ set history=1000
 set ignorecase
 set incsearch
 set list
+set spell
 set listchars=tab:▸▸,trail:·
 set number
 set ruler

@@ -10,6 +10,7 @@ ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 HIST_STAMPS="yyyy-mm-dd"
+HIST_IGNORE_ALL_DUPS="true"
 
 # PLUGINS
 plugins=(git zsh-256-color vi-mode syntax-highlighting)
