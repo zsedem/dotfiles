@@ -8,9 +8,9 @@ HYPHEN_INSENSITIVE="true"
 DISABLE_AUTO_UPDATE="true"
 ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
+HIST_IGNORE_ALL_DUPS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 HIST_STAMPS="yyyy-mm-dd"
-HIST_IGNORE_ALL_DUPS="true"
 
 # PLUGINS
 plugins=(git zsh-256-color vi-mode syntax-highlighting)
@@ -30,3 +30,4 @@ precmd_functions+=_my_above_line_promptcmd
 PROMPT='$("$POWERLINE_COMMAND" $=POWERLINE_COMMAND_ARGS shell left -r .zsh --last-exit-code=$? --last-pipe-status="$pipestatus" --renderer-arg="client_id=$$" --renderer-arg="shortened_path=${(%):-%~}" --jobnum=$_POWERLINE_JOBNUM --renderer-arg="mode=$_POWERLINE_MODE" --renderer-arg="default_mode=$_POWERLINE_DEFAULT_MODE" --width=$(( ${COLUMNS:-$(_powerline_columns_fallback)} - ${ZLE_RPROMPT_INDENT:-1} )))'
 
 try_source ~/.fzf.zsh
+setopt histignoredups

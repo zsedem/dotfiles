@@ -5,13 +5,12 @@ set breakindentopt=sbr
 set colorcolumn=120
 set cursorline
 set expandtab
-set foldmethod=indent
 set foldlevel=99
+set foldmethod=indent
 set history=1000
 set ignorecase
 set incsearch
 set list
-set spell
 set listchars=tab:▸▸,trail:·
 set number
 set ruler

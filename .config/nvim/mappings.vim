@@ -17,7 +17,9 @@ nmap <Leader>ww :w<CR>
 nmap <Leader>wq :wq<CR>
 nmap <Leader>qq :q<CR>
 
-nmap : q:i
+nmap <silent><C-H> :tabnext<CR>
+nmap <silent><C-L> :tabprevious<CR>
+
 " Disables:
 " Disable the right side of the keyboard
 inoremap  <Up>     <NOP>
