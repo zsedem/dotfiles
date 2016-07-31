@@ -43,9 +43,9 @@ customCommandMenu :: X ()
 customCommandMenu = do
     windows <- windowMap
     layoutFiles <- filter (`notElem` [".", ".."] ) <$> liftIO (getDirectoryContents ".screenlayout")
-    let commands = ["hangups", "pycharm", "term", "newtmux", "wifi off",
-                    "chrome", "xmonad config", "network", "wifi on",
-                    "google", "openUrl", "subl3"]
+    let commands = ["hangups", "idea", "term", "newtmux", "wifi off",
+                    "chrome", "network", "wifi on",
+                    "google", "openUrl"]
         windowPrefix = "window: "
         commandPrefix = "command: "
         screenLayoutPrefix = "screenlayout: "
@@ -85,7 +85,7 @@ customCommandMenu = do
     hangups = nextTitleMatchOrSpawn "hangups" "exec st -f 'Monofur for Powerline:size=19' -e hangups"
     getXselection = runProcessWithInput "xclip" ["-o", "-selection"] ""
     commandRun c | c `elem` ["hangups", "hangout"] = hangups
-    commandRun "pycharm" = nextTitleMatchOrSpawn "PyCharm" "exec pycharm"
+    commandRun "idea" = nextTitleMatchOrSpawn "IntelliJ" "exec pycharm"
     commandRun c | c `elem` ["term", "st"] = terminalRun
     commandRun "google" = do
         selection <- getXselection
