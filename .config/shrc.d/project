@@ -1,7 +1,16 @@
 # vi: syntax=sh
 function project {
     cd $HOME/projects/$1
+    _try_activate_virtualenv $1
     try_source .projectrc
+}
+
+function _try_activate_virtualenv {
+    ACTIVATE_FILE=$HOME/.local/share/PythonVirtualEnvironments/$1/bin/activate
+    if [ -f $ACTIVATE_FILE ]; then
+        echo "Activate VirtualEnv"
+        source $ACTIVATE_FILE
+    fi
 }
 
 _projects()
