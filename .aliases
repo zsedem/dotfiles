@@ -17,7 +17,7 @@ function vim(){
            sed s/^..//) 2> /dev/null' /usr/bin/vim -w ~/.vimlog "$@"
 }
 alias gti="git"  # for typos
-alias inv="$(which invoke) --pty"
+alias inv="invoke --echo --pty"
 alias .cathistorygrep='cat ~/.bash_history | grep'
 alias SystemUpgrade='sudo pacman -Syu && sudo bootctl update && sudo pkgfile --update && sudo aura -Au'
 alias PacmanClearCache='sudo pacman -Scc && sudo pacman-optimize'
