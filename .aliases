@@ -33,3 +33,4 @@ function stopper() {
        sleep 0.1
     done
 }
+alias sbtStack='sudo jstack -F `ps -aux | grep sbt | grep java | tr -s " " | cut -d" " -f2 | head -n1`'
