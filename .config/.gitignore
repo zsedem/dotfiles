@@ -1,6 +1,7 @@
 /*
 !.gitignore
 !compton.conf
+!shrc.d/
 !hangups/
 !powerline/
 !systemd/

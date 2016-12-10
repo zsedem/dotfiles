@@ -1,0 +1,49 @@
+# vi: syntax=sh
+# If not running interactively, don't do anything!
+[[ $- != *i* ]] && return
+! [[ -z "$DISPLAY" ]] && [[ -z "$ATOM_HOME" ]] && [[ -z "$TMUX" ]] && exec "$SHELL" -c "tmux -q has-session && exec tmux attach-session || exec tmux"
+[[ -z SSH_AUTH_SOCK ]] && export SSH_AUTH_SOCK=/run/user/1000/ssh-agent.socket
+if ! ssh-add -l &> /dev/null; then ssh-add ; fi
+
+function try_source(){
+    [ -r $1 ] && source $1
+    return 0
+}
+PATH=~/.local/bin:$PATH
+
+try_source ~/.aliases
+
+
+
+EDITOR=vim
+HISTSIZE=99999999999999
+HISTCONTROL=ignoredups:erasedups
+
+PS2="> "
+PS3="> "
+PS4="+ "
+
+function .pushbranch(){
+    currentbranch=$(git rev-parse --abbrev-ref HEAD)
+    if [[ "$currentbranch" == "master" ]]; then
+        echo "This method not for pushing master"
+    else
+        git push -f || git push --set-upstream origin $currentbranch
+    fi
+}
+
+function .fixupfile(){
+    git add $1
+    git commit -s --fixup=$(git log --format="%H" -1 $1)
+}
+
+
+function .dockerclean(){
+    docker ps -aq | xargs --no-run-if-empty docker rm
+    docker rmi $(docker images -a | grep "^<none>" | awk '{print $3}')
+}
+
+FZF_DEFAULT_OPTS=""
+
+try_source ~/.shrc.local
+

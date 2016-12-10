@@ -1,7 +1,0 @@
-#!/usr/bin/env sh
-HDEVTOOLS=`find ~/.stack/snapshots/x86_64-linux/*/*/bin/hdevtools | head -n1`
-if [ -z "$HDEVTOOLS" ]; then
-    echo "hdevtools not found in stack folder" >&2
-    exit 1;
-fi;
-stack exec --no-ghc-package-path -- $HDEVTOOLS "$@"
