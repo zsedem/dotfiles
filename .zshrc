@@ -20,6 +20,6 @@ compinit
 autoload -U bashcompinit
 bashcompinit
 source $ZSH/oh-my-zsh.sh
-source $HOME/.config/shrc.d/*
+for i in `ls .config/shrc.d/*`; do echo $i; done;
 setopt histignoredups
 

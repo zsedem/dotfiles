@@ -2,7 +2,7 @@
 [[ $- != *i* ]] && return
 alias rehash='echo' # for compatibility with zsh
 SHELL=`which bash`
-source ~/.shrc
+for i in `ls .config/shrc.d/*`; do source $i; done;
 
 shopt -s checkwinsize
 shopt -s histappend
