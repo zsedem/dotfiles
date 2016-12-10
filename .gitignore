@@ -1,7 +1,5 @@
 /*
-
 !.Xresources
-!abs
 !.aliases
 !.bash_logout
 !.bash_profile
@@ -11,10 +9,7 @@
 !.gitconfig
 !.gitignore
 !.gitignore.global
-!.ipython/
 !.local/
-!.logs/
-!.nanorc
 !.npmrc
 !.screenlayout/
 !.shrc

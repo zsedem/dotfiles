@@ -1,11 +1,8 @@
 # Path to your oh-my-zsh installation.
 SHELL=`which zsh`
+export ZSH=$HOME/.config/oh-my-zsh
 
-export ZSH=/home/zsedem/.oh-my-zsh
-
-
-ZSH_THEME="amuse"
-
+ZSH_THEME="gallois"
 CASE_SENSITIVE="false"
 HYPHEN_INSENSITIVE="true"
 DISABLE_AUTO_UPDATE="true"
@@ -23,7 +20,6 @@ compinit
 autoload -U bashcompinit
 bashcompinit
 source $ZSH/oh-my-zsh.sh
-source ~/.shrc
-try_source ~/.zsh/completion/_docker-compose
-try_source ~/.fzf.zsh
+source $HOME/.config/shrc.d/*
 setopt histignoredups
+

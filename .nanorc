@@ -1,9 +1,0 @@
-# ignore errors
-set quiet
-# set autoindent
-set casesensitive
-## Remember the cursor position in each file for the next editing session.
-set poslog
-
-## Setup of syntax coloring.
-include "/usr/share/nano/*.nanorc"

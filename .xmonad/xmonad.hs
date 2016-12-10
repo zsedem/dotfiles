@@ -1,7 +1,6 @@
 {-# OPTIONS_GHC -fno-warn-missing-signatures #-}
 module Main(main) where
 import           System.Directory                 (getHomeDirectory)
-import           System.Taffybar.Hooks.PagerHints (pagerHints)
 import           XMonad
 import           XMonad.Config.ZsEdem             (themeColor)
 import qualified XMonad.Config.ZsEdem             as ZsEdem
@@ -20,7 +19,7 @@ layoutHook' = avoidStruts $ smartBorders $ windowNavigation ( Full ||| sTall |||
 
 main = do
     homePath <- (++"/")<$> getHomeDirectory
-    let desktopConfig = ewmh $ pagerHints def
+    let desktopConfig = ewmh $ def
     xmonad $ desktopConfig
      { manageHook = ZsEdem.manageHook <+> manageHook desktopConfig
      , layoutHook = layoutHook'
@@ -35,3 +34,4 @@ main = do
      , startupHook = startupHook desktopConfig >> ZsEdem.startupHook
      , handleEventHook = docksEventHook <+> handleEventHook desktopConfig
      } `additionalKeys` ZsEdem.keyBindings
+

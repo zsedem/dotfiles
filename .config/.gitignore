@@ -4,7 +4,5 @@
 !hangups/
 !powerline/
 !systemd/
-!taffybar/
-!yi/
-!shrc.d/
+!oh-my-zsh
 !nvim
