@@ -9,7 +9,8 @@ function _try_activate_virtualenv {
     ACTIVATE_FILE=$HOME/.local/share/PythonVirtualEnvironments/$1/bin/activate
     if [ -f $ACTIVATE_FILE ]; then
         echo "Activate VirtualEnv"
-        source $ACTIVATE_FILE
+
+        VIRTUAL_ENV_DISABLE_PROMPT=1 source $ACTIVATE_FILE
     fi
 }
 
