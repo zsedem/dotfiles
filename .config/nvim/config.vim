@@ -26,16 +26,3 @@ set tw=120
 set wildignore+=*\\tmp\\*,*.hi,*.swp,*.swo,*.o,*.zip,.git,.cabal-sandbox,node_modules,.stack-work
 set mouse=""
 
-" NeoMake
-autocmd BufWritePost * Neomake
-let g:neomake_typescript_enabled_makers = ['tslint']
-let g:neomake_haskell_enabled_makers = ['hdevtools', 'hlint']
-
-" NeoMake makes the notes
-" let g:tsuquyomi_disable_quickfix = 1
-
-" Workaround a problem with gitgutter async
-let g:gitgutter_async = 0
-
-" Deoplete
-let g:deoplete#enable_at_startup = 1

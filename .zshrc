@@ -2,6 +2,8 @@
 SHELL=`which zsh`
 export ZSH=$HOME/.config/oh-my-zsh
 
+if [ -e /home/zsedem/.nix-profile/etc/profile.d/nix.sh ]; then . /home/zsedem/.nix-profile/etc/profile.d/nix.sh; fi
+
 ZSH_THEME="random"
 alias changetheme='ZSH_THEME=`ls ~/.config/oh-my-zsh/themes/ | cut -d"." -f1 | ~/.fzf/bin/fzf ` source ~/.config/oh-my-zsh/oh-my-zsh.sh'
 
@@ -22,6 +24,6 @@ compinit
 autoload -U bashcompinit
 bashcompinit
 source $ZSH/oh-my-zsh.sh
-for i in `ls .config/shrc.d/*`; do source $i; done;
+for i in `ls ~/.config/shrc.d/*`; do source $i; done;
 setopt histignoredups
 
