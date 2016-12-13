@@ -5,7 +5,7 @@ export ZSH=$HOME/.config/oh-my-zsh
 if [ -e /home/zsedem/.nix-profile/etc/profile.d/nix.sh ]; then . /home/zsedem/.nix-profile/etc/profile.d/nix.sh; fi
 
 ZSH_THEME="random"
-alias changetheme='ZSH_THEME=`ls ~/.config/oh-my-zsh/themes/ | cut -d"." -f1 | ~/.fzf/bin/fzf ` source ~/.config/oh-my-zsh/oh-my-zsh.sh'
+alias changetheme='ZSH_THEME=`ls ~/.config/oh-my-zsh/themes/ | cut -d"." -f1 | fzf ` source ~/.config/oh-my-zsh/oh-my-zsh.sh'
 
 CASE_SENSITIVE="false"
 HYPHEN_INSENSITIVE="true"
