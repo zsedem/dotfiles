@@ -4,3 +4,6 @@
 [submodule ".config/tmux/tpm"]
 	path = .config/tmux/tpm
 	url = https://github.com/tmux-plugins/tpm
+[submodule "projects/nix-system-configuration"]
+	path = projects/nix-system-configuration
+	url = https://github.com/zsedem/nixos-configuration

@@ -16,7 +16,7 @@ if type -P dircolors >/dev/null ; then
     fi
 fi
 
-try_source /usr/share/git/completion/git-prompt.sh
+try_source `which git | sed 's|\(.*\)/.*|\1|'`/../share/git/contrib/completion/git-prompt.sh
 
 GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWSTASHSTATE=1
@@ -27,10 +27,13 @@ HISTCONTROL=ignoredups:erasedups
 
 export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
 
+
 try_source /usr/share/bash-completion/bash_completion
 try_source /usr/share/doc/pkgfile/command-not-found.bash
 
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
+
+PS1="$(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;31m\]\h'; else echo '\[\033[01;32m\]\u@\h'; fi)\[\033[01;34m\] \w\$(last_exit_status=\$?; [[ \$last_exit_status != 0 ]] && echo \"\[\033[01;31m\] (\$last_exit_status)\" || echo \"\[\033[01;32m\] :)\")\[\033[00m\]\[\033[1;33m\]\$(__git_ps1)\[\033[01;31m\] \t\n> $\[\033[00m\] "
 try_source ~/.bashrc.local
 
