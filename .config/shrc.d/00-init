@@ -1,7 +1,7 @@
 # vi: syntax=sh
 # If not running interactively, don't do anything!
 [[ $- != *i* ]] && return
-! [[ -z "$DISPLAY" ]] && [[ -z "$ATOM_HOME" ]] && [[ -z "$TMUX" ]] && exec "$SHELL" -c "tmux -q has-session && exec tmux attach-session || exec tmux"
+# ! [[ -z "$DISPLAY" ]] && [[ -z "$ATOM_HOME" ]] && [[ -z "$TMUX" ]] && exec "$SHELL" -c "tmux -q has-session && exec tmux attach-session || exec tmux"
 [[ -z SSH_AUTH_SOCK ]] && export SSH_AUTH_SOCK=/run/user/1000/ssh-agent.socket
 if ! ssh-add -l &> /dev/null; then ssh-add ; fi
 
