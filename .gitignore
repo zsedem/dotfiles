@@ -5,6 +5,7 @@
 !.bash_profile
 !.bashrc
 !.config/
+!.nixpkgs/
 !.dunstrc
 !.gitconfig
 !.gitignore
