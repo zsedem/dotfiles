@@ -10,7 +10,6 @@ alias changetheme='ZSH_THEME=`ls ~/.config/oh-my-zsh/themes/ | cut -d"." -f1 | f
 CASE_SENSITIVE="false"
 HYPHEN_INSENSITIVE="true"
 DISABLE_AUTO_UPDATE="true"
-ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 HIST_IGNORE_ALL_DUPS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
