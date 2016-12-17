@@ -27,3 +27,19 @@ source $ZSH/oh-my-zsh.sh
 for i in `ls ~/.config/shrc.d/*`; do source $i; done;
 setopt histignoredups
 
+# This function is called whenever a command is not found.
+command_not_found_handler() {
+    local p=/run/current-system/sw/bin/command-not-found
+    if [ -x $p -a -f /nix/var/nix/profiles/per-user/root/channels/nixos/programs.sqlite ]; then
+      # Run the helper program.
+      $p "$@"
+      # Retry the command if we just installed it.
+      if [ $? = 126 ]; then
+        "$@"
+      fi
+    else
+      # Indicate than there was an error so ZSH falls back to its default handler
+      return 127
+    fi
+}
+
