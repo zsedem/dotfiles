@@ -15,3 +15,4 @@ bspgit.conf
 *.sublime-workspace
 *.sublime-project
 *.iml
+*.swp

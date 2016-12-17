@@ -1,0 +1,17 @@
+# vi: syntax=sh
+
+function .pushbranch(){
+    currentbranch=$(git rev-parse --abbrev-ref HEAD)
+    if [[ "$currentbranch" == "master" ]]; then
+        echo "This method not for pushing master"
+    else
+        git push -f || git push --set-upstream origin $currentbranch
+    fi
+}
+
+function .fixupfile(){
+    git add $1
+    git commit -s --fixup=$(git log --format="%H" -1 $1)
+}
+
+

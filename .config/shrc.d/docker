@@ -1,0 +1,5 @@
+# vi: syntax=sh
+function .dockerclean(){
+    docker ps -aq | xargs --no-run-if-empty docker rm
+    docker rmi $(docker images -a | grep "^<none>" | awk '{print $3}')
+}
