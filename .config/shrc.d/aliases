@@ -11,7 +11,6 @@ alias e="$EDITOR"
 alias f="find . "
 alias fn="find . -name "
 alias gti="git"  # for typos
-alias inv="invoke --echo --pty"
 alias .cathistorygrep='cat ~/.bash_history | grep'
 alias SystemUpgrade='sudo pacman -Syu && sudo bootctl update && sudo pkgfile --update && sudo aura -Au'
 alias PacmanClearCache='sudo pacman -Scc && sudo pacman-optimize'
