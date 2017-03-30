@@ -9,7 +9,8 @@
     cl = clone
     ci = commit --signoff
     co = checkout
-    br = branch
+    brD = branch -D
+    br = branch -a -vv --no-merged
     rba = rebase --abort
     rbc = rebase --continue
     rb = rebase -i origin/master --autosquash --autostash
@@ -32,6 +33,9 @@
     last-ci = log --format="%H" -1
     push-new-upstream = \
     "!git push --set-upstream origin `git rev-parse --abbrev-ref HEAD`"
+    sf = show --stat
+    rf = reset HEAD~1 --
+
 [guitool "Rebase onto master"]
     cmd = git rebase -i origin/master
 [guitool "Rebase - Continue"]
