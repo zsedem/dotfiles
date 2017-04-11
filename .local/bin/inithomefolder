@@ -1,22 +1,23 @@
 #!/usr/bin/env bash
-
 set -e
 
-function create_new_ssh_keys {
-    ssh-keygen -t rsa -b 4096
-    ssh-add ~/.ssh/id_rsa
-    xclip ~/.ssh/id_rsa.pub -selection clipboard
-    echo "add your new ssh public key(copied to clipboard) to github"
-    echo "https://github.com/settings/keys"
-    echo "Press Enter when you done"
-    read > /dev/null
-}
+TMP=/tmp/zsedem
+
 function clone_home_folder {
-    git clone --recurse-submodules https://github.com/zsedem/dotfiles /tmp/dotfiles
-    cp -r /tmp/dotfiles/.[!.]* ~/
-    rm /tmp/dotfiles
+    mkdir -p $TMP
+    git clone --recurse-submodules https://github.com/zsedem/dotfiles $TMP/dotfiles
+    cp -r $TMP/dotfiles/.[!.]* ~/
+    rm -rf $TMP/dotfiles
 }
 
-create_new_ssh_keys
-clone_home_folder
+if [ $REMOTE ]; then
+    ssh-copy-id $REMOTE
+    ssh $REMOTE mkdir -p $TMP
+
+    scp $BASH_SOURCE $REMOTE:$TMP/init
+
+    ssh $REMOTE -t $TMP/init
+else
+    clone_home_folder
+fi
 
