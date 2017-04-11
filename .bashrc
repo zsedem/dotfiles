@@ -25,15 +25,14 @@ EDITOR=vim
 HISTSIZE=99999999999999
 HISTCONTROL=ignoredups:erasedups
 
-export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
-
-
 try_source /usr/share/bash-completion/bash_completion
 try_source /usr/share/doc/pkgfile/command-not-found.bash
 
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
+hostnamesalt=thisisforhavinggreenforzsedem-lt21
+hostnamecolor="\e[38;5;$((0x$( (echo "$hostnamesalt"; hostname) | sha256sum | cut -f1 -d' ' | tr -d '\n' | tail -c2)))m"
 
-PS1="$(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;31m\]\h'; else echo '\[\033[01;32m\]\u@\h'; fi)\[\033[01;34m\] \w\$(last_exit_status=\$?; [[ \$last_exit_status != 0 ]] && echo \"\[\033[01;31m\] (\$last_exit_status)\" || echo \"\[\033[01;32m\] :)\")\[\033[00m\]\[\033[1;33m\]\$(__git_ps1)\[\033[01;31m\] \t\n> $\[\033[00m\] "
+PS1="$hostnamecolor\u@\h\[\033[01;34m\] \w\$(last_exit_status=\$?; [[ \$last_exit_status != 0 ]] && echo \"\[\033[01;31m\] (\$last_exit_status)\" || echo \"\[\033[01;32m\] :)\")\[\033[00m\]\[\033[1;33m\]\$(__git_ps1)\[\033[01;31m\] \t\n> $\[\033[00m\] "
 try_source ~/.bashrc.local
 
