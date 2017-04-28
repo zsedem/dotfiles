@@ -5,8 +5,6 @@
 Untitled.ipynb
 bspgit.conf
 .hdevtools.sock
-.venv
-.projectrc
 *.hi
 *.o
 *.pyc
@@ -17,3 +15,4 @@ bspgit.conf
 *.iml
 *.swp
 /default.nix
+/.bash_history

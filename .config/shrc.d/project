@@ -26,7 +26,7 @@ in
 }
 EOF
     fi
-    nix-shell default.nix -A $1
+    HISTFILE=`realpath ./.bash_history` nix-shell default.nix -A $1
     popd
 }
 
