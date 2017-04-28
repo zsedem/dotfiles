@@ -1,17 +1,33 @@
 # vi: syntax=sh
 function project {
-    cd $HOME/projects/$1
-    _try_activate_virtualenv $1
-    try_source .projectrc
+    pushd $HOME/projects/$1
+    if ! [ -f default.nix ]
+    then
+      cat << EOF > default.nix
+let
+  pkgs = import <nixpkgs> {};
+in
+  {
+  $1 = with pkgs; stdenv.mkDerivation rec {
+      name = "$1";
+      propagatedBuildInputs = [
+      ];
+      shellHook = ''
+        source $HOME/.bashrc
+      '';
+      src = null;
+      buildPhase = ''
+        echo OK
+      '';
+      installPhase = ''
+        echo OK
+      '';
+    };
 }
-
-function _try_activate_virtualenv {
-    ACTIVATE_FILE=$HOME/.local/share/PythonVirtualEnvironments/$1/bin/activate
-    if [ -f $ACTIVATE_FILE ]; then
-        echo "Activate VirtualEnv"
-
-        VIRTUAL_ENV_DISABLE_PROMPT=1 source $ACTIVATE_FILE
+EOF
     fi
+    nix-shell default.nix -A $1
+    popd
 }
 
 _projects()

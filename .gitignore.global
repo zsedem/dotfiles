@@ -16,3 +16,4 @@ bspgit.conf
 *.sublime-project
 *.iml
 *.swp
+/default.nix
