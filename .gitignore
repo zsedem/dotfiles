@@ -12,9 +12,7 @@
 !.gitignore.global
 !.local/
 !.npmrc
-!.screenlayout/
 !.shrc
-!.stack/
 !.tigrc
 !.tmux.conf
 !.vimrc
