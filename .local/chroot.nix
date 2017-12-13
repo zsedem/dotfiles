@@ -6,9 +6,11 @@
     [ udev
       alsaLib
       clib
+      zlib
       busybox
       freetype
       fontconfig
+      fuse
       xorg.libXi
       xorg.libXdamage
       xorg.libXtst
@@ -16,6 +18,7 @@
       xorg.libXfixes
       xorg.libXrender
       xorg.libXcomposite
+      (python36.withPackages (ps: with ps; [ pyyaml pyxdg pygobject3 ]))
       expat
       openssh
       git
@@ -28,6 +31,7 @@
       gdk_pixbuf
       cairo
       gnome3.gconf
+      gnome3.gtk
       libcap
       libudev
       dbus
@@ -49,5 +53,5 @@
       libudev
       alsaLib
     ]);
-  runScript = "bash";
+  runScript = "sudo -u zsedem bash";
 }).env
