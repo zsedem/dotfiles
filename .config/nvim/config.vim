@@ -1,12 +1,9 @@
 syntax on
 filetype on
-set breakindent
-set breakindentopt=sbr
 set colorcolumn=120
 set cursorline
 set expandtab
 set foldlevel=99
-set foldmethod=indent
 set history=1000
 set ignorecase
 set incsearch
