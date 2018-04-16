@@ -31,7 +31,7 @@
     "!git checkout HEAD~1"
     sl = log --oneline -10
     last-ci = log --format="%H" -1
-    push-new-upstream = \
+    new-upstream = \
     "!git push --set-upstream origin `git rev-parse --abbrev-ref HEAD`"
     sf = show --stat
     rf = reset HEAD~1 --
