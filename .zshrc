@@ -32,4 +32,4 @@ bindkey "^[[3~" delete-char
 bindkey '^[[1;5D' backward-word
 bindkey '^[[1;5C' forward-word
 bindkey ' ' magic-space
-source /usr/share/fzf/key-bindings.zsh
+source /run/current-system/sw/share/fzf/key-bindings.zsh
