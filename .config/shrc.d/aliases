@@ -27,4 +27,3 @@ function stopper() {
     done
 }
 alias sbtStack='sudo jstack -F `ps -aux | grep sbt | grep java | tr -s " " | cut -d" " -f2 | head -n1`'
-if which hub &>/dev/null; then alias git=hub; fi
