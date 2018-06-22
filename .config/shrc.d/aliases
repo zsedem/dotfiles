@@ -27,3 +27,4 @@ function stopper() {
     done
 }
 alias sbtStack='sudo jstack -F `ps -aux | grep sbt | grep java | tr -s " " | cut -d" " -f2 | head -n1`'
+alias nm-vpn-up="nmcli --fields name,type,state c show | grep vpn | egrep -v ' activated' | cut -d' ' -f1 | tee /dev/stderr | xargs --max-args=1 --no-run-if-empty --interactive nmcli connection up"
