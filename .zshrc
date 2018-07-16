@@ -44,7 +44,10 @@ command_not_found_handler() {
 # key bindings
 bindkey "\033[1~" beginning-of-line
 bindkey "\033[4~" end-of-line
+bindkey "^[[1~" beginning-of-line
+bindkey "^[[4~" end-of-line
 bindkey "^[[3~" delete-char
+bindkey "^[[P" delete-char
 bindkey '^[[1;5D' backward-word
 bindkey '^[[1;5C' forward-word
 bindkey ' ' magic-space
