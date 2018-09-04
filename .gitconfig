@@ -7,7 +7,7 @@
     cp = cherry-pick
     st = status
     cl = clone
-    ci = commit --signoff
+    ci = commit
     co = checkout
     brD = branch -D
     br = branch -a -vv --no-merged
@@ -59,6 +59,8 @@
     prune = true
 [include]
     path = ~/.gitconfig.local
+[commit]
+    gpgsign = true
 [color]
     ui = true
 [color "diff-highlight"]
@@ -73,3 +75,4 @@
     old = red bold
     new = green bold
     whitespace = red reverse
+
