@@ -10,3 +10,6 @@ EDITOR=vim
 HISTSIZE=99999999999999
 HISTCONTROL=ignoredups:erasedups
 
+function diff-last-commands() {
+  diff -u --color =(eval $history[$(($#history - 1))]) =(eval $history[$(($#history))])
+}
