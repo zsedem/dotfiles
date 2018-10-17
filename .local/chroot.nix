@@ -53,5 +53,5 @@
       libudev
       alsaLib
     ]);
-  runScript = "sudo -u zsedem bash";
+  runScript = "sudo -u azsigmond bash";
 }).env

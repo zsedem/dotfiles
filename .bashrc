@@ -1,8 +1,11 @@
 # If not running interactively, don't do anything!
 [[ $- != *i* ]] && return
 alias rehash='echo' # for compatibility with zsh
+function try_source(){
+    [ -r $1 ] && source $1
+    return 0
+}
 SHELL=`which bash`
-for i in `ls ~/.config/shrc.d/*`; do source $i; done;
 
 shopt -s checkwinsize
 shopt -s histappend
@@ -24,9 +27,6 @@ GIT_PS1_SHOWUPSTREAM=1
 EDITOR=vim
 HISTSIZE=99999
 HISTCONTROL=ignoredups:erasedups
-
-try_source /usr/share/bash-completion/bash_completion
-try_source /usr/share/doc/pkgfile/command-not-found.bash
 
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'

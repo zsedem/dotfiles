@@ -7,7 +7,7 @@
     cp = cherry-pick
     st = status
     cl = clone
-    ci = commit --signoff
+    ci = commit
     co = checkout
     brD = branch -D
     br = branch -a -vv --no-merged
@@ -17,7 +17,7 @@
     rbf = -c core.editor=true rebase -i origin/master --autosquash --autostash
     diff = diff --word-diff
     dc = diff --cached
-    fp = fetch --prune --no-tags
+    fp = fetch --prune
     casm = commit -asm
     cfoobar = commit -am foobar --no-verify
     ca = commit --amend --no-edit
@@ -31,7 +31,7 @@
     "!git checkout HEAD~1"
     sl = log --oneline -10
     last-ci = log --format="%H" -1
-    push-new-upstream = \
+    new-upstream = \
     "!git push --set-upstream origin `git rev-parse --abbrev-ref HEAD`"
     sf = show --stat
     rf = reset HEAD~1 --
@@ -51,8 +51,28 @@
 [core]
     editor = vim
     excludesfile = ~/.gitignore.global
+    pager = diff-so-fancy | less --tabs=4 -RFX
+
+[pager]
+    diff = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '
 [remote "origin"]
-    tagOpt = --no-tags
     prune = true
 [include]
     path = ~/.gitconfig.local
+[commit]
+    gpgsign = true
+[color]
+    ui = true
+[color "diff-highlight"]
+    oldNormal = red bold
+    oldHighlight = red bold 52
+    newNormal = green bold
+    newHighlight = green bold 22
+[color "diff"]
+    meta = 226
+    frag = magenta bold
+    commit = yellow bold
+    old = red bold
+    new = green bold
+    whitespace = red reverse
+

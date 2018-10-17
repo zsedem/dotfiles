@@ -1,12 +1,9 @@
 syntax on
 filetype on
-set breakindent
-set breakindentopt=sbr
 set colorcolumn=120
 set cursorline
 set expandtab
 set foldlevel=99
-set foldmethod=indent
 set history=1000
 set ignorecase
 set incsearch
@@ -14,11 +11,11 @@ set list
 set listchars=tab:▸▸,trail:·
 set number
 set ruler
-set shiftwidth=4
+set shiftwidth=2
 set showbreak=↪\ 
 set showmode
 set smartcase
-set softtabstop=4
+set softtabstop=2
 set timeout
 set timeoutlen=400
 set title
