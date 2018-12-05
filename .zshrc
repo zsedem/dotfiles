@@ -52,3 +52,4 @@ bindkey '^[[1;5D' backward-word
 bindkey '^[[1;5C' forward-word
 bindkey ' ' magic-space
 source /run/current-system/sw/share/fzf/key-bindings.zsh
+source ~/.zshrc.local
