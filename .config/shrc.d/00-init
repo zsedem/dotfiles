@@ -4,7 +4,7 @@ function try_source(){
     [ -r $1 ] && source $1
     return 0
 }
-PATH=~/.local/bin:$PATH
+PATH=$HOME/.local/bin:$HOME/.local/share/npm-global/bin:$PATH
 
 EDITOR=vim
 HISTSIZE=99999999999999
