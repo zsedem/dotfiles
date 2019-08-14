@@ -27,5 +27,5 @@ function stopper() {
     done
 }
 alias sbtStack='sudo jstack -F `ps -aux | grep sbt | grep java | tr -s " " | cut -d" " -f2 | head -n1`'
-alias nm-vpn-up="nmcli --fields name,type,state c show | grep vpn | egrep -v ' activated' | cut -d' ' -f1 | tee /dev/stderr | xargs --max-procs=3 --max-args=1 --no-run-if-empty nmcli connection up"
+alias nm-vpn-up="nmcli --fields name,type,state c show | grep vpn | egrep -v ' activated' | egrep -v 'Mullvad' | cut -d' ' -f1 | tee /dev/stderr | xargs --max-procs=3 --max-args=1 --no-run-if-empty nmcli connection up"
 alias bl-headphone='echo connect 00:16:94:30:8E:E5 | bluetoothctl'
