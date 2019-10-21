@@ -4,7 +4,6 @@
 !shrc.d/
 !hangups/
 !powerline/
-!systemd/
 !oh-my-zsh
 !nvim
 !tmux
