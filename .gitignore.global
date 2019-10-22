@@ -1,3 +1,4 @@
+.bloop
 .ipynb_checkpoints
 .idea
 .stack-work
@@ -13,5 +14,6 @@ Untitled.ipynb
 *.sublime-project
 *.iml
 *.swp
+wtf.sc
 /default.nix
 /.bash_history
