@@ -30,7 +30,6 @@
       nspr
       gdk_pixbuf
       cairo
-      gnome3.gconf
       gnome3.gtk
       libcap
       libudev
@@ -53,5 +52,5 @@
       libudev
       alsaLib
     ]);
-  runScript = "sudo -u azsigmond bash";
+  runScript = "bash";
 }).env

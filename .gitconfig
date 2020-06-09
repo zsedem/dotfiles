@@ -51,10 +51,10 @@
 [core]
     editor = vim
     excludesfile = ~/.gitignore.global
-    pager = diff-so-fancy | less --tabs=4 -RFX
+    #pager = diff-so-fancy | less --tabs=4 -RFX
 
 [pager]
-    diff = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '
+    #diff = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '
 [remote "origin"]
     prune = true
 [include]
