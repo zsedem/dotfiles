@@ -18,12 +18,10 @@
       xorg.libXfixes
       xorg.libXrender
       xorg.libXcomposite
-      (python36.withPackages (ps: with ps; [ pyyaml pyxdg pygobject3 ]))
       expat
       openssh
       git
       glib
-      gnome2.gtk
       atk
       pango
       nss
@@ -35,13 +33,6 @@
       libudev
       dbus
       libnotify
-      (stdenv.mkDerivation {
-         name = "udev0-soft-link";
-         buildCommand = ''
-           mkdir -p $out/lib
-           ln -s ${systemd.lib}/lib/libudev.so.1 $out/lib/libudev.so.0
-         '';
-      })
     ]) ++ (with pkgs.xorg;
     [ libX11
       libXcursor
