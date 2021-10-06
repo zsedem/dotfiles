@@ -3,7 +3,7 @@ filetype on
 set colorcolumn=120
 set cursorline
 set expandtab
-set foldlevel=99
+#set foldlevel=99
 set history=1000
 set ignorecase
 set incsearch
@@ -19,7 +19,7 @@ set softtabstop=2
 set timeout
 set timeoutlen=400
 set title
-set tw=120
+set tw=0
 set wildignore+=*\\tmp\\*,*.hi,*.swp,*.swo,*.o,*.zip,.git,.cabal-sandbox,node_modules,.stack-work
 set mouse=""
 
