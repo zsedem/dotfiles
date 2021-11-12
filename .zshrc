@@ -16,7 +16,8 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 HIST_STAMPS="yyyy-mm-dd"
 
 # PLUGINS
-plugins=(git zsh-256-color vi-mode syntax-highlighting)
+plugins=(git vi-mode zsh-abbr)
+
 source $ZSH/oh-my-zsh.sh
 
 autoload -U compinit
