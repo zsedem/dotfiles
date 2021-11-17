@@ -1,6 +1,6 @@
 # Path to your oh-my-zsh installation.
 SHELL=`which zsh`
-export ZSH=$HOME/.config/oh-my-zsh
+export ZSH_CUSTOM=$HOME/.config/oh-my-zsh
 
 if [ -e /home/zsedem/.nix-profile/etc/profile.d/nix.sh ]; then . /home/zsedem/.nix-profile/etc/profile.d/nix.sh; fi
 
@@ -17,8 +17,8 @@ HIST_STAMPS="yyyy-mm-dd"
 
 # PLUGINS
 plugins=(git vi-mode zsh-abbr)
+source $ZSH_CUSTOM/oh-my-zsh.sh
 
-source $ZSH/oh-my-zsh.sh
 
 autoload -U compinit
 compinit
@@ -51,6 +51,5 @@ bindkey "^[[3~" delete-char
 bindkey "^[[P" delete-char
 bindkey '^[[1;5D' backward-word
 bindkey '^[[1;5C' forward-word
-bindkey ' ' magic-space
 source /run/current-system/sw/share/fzf/key-bindings.zsh
 source ~/.zshrc.local
