@@ -16,8 +16,6 @@ alias SystemUpgrade='sudo pacman -Syu && sudo bootctl update && sudo pkgfile --u
 alias PacmanClearCache='sudo pacman -Scc && sudo pacman-optimize'
 alias screenlayout_dmenu='pushd ~/.screenlayout; bash `ls | ~/.xmonad/assets/bin/dmenu.sh 1600 900 "#000000" "#0783c0" `; popd'
 alias htoptmux='htop -p `pstree -p $(echo $TMUX | cut -d, -f2) | perl -ne '"'"'push @t, /\((\d+)\)/g; END { print join ",", @t }'"'"'`'
-alias evcs='vim `git ls-files | fzf`'
-alias cdir='cd `dirs -lp | fzf`'
 alias vimconfig='nvim ~/.config/nvim'
 function stopper() {
     date1=`date +%s`
@@ -30,3 +28,4 @@ alias sbtStack='sudo jstack -F `ps -aux | grep sbt | grep java | tr -s " " | cut
 alias nm-vpn-up="nmcli --fields name,type,state c show | grep vpn | egrep -v ' activated' | cut -d' ' -f1 | fzf --multi | tee /dev/stderr | xargs --max-procs=3 --max-args=1 --no-run-if-empty nmcli connection up"
 alias bl-headphone='echo connect 00:16:94:30:8E:E5 | bluetoothctl'
 alias k='kubectl --context '
+alias tig='nix-shell -p sl --run sl

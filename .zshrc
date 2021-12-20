@@ -5,7 +5,7 @@ export ZSH_CUSTOM=$HOME/.config/oh-my-zsh
 if [ -e /home/zsedem/.nix-profile/etc/profile.d/nix.sh ]; then . /home/zsedem/.nix-profile/etc/profile.d/nix.sh; fi
 
 ZSH_THEME="jonathan"
-alias changetheme='ZSH_THEME=`ls ~/.config/oh-my-zsh/themes/ | cut -d"." -f1 | fzf ` source ~/.config/oh-my-zsh/oh-my-zsh.sh'
+alias changetheme='ZSH_THEME=`ls ~/.config/oh-my-zsh/themes/ | cut -d"." -f1 | sk ` source ~/.config/oh-my-zsh/oh-my-zsh.sh'
 
 CASE_SENSITIVE="false"
 HYPHEN_INSENSITIVE="true"
@@ -51,5 +51,5 @@ bindkey "^[[3~" delete-char
 bindkey "^[[P" delete-char
 bindkey '^[[1;5D' backward-word
 bindkey '^[[1;5C' forward-word
-source /run/current-system/sw/share/fzf/key-bindings.zsh
+source /run/current-system/sw/share/skim/key-bindings.zsh
 source ~/.zshrc.local

@@ -16,8 +16,10 @@
     rb = rebase -i origin/master --autosquash --autostash
     rbf = -c core.editor=true rebase -i origin/master --autosquash --autostash
     diff = diff --word-diff
+    rg = "!git-rg"
     dc = diff --cached
     fp = fetch --prune
+    ui = "!gitui"
     casm = commit -asm
     cfoobar = commit -am foobar --no-verify
     ca = commit --amend --no-edit
@@ -51,10 +53,11 @@
 [core]
     editor = vim
     excludesfile = ~/.gitignore.global
-    #pager = diff-so-fancy | less --tabs=4 -RFX
+    pager = delta
 
-[pager]
-    #diff = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '
+[interactive]
+    diffFilter = delta --color-only --features=interactive
+
 [remote "origin"]
     prune = true
 [include]
@@ -77,4 +80,4 @@
     whitespace = red reverse
 
 [init]
-	defaultBranch = main
+    defaultBranch = main
