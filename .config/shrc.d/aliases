@@ -28,4 +28,4 @@ alias sbtStack='sudo jstack -F `ps -aux | grep sbt | grep java | tr -s " " | cut
 alias nm-vpn-up="nmcli --fields name,type,state c show | grep vpn | egrep -v ' activated' | cut -d' ' -f1 | fzf --multi | tee /dev/stderr | xargs --max-procs=3 --max-args=1 --no-run-if-empty nmcli connection up"
 alias bl-headphone='echo connect 00:16:94:30:8E:E5 | bluetoothctl'
 alias k='kubectl --context '
-alias tig='nix-shell -p sl --run sl
+alias tig='nix-shell -p sl --run sl'
