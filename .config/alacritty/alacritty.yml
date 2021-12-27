@@ -115,8 +115,9 @@ hints:
 # /home/azsigmond/anyam
 # some-file/and-folder32.bat
 key_bindings:
-  - { key: Q, mode: "Vi", action: "ToggleViMode"   }
-  - { key: Q, mode: "Vi", action: "ScrollToBottom" }
+  - { key: Q,                mode: "Vi", action: "ToggleViMode"   }
+  - { key: Q,                mode: "Vi", action: "ScrollToBottom" }
+  - { key: Q, mods: Control,             action: Quit             }
 
 
 # Key bindings
