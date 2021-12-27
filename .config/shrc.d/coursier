@@ -1,2 +1,0 @@
-alias coursier-on='mv ~/.sbt/0.13/plugins/coursier.sbt.bck ~/.sbt/0.13/plugins/coursier.sbt'
-alias coursier-off='mv ~/.sbt/0.13/plugins/coursier.sbt ~/.sbt/0.13/plugins/coursier.sbt.bck'

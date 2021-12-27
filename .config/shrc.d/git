@@ -1,8 +1,0 @@
-# vi: syntax=sh
-
-function .fixupfile(){
-    git add $1
-    git commit -s --fixup=$(git log --format="%H" -1 $1)
-}
-
-
