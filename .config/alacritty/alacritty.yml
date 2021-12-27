@@ -70,9 +70,11 @@ cursor:
     blinking: Off
 live_config_reload: true
 shell:
-  program: /usr/bin/env
+  program: /run/current-system/sw/bin/bash
   args:
-    - zsh
+    - -c
+    - |
+      while tab; do echo; done
 mouse:
   hide_when_typing: true
 hints:
@@ -99,11 +101,11 @@ hints:
     mouse:
       enabled: false
     binding: { key: P, mods: Alt }
-  - regex: "(((\\.|\\.\\.|)/)?([a-zA-Z0-9-]+/)|\\.?\\./)+[a-zA-Z0-9-]+(\\.[a-z0-9]+)?"
+  - regex: "(((\\.|\\.\\.|)/?)?([a-zA-Z0-9-]+/)|\\.?\\./)+[a-zA-Z0-9-]+(\\.[a-z0-9]+)?"
     action: Copy
     post_processing: true
     mouse:
-      enabled: true
+      enabled: false
       mods: None
     binding: { key: F, mods: Alt }
 
