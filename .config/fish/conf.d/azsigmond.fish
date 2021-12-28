@@ -6,7 +6,6 @@ function random_color
     echo "$argv" | sha256sum | cut -f1 -d' ' | tr -d '\n' | tail -c3
 end
 
-
 function fish_prompt
     set -l prompt_symbol '$'
     set -l prompt_symbol_color (set_color green)
@@ -14,7 +13,7 @@ function fish_prompt
     fish_is_root_user; and set prompt_symbol_color (set_color red)
 
     set tab_name $TAB
-    if [ $TAB != "Projects/" ]
+    if [ "$tab_name" != "Projects/" ]
       set tab_name (string replace Projects/ "" $tab_name)
     end
     set tab_name (string trim --right --chars "/" $tab_name)
@@ -26,7 +25,7 @@ function fish_prompt
        (set_color normal) )
 
     set git_info ""
-    if [ (string sub -l 9 $TAB) = "Projects/" ]; and [ $TAB != "Projects/" ]
+    if [ (string sub -l 9 "$TAB") = "Projects/" ]; and [ $TAB != "Projects/" ]
        set git_info ( \
          __fish_git_prompt_show_informative_status=1 \
          __fish_git_prompt_showcolorhints=1 \
@@ -49,3 +48,5 @@ function fish_prompt
     $git_info \
     $prompt_symbol_color $prompt_symbol (set_color normal) " "
 end
+
+set -g fzf_history_opts "--preview-window=down:3:wrap"
