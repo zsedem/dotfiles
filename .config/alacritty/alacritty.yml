@@ -111,6 +111,12 @@ hints:
     mouse:
       enabled: false
     binding: { key: P, mods: Alt }
+  - regex: "([a-z]*-|v[0-9]*-)*([a-z0-9]{5}[a-z0-9]*)-[a-z0-9]{5} "
+    action: Paste
+    post_processing: true
+    mouse:
+      enabled: false
+    binding: { key: P, mods: Shift|Alt }
   # Folders
   # ./some-file
   # /home/azsigmond/anyam
@@ -120,8 +126,13 @@ hints:
     post_processing: true
     mouse:
       enabled: false
-      mods: None
     binding: { key: F, mods: Alt }
+  - regex: "(((\\.|\\.\\.|)/?)?([a-zA-Z0-9-]+/)|(\\.?\\.|~)/)+[a-zA-Z0-9-]+(\\.[a-z0-9]+)?"
+    action: Paste
+    post_processing: true
+    mouse:
+      enabled: false
+    binding: { key: F, mods: Shift|Alt }
   # SHA256 sums
   # 0g320yzmlb3gy18h4xvzzcxpbf16984ddvpkdizp0l9di4jzd1c8
   - regex: "[a-z0-9-]{52}"
@@ -129,8 +140,13 @@ hints:
     post_processing: true
     mouse:
       enabled: false
-      mods: None
     binding: { key: S, mods: Alt }
+  - regex: "[a-z0-9-]{52}"
+    action: Paste
+    post_processing: true
+    mouse:
+      enabled: false
+    binding: { key: S, mods: Shift|Alt }
 
 # TEST HINTS
 key_bindings:
