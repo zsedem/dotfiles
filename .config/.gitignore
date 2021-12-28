@@ -2,12 +2,10 @@
 !.gitignore
 !compton.conf
 !shrc.d/
-!hangups/
-!powerline/
-!oh-my-zsh
 !nvim
 !tmux
 !plasma-workspace/
 !nixpkgs
 !alacritty
 !tab.yml
+!fish

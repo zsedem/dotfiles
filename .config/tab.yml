@@ -1,4 +1,3 @@
-shell: /run/current-system/sw/bin/zsh
 workspace:
 - repo: projects/
 - tab: htop

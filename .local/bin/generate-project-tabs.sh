@@ -2,7 +2,6 @@
 cd ~/projects
 echo '
 repo: Projects
-shell: /run/current-system/sw/bin/zsh
 tabs:'
 
 while read projectFolder; do
