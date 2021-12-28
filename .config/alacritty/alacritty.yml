@@ -74,11 +74,17 @@ shell:
   args:
     - -c
     - |
-      while tab; do echo; done
+      export SHELL="$(which zsh)"
+      if tab; then
+        while tab; do echo; done
+      else
+        exec zsh
+      fi
 mouse:
   hide_when_typing: true
 hints:
   enabled:
+  # https://google.com
   - regex: "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)\
             [^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+"
     command: xdg-open
@@ -87,6 +93,7 @@ hints:
       enabled: true
       mods: None
     binding: { key: U, mods: Shift|Alt }
+  # https://google.com
   - regex: "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)\
             [^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+"
     action: Copy
@@ -95,30 +102,44 @@ hints:
       enabled: false
       mods: None
     binding: { key: U, mods: Alt }
+  # Folders
+  # Kubernetes pod names
+  # my-application-gas6f45d6s-dsf6f
   - regex: "([a-z]*-|v[0-9]*-)*([a-z0-9]{5}[a-z0-9]*)-[a-z0-9]{5} "
     action: Copy
     post_processing: true
     mouse:
       enabled: false
     binding: { key: P, mods: Alt }
-  - regex: "(((\\.|\\.\\.|)/?)?([a-zA-Z0-9-]+/)|\\.?\\./)+[a-zA-Z0-9-]+(\\.[a-z0-9]+)?"
+  # Folders
+  # ./some-file
+  # /home/azsigmond/anyam
+  # some-file/and-folder32.bat
+  - regex: "(((\\.|\\.\\.|)/?)?([a-zA-Z0-9-]+/)|(\\.?\\.|~)/)+[a-zA-Z0-9-]+(\\.[a-z0-9]+)?"
     action: Copy
     post_processing: true
     mouse:
       enabled: false
       mods: None
     binding: { key: F, mods: Alt }
+  # SHA256 sums
+  # 0g320yzmlb3gy18h4xvzzcxpbf16984ddvpkdizp0l9di4jzd1c8
+  - regex: "[a-z0-9-]{52}"
+    action: Copy
+    post_processing: true
+    mouse:
+      enabled: false
+      mods: None
+    binding: { key: S, mods: Alt }
 
 # TEST HINTS
-# https://google.com
-# ./some-file
-# /home/azsigmond/anyam
-# some-file/and-folder32.bat
 key_bindings:
-  - { key: Q,                mode: "Vi", action: "ToggleViMode"   }
-  - { key: Q,                mode: "Vi", action: "ScrollToBottom" }
-  - { key: Q, mods: Control,             action: Quit             }
-
+  - { key: Q,                        mode: "Vi",    action: ToggleViMode     }
+  - { key: Q,                        mode: "Vi",    action: ScrollToBottom   }
+  - { key: Q,   mods: Control,                      action: Quit             }
+  - { key: A,   mods: Control,       mode: ~Search, action: ToggleViMode     }
+  - { key: N,   mods: Control|Shift,                action: SpawnNewInstance }
+  - { key: F11,                                     action: ToggleFullscreen }
 
 # Key bindings
 #

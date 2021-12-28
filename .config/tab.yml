@@ -1,10 +1,7 @@
 shell: /run/current-system/sw/bin/zsh
 workspace:
-- tab: nixos-configuration
-  dir: projects/nixos-configuration
-- tab: caller-profile-service
-  dir: projects/caller-profile-service
-  shell: /run/current-system/sw/bin/zsh
+- repo: projects/
 - tab: htop
   shell: /run/current-system/sw/bin/htop
+  doc: "htop - an interactive process viewer"
 
