@@ -121,13 +121,13 @@ hints:
   # ./some-file
   # /home/azsigmond/anyam
   # some-file/and-folder32.bat
-  - regex: "(((\\.|\\.\\.|)/?)?([a-zA-Z0-9-]+/)|(\\.?\\.|~)/)+[a-zA-Z0-9-]+(\\.[a-z0-9]+)?"
+  - regex: "(((\\.|\\.\\.|)/?)?([a-zA-Z0-9-_]+/)|(\\.?\\.|~)/)+[a-zA-Z0-9_-]+(\\.[a-z0-9]+)?"
     action: Copy
     post_processing: true
     mouse:
       enabled: false
     binding: { key: F, mods: Alt }
-  - regex: "(((\\.|\\.\\.|)/?)?([a-zA-Z0-9-]+/)|(\\.?\\.|~)/)+[a-zA-Z0-9-]+(\\.[a-z0-9]+)?"
+  - regex: "(((\\.|\\.\\.|)/?)?([a-zA-Z0-9_-]+/)|(\\.?\\.|~)/)+[a-zA-Z0-9_-]+(\\.[a-z0-9]+)?"
     action: Paste
     post_processing: true
     mouse:

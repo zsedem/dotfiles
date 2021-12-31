@@ -21,3 +21,5 @@ wtf.sc
 /.bash_history
 source-mapping.txt
 dist
+.vscode
+.metals

@@ -1,3 +1,5 @@
 /*
 !.gitignore
-!/conf.d/azsigmond.fish
+!conf.d
+conf.d/*
+!conf.d/azsigmond.fish
