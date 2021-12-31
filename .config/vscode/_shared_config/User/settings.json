@@ -1,0 +1,23 @@
+{
+    "explorer.confirmDelete": false,
+    "editor.fontFamily": "'monofur','Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "editor.fontSize": 20,
+    "helm-intellisense.customValueFileNames": [
+        "prod.yaml",
+        "../../commons/tpls.yaml",
+        "jenkins.yaml",
+        "values.yaml"
+    ],
+    "terminal.integrated.fontSize": 17,
+    "explorer.confirmDragAndDrop": false,
+    "workbench.editor.showTabs": false,
+    "workbench.editor.enablePreview": false,
+    "files.watcherExclude": {
+        "**/.bloop": true,
+        "**/.metals": true,
+        "**/.ammonite": true
+    },
+    "metals.ammoniteJvmProperties": [
+        "-Xmx8G"
+    ]
+}
