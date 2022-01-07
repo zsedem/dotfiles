@@ -1,23 +1,24 @@
 {
-    "explorer.confirmDelete": false,
+    "diffEditor.ignoreTrimWhitespace": false,
     "editor.fontFamily": "'monofur','Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
     "editor.fontSize": 20,
-    "helm-intellisense.customValueFileNames": [
-        "prod.yaml",
-        "../../commons/tpls.yaml",
-        "jenkins.yaml",
-        "values.yaml"
-    ],
-    "terminal.integrated.fontSize": 17,
+    "editor.minimap.enabled": false,
+    "explorer.confirmDelete": false,
     "explorer.confirmDragAndDrop": false,
-    "workbench.editor.showTabs": false,
-    "workbench.editor.enablePreview": false,
-    "files.watcherExclude": {
-        "**/.bloop": true,
-        "**/.metals": true,
-        "**/.ammonite": true
-    },
-    "metals.ammoniteJvmProperties": [
-        "-Xmx8G"
-    ]
+    "extensions.autoUpdate": false,
+    "files.autoSave":"onFocusChange",
+    "files.trimTrailingWhitespace": true,
+    "files.watcherExclude": { "**/.bloop": true, "**/.metals": true, "**/.ammonite": true },
+    "helm-intellisense.customValueFileNames": [ "prod.yaml", "../../commons/tpls.yaml", "jenkins.yaml", "values.yaml" ],
+    "json.schemaDownload.enable": false,
+    "metals.ammoniteJvmProperties": [ "-Xmx8G" ],
+    "npm.fetchOnlinePackageInfo": false,
+    "telemetry.telemetryLevel": "error",
+    "terminal.integrated.fontSize": 17,
+    "update.mode": "none",
+    "workbench.colorTheme": "Solarized Dark",
+    "workbench.editor.enablePreview": true,
+    "workbench.editor.enablePreviewFromQuickOpen": true,
+    "workbench.enableExperiments": false,
+    "workbench.settings.enableNaturalLanguageSearch": false
 }

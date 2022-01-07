@@ -52,7 +52,8 @@
     },
     {
         "key": "ctrl+q",
-        "command": "workbench.action.closeActiveEditor"
+        "command": "workbench.action.closeActiveEditor",
+        "when": "editorTextFocus"
     },
     {
         "key": "ctrl+n",
@@ -353,5 +354,25 @@
     {
         "key": "ctrl+shift+b",
         "command": "-workbench.action.tasks.build"
+    },
+    {
+        "key": "ctrl+q",
+        "command": "workbench.action.closePanel",
+        "when": "!editorTextFocus"
+    },
+    {
+        "key": "ctrl+alt+d",
+        "command": "editor.action.goToImplementation",
+        "when": "editorHasImplementationProvider && editorTextFocus && !isInEmbeddedEditor"
+    },
+    {
+        "key": "ctrl+f12",
+        "command": "-editor.action.goToImplementation",
+        "when": "editorHasImplementationProvider && editorTextFocus && !isInEmbeddedEditor"
+    },
+    {
+        "key": "ctrl+alt+u",
+        "command": "metals.goto-super-method",
+        "when": "!typeHierarchyVisible || typeHierarchyDirection != 'subtypes'"
     }
 ]

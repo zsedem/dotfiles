@@ -50,3 +50,16 @@ function fish_prompt
 end
 
 set -g fzf_history_opts "--preview-window=down:3:wrap"
+
+function kubectl
+    for i in (seq (math (count $argv) - 1))
+        set oyaml (echo $argv[$i..(math $i + 1)])
+        if [ $oyaml = "-o yaml" ]
+            command kubectl $argv | bat --language=yaml
+            return $status
+        end
+    end
+    command kubectl $argv
+end
+
+set -g EDITOR vim

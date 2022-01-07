@@ -55,6 +55,9 @@
     excludesfile = ~/.gitignore.global
     pager = delta
 
+[delta]
+    syntax-theme = Solarized (dark)
+
 [interactive]
     diffFilter = delta --color-only --features=interactive
 
