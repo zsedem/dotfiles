@@ -62,4 +62,5 @@ function kubectl
     command kubectl $argv
 end
 
-set -g EDITOR vim
+set -x AWS_PAGER 'bat --language=json'
+set -x EDITOR vim

@@ -26,5 +26,6 @@
     "workbench.enableExperiments": false,
     "workbench.settings.enableNaturalLanguageSearch": false,
     "editor.tabSize": 2,
-    "extensions.ignoreRecommendations": true
+    "extensions.ignoreRecommendations": true,
+    "git.autofetch": true
 }
