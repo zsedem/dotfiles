@@ -27,5 +27,6 @@
     "workbench.settings.enableNaturalLanguageSearch": false,
     "editor.tabSize": 2,
     "extensions.ignoreRecommendations": true,
-    "git.autofetch": true
+    "git.autofetch": true,
+    "redhat.telemetry.enabled": false
 }
