@@ -28,5 +28,7 @@
     "editor.tabSize": 2,
     "extensions.ignoreRecommendations": true,
     "git.autofetch": true,
-    "redhat.telemetry.enabled": false
+    "redhat.telemetry.enabled": false,
+    "metals.javaHome": "/nix/var/nix/gcroots/customs/openjdk8/lib/openjdk",
+    "workbench.startupEditor": "none"
 }
