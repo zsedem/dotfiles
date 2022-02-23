@@ -13,7 +13,7 @@
         "**/.metals": true,
         "**/.ammonite": true
     },
-    "helm-intellisense.customValueFileNames": [ "prod.yaml", "../../commons/tpls.yaml", "jenkins.yaml", "values.yaml" ],
+    "helm-intellisense.customValueFileNames": [ "prod.yaml", "jenkins.yaml", "values.yaml" ],
     "json.schemaDownload.enable": false,
     "metals.ammoniteJvmProperties": [ "-Xmx8G" ],
     "npm.fetchOnlinePackageInfo": false,
@@ -29,6 +29,6 @@
     "extensions.ignoreRecommendations": true,
     "git.autofetch": true,
     "redhat.telemetry.enabled": false,
-    "metals.javaHome": "/nix/var/nix/gcroots/customs/openjdk8/lib/openjdk",
-    "workbench.startupEditor": "none"
+    "workbench.startupEditor": "none",
+    "metals.javaHome": "/run/current-system/sw/lib/openjdk8"
 }
