@@ -374,5 +374,15 @@
         "key": "ctrl+alt+u",
         "command": "metals.goto-super-method",
         "when": "!typeHierarchyVisible || typeHierarchyDirection != 'subtypes'"
+    },
+    {
+        "key": "ctrl+n",
+        "command": "metals.symbol-search",
+        "when": "editorLangId == 'scala'"
+    },
+    {
+        "key": "ctrl+t",
+        "command": "-metals.symbol-search",
+        "when": "editorLangId == 'scala'"
     }
 ]
