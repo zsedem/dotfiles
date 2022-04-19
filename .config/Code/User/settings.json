@@ -30,5 +30,40 @@
     "git.autofetch": true,
     "redhat.telemetry.enabled": false,
     "workbench.startupEditor": "none",
-    "metals.javaHome": "/run/current-system/sw/lib/openjdk8"
+    "metals.javaHome": "/run/current-system/sw/lib/openjdk8",
+    "json.schemas": [],
+    "yaml.customTags": [
+        "!And",
+        "!And sequence",
+        "!If",
+        "!If sequence",
+        "!Not",
+        "!Not sequence",
+        "!Equals",
+        "!Equals sequence",
+        "!Or",
+        "!Or sequence",
+        "!FindInMap",
+        "!FindInMap sequence",
+        "!Base64",
+        "!Join",
+        "!Join sequence",
+        "!Cidr",
+        "!Ref",
+        "!Sub",
+        "!Sub sequence",
+        "!GetAtt",
+        "!GetAZs",
+        "!ImportValue",
+        "!ImportValue sequence",
+        "!Select",
+        "!Select sequence",
+        "!Split",
+        "!Split sequence"
+    ],
+    "aws.telemetry": false,
+    "yaml.validate": false,
+    "files.associations": {
+        "*.json": "json"
+    }
 }
