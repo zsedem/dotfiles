@@ -1,6 +1,6 @@
 {
     "diffEditor.ignoreTrimWhitespace": false,
-    "editor.fontFamily": "'monofur','Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "editor.fontFamily": "'Monofur Nerd Font Mono','Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
     "editor.fontSize": 20,
     "editor.minimap.enabled": false,
     "explorer.confirmDelete": false,
