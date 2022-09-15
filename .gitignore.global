@@ -24,3 +24,4 @@ dist
 .vscode
 .metals
 metals.sbt
+MyCustomLocalMain.scala
