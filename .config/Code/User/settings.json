@@ -6,16 +6,22 @@
     "explorer.confirmDelete": false,
     "explorer.confirmDragAndDrop": false,
     "extensions.autoUpdate": false,
-    "files.autoSave":"onFocusChange",
+    "files.autoSave": "onFocusChange",
     "files.trimTrailingWhitespace": true,
     "files.watcherExclude": {
         "**/.bloop": true,
         "**/.metals": true,
         "**/.ammonite": true
     },
-    "helm-intellisense.customValueFileNames": [ "prod.yaml", "jenkins.yaml", "values.yaml" ],
+    "helm-intellisense.customValueFileNames": [
+        "prod.yaml",
+        "jenkins.yaml",
+        "values.yaml"
+    ],
     "json.schemaDownload.enable": false,
-    "metals.ammoniteJvmProperties": [ "-Xmx8G" ],
+    "metals.ammoniteJvmProperties": [
+        "-Xmx8G"
+    ],
     "npm.fetchOnlinePackageInfo": false,
     "telemetry.telemetryLevel": "error",
     "terminal.integrated.fontSize": 17,
@@ -138,5 +144,6 @@
         "Xfatal",
         "Ymacro"
     ],
-    "editor.inlayHints.enabled": false
+    "editor.inlayHints.enabled": false,
+    "editor.formatOnSave": true
 }

@@ -54,7 +54,7 @@ colors:
     focused_match:
       foreground: '#E9AD0C'
       background: '#006B06'
-    bar:
+    footer_bar:
       background: '#E9AD0C'
       foreground: '#171421'
 
