@@ -384,5 +384,13 @@
         "key": "ctrl+t",
         "command": "-metals.symbol-search",
         "when": "editorLangId == 'scala'"
+    },
+    {
+        "key": "ctrl+shift+s",
+        "command": "workbench.action.files.saveWithoutFormatting"
+    },
+    {
+        "key": "ctrl+k s",
+        "command": "-workbench.action.files.saveWithoutFormatting"
     }
 ]
