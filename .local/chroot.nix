@@ -8,6 +8,7 @@
       clib
       zlib
       busybox
+      fish
       freetype
       fontconfig
       fuse
@@ -26,13 +27,13 @@
       pango
       nss
       nspr
-      gdk_pixbuf
+      openjdk
+      sbt
       cairo
-      gnome3.gtk
       libcap
-      libudev
       dbus
       libnotify
+      vim
     ]) ++ (with pkgs.xorg;
     [ libX11
       libXcursor
@@ -40,8 +41,7 @@
     ]);
   multiPkgs = pkgs: (with pkgs;
     [ udev
-      libudev
       alsaLib
     ]);
-  runScript = "bash";
+  runScript = "fish";
 }).env

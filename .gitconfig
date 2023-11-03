@@ -67,6 +67,8 @@
     path = ~/.gitconfig.local
 [commit]
     gpgsign = true
+    template = ~/.local/share/git/git-commit-template.txt
+    verbose = true
 [color]
     ui = true
 [color "diff-highlight"]

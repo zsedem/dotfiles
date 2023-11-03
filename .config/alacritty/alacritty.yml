@@ -36,7 +36,7 @@ font:
   bold_italic:
     family: "Monofur Nerd Font Mono"
     style: Bold Italic
-  size: 18.0
+  size: 14.0
 
 colors:
   primary:

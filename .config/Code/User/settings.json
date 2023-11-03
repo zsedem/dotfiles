@@ -1,5 +1,4 @@
 {
-    "diffEditor.ignoreTrimWhitespace": false,
     "editor.fontFamily": "'Monofur Nerd Font Mono','Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
     "editor.fontSize": 20,
     "editor.minimap.enabled": false,
@@ -18,7 +17,6 @@
         "jenkins.yaml",
         "values.yaml"
     ],
-    "json.schemaDownload.enable": false,
     "metals.ammoniteJvmProperties": [
         "-Xmx8G"
     ],
@@ -26,7 +24,7 @@
     "telemetry.telemetryLevel": "error",
     "terminal.integrated.fontSize": 17,
     "update.mode": "none",
-    "workbench.colorTheme": "Solarized Dark",
+    "workbench.colorTheme": "Solarized Light",
     "workbench.editor.enablePreview": true,
     "workbench.editor.enablePreviewFromQuickOpen": true,
     "workbench.enableExperiments": false,
@@ -36,7 +34,7 @@
     "git.autofetch": true,
     "redhat.telemetry.enabled": false,
     "workbench.startupEditor": "none",
-    "metals.javaHome": "/run/current-system/sw/lib/openjdk8",
+    "metals.javaHome": "/run/current-system/sw/lib/openjdk17",
     "json.schemas": [],
     "yaml.customTags": [
         "!And",
@@ -145,5 +143,28 @@
         "Ymacro"
     ],
     "editor.inlayHints.enabled": false,
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "metals.enableStripMarginOnTypeFormatting": false,
+    "metals.showImplicitArguments": true,
+    "metals.showInferredType": true,
+    "editor.unicodeHighlight.allowedCharacters": {
+        "’": true
+    },
+    "workbench.preferredDarkColorTheme": "Visual Studio Light",
+    "workbench.preferredHighContrastColorTheme": "Visual Studio Light",
+    "diffEditor.renderSideBySide": false,
+    "diffEditor.diffAlgorithm": "advanced",
+    "diffEditor.codeLens": true,
+    "gitlens.hovers.avatars": false,
+    "github.copilot.enable": {
+        "*": true,
+        "plaintext": false,
+        "markdown": true,
+        "scminput": false,
+        "properties": false
+    },
+    "githubPullRequests.pushBranch": "always",
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "security.workspace.trust.untrustedFiles": "newWindow"
 }
