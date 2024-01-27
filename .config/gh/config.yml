@@ -7,3 +7,4 @@ aliases:
         gh pr --repo "$REPO" checks  $PR || exit 1
         gh pr --repo "$REPO" review --approve $PR || exit 1
         gh pr --repo "$REPO" merge --squash $PR
+version: "1"

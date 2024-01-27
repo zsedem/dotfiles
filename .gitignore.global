@@ -25,3 +25,4 @@ dist
 .metals
 metals.sbt
 MyCustomLocalMain.scala
+target

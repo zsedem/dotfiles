@@ -4,7 +4,7 @@
     "editor.minimap.enabled": false,
     "explorer.confirmDelete": false,
     "explorer.confirmDragAndDrop": false,
-    "extensions.autoUpdate": false,
+    "extensions.autoUpdate": "onlySelectedExtensions",
     "files.autoSave": "onFocusChange",
     "files.trimTrailingWhitespace": true,
     "files.watcherExclude": {
@@ -142,11 +142,8 @@
         "Xfatal",
         "Ymacro"
     ],
-    "editor.inlayHints.enabled": false,
-    "editor.formatOnSave": true,
     "metals.enableStripMarginOnTypeFormatting": false,
     "metals.showImplicitArguments": true,
-    "metals.showInferredType": true,
     "editor.unicodeHighlight.allowedCharacters": {
         "’": true
     },
@@ -156,6 +153,18 @@
     "diffEditor.diffAlgorithm": "advanced",
     "diffEditor.codeLens": true,
     "gitlens.hovers.avatars": false,
+    "gitlens.blame.ignoreWhitespace": true,
+    "gitlens.showWelcomeOnInstall": false,
+    "gitlens.virtualRepositories.enabled": false,
+    "gitlens.currentLine.enabled": false,
+    "gitlens.codeLens.enabled": false,
+    "gitlens.codeLens.authors.enabled": false,
+    "gitlens.autolinks": [
+        {
+            "prefix": "API-",
+            "url": "https://hiyainc.atlassian.net/browse/API-<num>"
+        }
+    ],
     "github.copilot.enable": {
         "*": true,
         "plaintext": false,
@@ -166,5 +175,13 @@
     "githubPullRequests.pushBranch": "always",
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,
-    "security.workspace.trust.untrustedFiles": "newWindow"
+    "security.workspace.trust.untrustedFiles": "newWindow",
+    "githubPullRequests.pullBranch": "never",
+    "git.openRepositoryInParentFolders": "never",
+    "editor.formatOnSave": true,
+    "python.analysis.extraPaths": [],
+    "metals.serverProperties": [
+        "-Xmx8G"
+    ],
+    "metals.fallbackScalaVersion": "2.13.12"
 }

@@ -1,4 +1,3 @@
 # When applied, this commit will (in less than 72 characters)...
-# Why is this change needed?
 # How does it address the issue?
-# Provide links to any relevant tickets, articles or other resources
+# Why is this change needed?
