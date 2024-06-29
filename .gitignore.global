@@ -16,6 +16,7 @@ Untitled.ipynb
 *.sublime-project
 *.iml
 *.swp
+.scala-build
 wtf.sc
 /default.nix
 /.bash_history

@@ -1,0 +1,198 @@
+live_config_reload = true
+
+[colors.line_indicator]
+background = "#E9AD0C"
+foreground = "#171421"
+
+[colors.primary]
+background = "#002B36"
+foreground = "#839496"
+
+[colors.search.focused_match]
+background = "#006B06"
+foreground = "#E9AD0C"
+
+
+[colors.search.matches]
+background = "#003B06"
+foreground = "#E9AD0C"
+
+[colors.vi_mode_cursor]
+cursor = "#E9AD0C"
+text = "#171421"
+
+[cursor.vi_mode_style]
+blinking = "Off"
+shape = "Beam"
+
+[font]
+size = 14.0
+
+[font.bold]
+family = "Monofur Nerd Font Mono"
+style = "Bold"
+
+[font.bold_italic]
+family = "Monofur Nerd Font Mono"
+style = "Bold Italic"
+
+[font.italic]
+family = "Monofur Nerd Font Mono"
+style = "Italic"
+
+[font.normal]
+family = "Monofur Nerd Font Mono"
+style = "Regular"
+
+[[hints.enabled]]
+command = "xdg-open"
+post_processing = true
+regex = "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)[^\u0000-\u001F\u007F-<>\"\\s{-}\\^⟨⟩`]+"
+
+[hints.enabled.binding]
+key = "U"
+mods = "Shift|Alt"
+
+[hints.enabled.mouse]
+enabled = true
+mods = "None"
+
+[[hints.enabled]]
+action = "Copy"
+post_processing = true
+regex = "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)[^\u0000-\u001F\u007F-<>\"\\s{-}\\^⟨⟩`]+"
+
+[hints.enabled.binding]
+key = "U"
+mods = "Alt"
+
+[hints.enabled.mouse]
+enabled = false
+mods = "None"
+
+[[hints.enabled]]
+action = "Copy"
+post_processing = true
+regex = "([a-z]*-|v[0-9]*-)*([a-z0-9]{5}[a-z0-9]*)-[a-z0-9]{5} "
+
+[hints.enabled.binding]
+key = "P"
+mods = "Alt"
+
+[hints.enabled.mouse]
+enabled = false
+
+[[hints.enabled]]
+action = "Paste"
+post_processing = true
+regex = "([a-z]*-|v[0-9]*-)*([a-z0-9]{5}[a-z0-9]*)-[a-z0-9]{5} "
+
+[hints.enabled.binding]
+key = "P"
+mods = "Shift|Alt"
+
+[hints.enabled.mouse]
+enabled = false
+
+[[hints.enabled]]
+action = "Copy"
+post_processing = true
+regex = '(((\.|\.\.|)/?)?([a-zA-Z0-9-_]+/)|(\.?\.|~)/)+[a-zA-Z0-9_-]+(\.[a-z0-9]+)?'
+
+[hints.enabled.binding]
+key = "F"
+mods = "Alt"
+
+[hints.enabled.mouse]
+enabled = false
+
+[[hints.enabled]]
+action = "Paste"
+post_processing = true
+regex = '(((\.|\.\.|)/?)?([a-zA-Z0-9_-]+/)|(\.?\.|~)/)+[a-zA-Z0-9_-]+(\.[a-z0-9]+)?'
+
+[hints.enabled.binding]
+key = "F"
+mods = "Shift|Alt"
+
+[hints.enabled.mouse]
+enabled = false
+
+[[hints.enabled]]
+action = "Copy"
+post_processing = true
+regex = "[a-z0-9-]{52}"
+
+[hints.enabled.binding]
+key = "S"
+mods = "Alt"
+
+[hints.enabled.mouse]
+enabled = false
+
+[[hints.enabled]]
+action = "Paste"
+post_processing = true
+regex = "[a-z0-9-]{52}"
+
+[hints.enabled.binding]
+key = "S"
+mods = "Shift|Alt"
+
+[hints.enabled.mouse]
+enabled = false
+
+[[keyboard.bindings]]
+action = "ToggleViMode"
+key = "Q"
+mode = "Vi"
+
+[[keyboard.bindings]]
+action = "ScrollToBottom"
+key = "Q"
+mode = "Vi"
+
+[[keyboard.bindings]]
+action = "Quit"
+key = "Q"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "Quit"
+key = "Q"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "ToggleViMode"
+key = "A"
+mode = "~Search"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "SpawnNewInstance"
+key = "N"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "ToggleFullscreen"
+key = "F11"
+
+[mouse]
+hide_when_typing = true
+
+[scrolling]
+history = 10000
+
+[shell]
+args = ["-c", """
+export SHELL=\"$(which fish)\"
+if tab; then
+  while tab; do echo; done
+else
+  exec fish
+fi
+"""]
+program = "/run/current-system/sw/bin/bash"
+
+[window]
+startup_mode = "Maximized"
