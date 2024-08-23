@@ -5,6 +5,8 @@
   targetPkgs = pkgs: (with pkgs;
     [ udev
       alsaLib
+      stdenv.cc.cc.lib
+      gcc
       clib
       zlib
       busybox

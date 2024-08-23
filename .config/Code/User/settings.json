@@ -4,7 +4,7 @@
     "editor.minimap.enabled": false,
     "explorer.confirmDelete": false,
     "explorer.confirmDragAndDrop": false,
-    "extensions.autoUpdate": "onlySelectedExtensions",
+    "extensions.autoUpdate": false,
     "files.autoSave": "onFocusChange",
     "files.trimTrailingWhitespace": true,
     "files.watcherExclude": {
@@ -34,7 +34,7 @@
     "git.autofetch": true,
     "redhat.telemetry.enabled": false,
     "workbench.startupEditor": "none",
-    "metals.javaHome": "/run/current-system/sw/lib/openjdk17",
+    "metals.javaHome": "/run/current-system/sw/lib/openjdk21",
     "json.schemas": [],
     "yaml.customTags": [
         "!And",
@@ -170,7 +170,7 @@
         "plaintext": false,
         "markdown": true,
         "scminput": false,
-        "properties": false
+        "properties": true
     },
     "githubPullRequests.pushBranch": "always",
     "files.insertFinalNewline": true,
@@ -183,5 +183,11 @@
     "metals.serverProperties": [
         "-Xmx8G"
     ],
-    "metals.fallbackScalaVersion": "2.13.12"
+    "metals.fallbackScalaVersion": "2.13.12",
+    "git.enableSmartCommit": true,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "github.copilot.editor.enableAutoCompletions": true,
+    "metals.javaVersion": "21",
+    "terminal.integrated.enableMultiLinePasteWarning": false,
+    "thunder-client.followRedirects": false
 }
