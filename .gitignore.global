@@ -27,3 +27,4 @@ dist
 metals.sbt
 MyCustomLocalMain.scala
 target
+shell.nix
