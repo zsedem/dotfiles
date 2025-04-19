@@ -64,3 +64,39 @@ end
 
 set -x AWS_PAGER 'bat --language=json'
 set -x EDITOR vim
+
+# Check for Nix shell environment
+if test -f "shell.nix"; and not set -q IN_NIX_SHELL
+    set_color yellow
+    echo " Found shell.nix - attempting to enter Nix shell environment..."
+    set_color normal
+
+    # Capture start time
+    set -l start_time (date +%s)
+
+    # Run nix-shell with timeout and capture its status
+    nix-shell shell.nix --run fish
+    set -l nix_status $status
+
+    echo "Observed nix status: $nix_status"
+
+    set -l elapsed_time (math (date +%s) - $start_time)
+
+    # Check for other errors
+    if test $nix_status -ne 0
+        set_color red
+        echo " Nix shell failed - continuing with regular fish shell"
+        set_color normal
+    else
+        if test $elapsed_time -gt 10
+            set_color yellow
+            echo "Exitting..."
+            set_color normal
+            exec true # Stupid way of exit normally from a sourced file :P
+        else
+            set_color red
+            echo " Nix shell exited fast - continuing with regular fish shell"
+            set_color normal
+        end
+    end
+end

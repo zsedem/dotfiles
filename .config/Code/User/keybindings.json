@@ -111,10 +111,6 @@
         "when": "inKeybindings && inKeybindingsSearch"
     },
     {
-        "key": "alt+k",
-        "command": "workbench.action.navigateUp"
-    },
-    {
         "key": "alt+j",
         "command": "workbench.action.navigateDown"
     },
@@ -126,10 +122,6 @@
         "key": "alt+l",
         "command": "-toggleFindInSelection",
         "when": "editorFocus"
-    },
-    {
-        "key": "alt+l",
-        "command": "workbench.action.navigateRight"
     },
     {
         "key": "alt+l",
@@ -277,16 +269,6 @@
     },
     {
         "key": "alt+home",
-        "command": "workbench.action.toggleSidebarVisibility",
-        "when": "sideBarFocus"
-    },
-    {
-        "key": "alt+l",
-        "command": "workbench.action.toggleSidebarVisibility",
-        "when": "sideBarFocus"
-    },
-    {
-        "key": "alt+home",
         "command": "workbench.explorer.fileView.focus",
         "when": "!sideBarFocus"
     },
@@ -401,5 +383,23 @@
         "key": "ctrl+`",
         "command": "-workbench.action.terminal.toggleTerminal",
         "when": "terminal.active"
+    },
+    {
+        "key": "alt+k",
+        "command": "-editor.action.accessibilityHelpConfigureKeybindings",
+        "when": "accessibilityHelpIsShown && accessibleViewHasUnassignedKeybindings"
+    },
+    {
+        "key": "ctrl+k ctrl+c",
+        "command": "-editor.action.addCommentLine",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+k ctrl+c",
+        "command": "workbench.files.action.compareWithClipboard"
+    },
+    {
+        "key": "ctrl+k c",
+        "command": "-workbench.files.action.compareWithClipboard"
     }
 ]

@@ -4,7 +4,6 @@
   name = "chroot-env";
   targetPkgs = pkgs: (with pkgs;
     [ udev
-      alsaLib
       stdenv.cc.cc.lib
       gcc
       clib
@@ -43,7 +42,6 @@
     ]);
   multiPkgs = pkgs: (with pkgs;
     [ udev
-      alsaLib
     ]);
   runScript = "fish";
 }).env
